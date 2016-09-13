@@ -27,6 +27,8 @@ public class Usuarios implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "codusuario")
 	private Integer codusuario;
+	@Column(name = "usuario")
+	private String usuario;
 	@Column(name = "login")
 	private String login;
 	@Column(name = "nome")
@@ -63,6 +65,14 @@ public class Usuarios implements Serializable {
 
 	public void setCodusuario(Integer codusuario) {
 		this.codusuario = codusuario;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getNome() {

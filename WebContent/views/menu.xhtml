@@ -7,14 +7,15 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
 	<h:form id="formMenuuu">
-		<p:slideMenu style="width:200px; height: 300px" backLabel="Voltar">
+		<p:slideMenu style="width:180px; height: 300px" backLabel="Voltar">
 			<p:menuitem value="Home" url="inicial.jsf" update="messages" icon="ui-icon-home" />
 			<p:separator />
 	        <p:submenu label="Cadastro" icon=" ui-icon-check" expanded="true">
 	            <p:menuitem icon="ui-icon-bullet" value="Usuários" url="usuarios.jsf" update="messages" />
-	            <p:menuitem icon="ui-icon-bullet" value="Material" url="material.jsf" update="messages" />
-	            <p:menuitem icon="ui-icon-bullet" value="Fornecedores" url="fornecedores.jsf" update="messages" />
-	            <p:menuitem icon="ui-icon-bullet" value="Cadastro de NF" url="fornecedores.jsf" update="messages" />
+	            <p:menuitem icon="ui-icon-bullet" value="Pacientes" url="pacientes.jsf" update="messages" />
+	            <p:menuitem icon="ui-icon-bullet" value="Exames" url="exames.jsf" update="messages" />
+	            <p:menuitem icon="ui-icon-bullet" value="Setores" url="stores.jsf" update="messages" />
+	            <p:menuitem icon="ui-icon-bullet" value="Equipamentos" url="equipamentos.jsf" update="messages" />
 	            
 	        </p:submenu>
 	        <p:submenu label="Controle" icon=" ui-icon-check">
