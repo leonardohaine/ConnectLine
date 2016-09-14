@@ -20,9 +20,10 @@
 }
 
 .datatable-header{
-	background-color: darkblue; 
+	background-color: none; 
 	color:white;
 }
+
 
 .ui-panelgrid {
     border-width: 0px;
