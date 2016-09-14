@@ -50,6 +50,8 @@ public class PacienteController implements Serializable {
 		
 		exames.add(col);
 		exames.add(tri);
+		
+		System.out.println("Adicionando exames a lista.");
 	}
 
 	public void onDateSelect(SelectEvent event) {
@@ -68,7 +70,11 @@ public class PacienteController implements Serializable {
 		
 		this.idade = idade;
 	}
-
+	
+	public void setProntuario(char prontuario){
+		this.prontuario = prontuario;
+	}
+	
 	public char getProntuario() {
 		return prontuario;
 	}
