@@ -36,6 +36,11 @@ public class PacienteController implements Serializable {
 		return;
 	}
 	
+	public void salvarPaciente(){
+		
+		
+	}
+	
 	public void addExame(){
 		Exame col = new Exame();
 		Exame tri = new Exame();

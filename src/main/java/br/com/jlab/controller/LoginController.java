@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
 
-import br.com.jlab.model.Usuarios;
+import br.com.jlab.model.Usuario;
 import br.com.jlab.service.UsuarioService;
 import br.com.jlab.util.Util;
 
@@ -31,9 +31,9 @@ import br.com.jlab.util.Util;
 @SessionScoped
 public class LoginController implements Serializable {
 
-	private Usuarios usuario = new Usuarios();
+	private Usuario usuario = new Usuario();
 	// LoginController auth = new LoginController();
-	private List<Usuarios> listUsers;
+	private List<Usuario> listUsers;
 	private String user;
 	private String senha;
 	private Boolean checkSafx04;
@@ -60,7 +60,7 @@ public class LoginController implements Serializable {
 	 * @return the usuario
 	 */
 	// @PostConstruct
-	public Usuarios getUsuario() {
+	public Usuario getUsuario() {
 
 		return usuario;
 	}
@@ -69,21 +69,21 @@ public class LoginController implements Serializable {
 	 * @param usuario
 	 *            the usuario to set
 	 */
-	public void setUsuario(Usuarios usuario) {
+	public void setUsuario(Usuario usuario) {
 		if (usuario == null) {
-			usuario = new Usuarios();
+			usuario = new Usuario();
 		}
 		this.usuario = usuario;
 	}
 
-	public void setListUsers(List<Usuarios> lista) {
+	public void setListUsers(List<Usuario> lista) {
 		listUsers = lista;
 	}
 
-	public List<Usuarios> getListUsers() {
+	public List<Usuario> getListUsers() {
 		listUsers = getUsuarioService().getUsuarioDAO().getUsuario();
 
-		for (Usuarios user : listUsers) {
+		for (Usuario user : listUsers) {
 			System.out.println("Controller listUsuario: " + user.getNome());
 		}
 		return listUsers;
@@ -94,7 +94,7 @@ public class LoginController implements Serializable {
 		FacesMessage msg = null;
 		boolean loggedIn = false;
 
-		Usuarios usu = null;
+		Usuario usu = null;
 		try {
 			usu = getUsuarioService().getUsuarioDAO().getUsuario(user, Util.cript(senha));
 		} catch (Exception e) {
@@ -190,7 +190,7 @@ public class LoginController implements Serializable {
 		return "index";
 	}
 
-	public List<Usuarios> getSelectedOptions() {
+	public List<Usuario> getSelectedOptions() {
 		return listUsers;
 
 	}

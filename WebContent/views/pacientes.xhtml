@@ -27,7 +27,7 @@
       <h:form id="formPac" enctype="multipart/form-data" >
        	  <p:focus context="panelPesqPac" for="pesquisa"/>
        	
-	      <p:panelGrid id="panelPesqPac" columns="3" style="margin-bottom:5px; width: 738px;" >
+	      <p:panelGrid id="panelPesqPac" columns="3" style="margin-bottom:5px; width: 880px;" >
 		      <f:facet name="header">  
 	            <p:row>
 	                <p:column>PESQUISA DE PACIENTES</p:column>  
@@ -48,8 +48,8 @@
 	    <p:panelGrid id="panelPaciente" style="margin-top:0px;" >
 	        
 	        <p:row>
-		        <p:column  colspan="8" styleClass="ui-widget-header">
-		            <p:spacer style="background-color: darkblue; color:white;" height="0">PACIENTE</p:spacer>
+		        <p:column  style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+		            <p:spacer height="0">PACIENTE</p:spacer>
 		        </p:column>
 		    </p:row>
 	        <p:row>
@@ -92,8 +92,8 @@
 	        </p:row>
 	        
 	        <p:row>
-		        <p:column  colspan="8" styleClass="ui-widget-header">
-		            <p:spacer style="background-color: darkblue; color:white;" height="0" >REQUISIÇÃO</p:spacer>
+		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+		            <p:spacer height="0" >REQUISIÇÃO</p:spacer>
 		        </p:column>
 		    </p:row>
 		    
@@ -125,8 +125,8 @@
 	        </p:row>
 		    
 		    <p:row>
-		        <p:column  colspan="8" styleClass="ui-widget-header">
-		            <p:spacer style="background-color: darkblue; color:white;" height="0">EXAMES</p:spacer>
+		        <p:column  style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+		            <p:spacer height="0">EXAMES</p:spacer>
 		        </p:column>
 		    </p:row>
 		    
@@ -144,10 +144,10 @@
 	            <p:column colspan="8">
 	            	<p:dataTable id="tableExames" scrollable="true" scrollHeight="150"
 	            			 	 selectionMode="single" rowKey="#{exa.id}" var="exa" rowIndexVar="rowIndex"
-	            			 	 style="width: 860px; height: 200px;" value="#{paciente.exames}" reflow="true" rows="6" emptyMessage="">
+	            			 	 style="width: 870px; height: 200px;" value="#{paciente.exames}" reflow="true" rows="60" emptyMessage="">
 					    
-					    <p:column  headerText="Seq">
-					        <h:outputText value="#{exa.id}" />
+					    <p:column  headerText="Sequência">
+					        <h:outputText value="#{rowIndex}" />
 					    </p:column>
 					 
 					    <p:column   headerText="Exame">

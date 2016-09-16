@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.jlab.model.Usuario;
-import br.com.jlab.util.Util;
+import br.com.jlab.model.Setor;
 
 
 /**
@@ -23,7 +22,7 @@ import br.com.jlab.util.Util;
 
 @Repository
 @Transactional
-public class UsuarioDAO {
+public class SetorDAO extends GenericDAO<Setor>{
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -36,49 +35,45 @@ public class UsuarioDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	public void saveUsuario(Usuario usuario) {
-		try {
-			usuario.setSenha(Util.cript(usuario.getSenha()));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		getSessionFactory().getCurrentSession().saveOrUpdate(usuario);
+	public void saveSetor(Setor setor) {
+		setor.setSetor(null);
+		System.out.println("Save: " + setor.toString());
+		getSessionFactory().getCurrentSession().merge(setor);
 	}
 
-	public void deleteUsuario(Usuario usuario) {
-		getSessionFactory().getCurrentSession().delete(usuario);
+	public void deleteSetor(Setor setor) {
+		getSessionFactory().getCurrentSession().delete(setor);
 	}
 
-	public void updateUsuario(Usuario usuario) {
-		getSessionFactory().getCurrentSession().update(usuario);
+	public void updateSetor(Setor setor) {
+		getSessionFactory().getCurrentSession().update(setor);
 	}
 
-	public Usuario getUsuarioById(Integer id) {
-		Usuario usuarios = (Usuario) getSessionFactory().getCurrentSession().get(Usuario.class, id);
+	public Setor getSetorById(Integer id) {
+		Setor setor = (Setor) getSessionFactory().getCurrentSession().get(Setor.class, id);
 
-		return usuarios;
+		return setor;
 
 	}
 
-	public List<Usuario> getUsuario() {
-		List list = getSessionFactory().getCurrentSession().createQuery("from Usuario").list();
+	public List<Setor> getSetor() {
+		List list = getSessionFactory().getCurrentSession().createQuery("from Setor").list();
 		return list;
 	}
 
-	public Usuario getUsuario(String user, String senha) {
+	public Setor getSetores(String user, String senha) {
 
-		Usuario usuarios = null;
+		Setor setores = null;
 		boolean retorno = false;
 		try {
-			usuarios = (Usuario) getSessionFactory().getCurrentSession().createCriteria(Usuario.class)
+			setores = (Setor) getSessionFactory().getCurrentSession().createCriteria(Setor.class)
 					.add(Restrictions.eq("login", user.toUpperCase())).add(Restrictions.eq("senha", senha))
 					.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error in login() --> " + e.getMessage());
 		} finally {
-			return usuarios;
+			return setores;
 		}
 	}
 

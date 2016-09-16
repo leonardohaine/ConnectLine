@@ -3,15 +3,29 @@ package br.com.jlab.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.jlab.util.HibernateUtil;
 
 public class GenericDAO<Entidade> {
 	
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	private SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	private void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
 	
 public void salvar(Entidade entidade){
 		
-		Session sessao = HibernateUtil.getFabricaDeSessao().openSession();
+	
+		getSessionFactory().getCurrentSession().saveOrUpdate(entidade);
+		/*Session sessao = HibernateUtil.getFabricaDeSessao().openSession();
 		Transaction transacao = null;
 		
 		try {
@@ -28,7 +42,7 @@ public void salvar(Entidade entidade){
 
 			sessao.close();
 		
-		}	
+		}	*/
 	
 
 

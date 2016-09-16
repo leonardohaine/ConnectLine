@@ -2,16 +2,18 @@ package br.com.jlab.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -19,14 +21,16 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author diego
  */
 @Entity
-@Table(name = "setores")
-public class Setores implements Serializable {
+@Table(name = "setor")
+public class Setor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_SET")
+	@SequenceGenerator(name = "SEQ_SET", sequenceName = "seq_setores")
+	@Basic(optional = false)
     @Column(name = "setor")
-    private String setor;
+    private Long setor;
     @Column(name = "descricao")
     private String descricao;
     @Column(name = "usuario")
@@ -39,30 +43,29 @@ public class Setores implements Serializable {
     private Character datagerenciamento;
     @Column(name = "liberaparcial")
     private Character liberaparcial;
-    @Lob
+    /*@Lob
     @Column(name = "laudoresp")
-    private byte[] laudoresp;
+    private byte[] laudoresp;*/
     @Column(name = "laudotam")
     private Integer laudotam;
     @Column(name = "ativo")
-    private Character ativo;
+    private Boolean ativo;
     @Column(name = "loinc")
     private String loinc;
-    @OneToMany(mappedBy = "setor")
-    private Collection<Exames> examesCollection;
+   
 
-    public Setores() {
+    public Setor() {
     }
 
-    public Setores(String setor) {
+    public Setor(Long setor) {
         this.setor = setor;
     }
 
-    public String getSetor() {
+    public Long getSetor() {
         return setor;
     }
 
-    public void setSetor(String setor) {
+    public void setSetor(Long setor) {
         this.setor = setor;
     }
 
@@ -114,13 +117,13 @@ public class Setores implements Serializable {
         this.liberaparcial = liberaparcial;
     }
 
-    public byte[] getLaudoresp() {
+    /*public byte[] getLaudoresp() {
         return laudoresp;
     }
 
     public void setLaudoresp(byte[] laudoresp) {
         this.laudoresp = laudoresp;
-    }
+    }*/
 
     public Integer getLaudotam() {
         return laudotam;
@@ -130,11 +133,11 @@ public class Setores implements Serializable {
         this.laudotam = laudotam;
     }
 
-    public Character getAtivo() {
+    public Boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(Character ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
 
@@ -144,15 +147,6 @@ public class Setores implements Serializable {
 
     public void setLoinc(String loinc) {
         this.loinc = loinc;
-    }
-
-    @XmlTransient
-    public Collection<Exames> getExamesCollection() {
-        return examesCollection;
-    }
-
-    public void setExamesCollection(Collection<Exames> examesCollection) {
-        this.examesCollection = examesCollection;
     }
 
     @Override
@@ -165,10 +159,10 @@ public class Setores implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Setores)) {
+        if (!(object instanceof Setor)) {
             return false;
         }
-        Setores other = (Setores) object;
+        Setor other = (Setor) object;
         if ((this.setor == null && other.setor != null) || (this.setor != null && !this.setor.equals(other.setor))) {
             return false;
         }
@@ -177,7 +171,7 @@ public class Setores implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.entidades.Setores[ setor=" + setor + " ]";
+        return "br.com.entidades.Setores[ setor=" + setor + ", descricao="+ descricao + "]";
     }
     
 }

@@ -233,7 +233,7 @@ public class Exames implements Serializable {
     private Recipientes recipiente;
     @JoinColumn(name = "setor", referencedColumnName = "setor")
     @ManyToOne
-    private Setores setor;
+    private Setor setor;
 
     public Exames() {
     }
@@ -951,11 +951,11 @@ public class Exames implements Serializable {
         this.recipiente = recipiente;
     }
 
-    public Setores getSetor() {
+    public Setor getSetor() {
         return setor;
     }
 
-    public void setSetor(Setores setor) {
+    public void setSetor(Setor setor) {
         this.setor = setor;
     }
 

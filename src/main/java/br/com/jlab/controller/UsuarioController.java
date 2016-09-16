@@ -15,7 +15,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
-import br.com.jlab.model.Usuarios;
+import br.com.jlab.model.Usuario;
 import br.com.jlab.service.UsuarioService;
 
 /**
@@ -26,9 +26,9 @@ import br.com.jlab.service.UsuarioService;
 @ViewScoped
 public class UsuarioController {
 
-	private Usuarios usuarios = new Usuarios();
-	private List<Usuarios> listUsuario;
-	private Usuarios selectedUsuario = new Usuarios();
+	private Usuario usuarios = new Usuario();
+	private List<Usuario> listUsuario;
+	private Usuario selectedUsuario = new Usuario();
 
 	@ManagedProperty(value = "#{UsuarioService}")
 	private UsuarioService usuarioService;
@@ -40,7 +40,7 @@ public class UsuarioController {
 	/**
 	 * @return the usuario
 	 */
-	public Usuarios getUsuarios() {
+	public Usuario getUsuarios() {
 		return usuarios;
 	}
 
@@ -48,15 +48,15 @@ public class UsuarioController {
 	 * @param usuario
 	 *            the usuario to set
 	 */
-	public void setUsuarios(Usuarios usuarios) {
+	public void setUsuarios(Usuario usuarios) {
 		this.usuarios = usuarios;
 	}
 
 	/**
 	 * @return the listUsuario
 	 */
-	public List<Usuarios> getListUsuario() {
-		listUsuario = new ArrayList<Usuarios>();
+	public List<Usuario> getListUsuario() {
+		listUsuario = new ArrayList<Usuario>();
 		listUsuario = getUsuarioService().getUsuario();
 		return listUsuario;
 	}
@@ -65,7 +65,7 @@ public class UsuarioController {
 	 * @param listUsuario
 	 *            the listUsuario to set
 	 */
-	public void setListUsuario(List<Usuarios> listUsuario) {
+	public void setListUsuario(List<Usuario> listUsuario) {
 		this.listUsuario = listUsuario;
 	}
 
@@ -73,24 +73,24 @@ public class UsuarioController {
 		try {
 			getUsuarioService().getUsuarioDAO().saveUsuario(usuarios);
 
-			usuarios = new Usuarios();
+			usuarios = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Usuário cadastrado com sucesso!", "Usuário cadastrado com sucesso!"));
 			return "usuarios";
 		} catch (Exception e) {
 			e.printStackTrace();
-			usuarios = new Usuarios();
+			usuarios = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro ao cadastrar usuário!", "Erro ao cadastrar usuário! " + e));
 			return "usuarios";
 		}
 	}
-
+	
 	public String delete() {
 
 		try {
 			getUsuarioService().getUsuarioDAO().deleteUsuario(usuarios);
-			usuarios = new Usuarios();
+			usuarios = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Usuário deletado com sucesso!", "Usuário deletado com sucesso!"));
 			return "usuarios";
@@ -108,7 +108,7 @@ public class UsuarioController {
 		// listCorretores = new ClienteDAO().listaClientes();
 
 		if (event.getObject() != null) {
-			Usuarios usuario = (Usuarios) event.getObject();
+			Usuario usuario = (Usuario) event.getObject();
 			setUsuarios(getUsuarioService().getUsuarioDAO().getUsuarioById(usuario.getCodusuario()));
 
 		}
@@ -117,7 +117,7 @@ public class UsuarioController {
 	/**
 	 * @return the selectedUsuario
 	 */
-	public Usuarios getSelectedUsuario() {
+	public Usuario getSelectedUsuario() {
 		return selectedUsuario;
 	}
 
@@ -125,7 +125,7 @@ public class UsuarioController {
 	 * @param selectedUsuario
 	 *            the selectedUsuario to set
 	 */
-	public void setSelectedUsuario(Usuarios selectedUsuario) {
+	public void setSelectedUsuario(Usuario selectedUsuario) {
 		this.selectedUsuario = selectedUsuario;
 	}
 

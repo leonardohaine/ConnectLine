@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.jlab.dao.UsuarioDAO;
 import br.com.jlab.model.Usuario;
 
-@Service("UsuarioService")
+@Service("PacienteService")
 @Transactional(readOnly = true)
-public class UsuarioService {
+public class PacienteService {
 
 	@Autowired
 	UsuarioDAO usuarioDAO;
