@@ -28,13 +28,14 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
     <!-- Data Source Declaration -->
     <bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="org.postgresql.Driver" />
-        <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/jlab" />
-        <property name="user" value="postgres" />
-        <property name="password" value="leonardo" />
         
-        <!--<property name="jdbcUrl" value="jdbc:postgresql://gaminfo.com.br:5432/gaminfo_jlab" />
+        <!--<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/jlab" />
+        <property name="user" value="postgres" />
+        <property name="password" value="leonardo" />-->
+        
+        <property name="jdbcUrl" value="jdbc:postgresql://gaminfo.com.br:5432/gaminfo_jlab" />
         <property name="user" value="gaminfo_postgres" />
-        <property name="password" value="postgres" />-->
+        <property name="password" value="postgres" />
         
         <property name="maxPoolSize" value="2" />
         <property name="maxStatements" value="0" />
