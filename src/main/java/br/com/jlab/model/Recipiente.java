@@ -7,14 +7,19 @@ package br.com.jlab.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,9 +40,11 @@ public class Recipiente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_RECIP")
+	@SequenceGenerator(name = "SEQ_RECIP", sequenceName = "seq_recipiente")
+	@Basic(optional = false)
     @Column(name = "recipiente")
-    private String recipiente;
+    private Long recipiente;
     @Column(name = "descricao")
     private String descricao;
     @Lob
@@ -46,20 +53,22 @@ public class Recipiente implements Serializable {
     @Column(name = "rec_st_preanalitico")
     private String recStPreanalitico;
     @OneToMany(mappedBy = "recipiente")
-    private Collection<Exame> examesCollection;
+    private List<Exame> examesList;
+    @Column(name = "ativo")
+    private Boolean ativo;
 
     public Recipiente() {
     }
 
-    public Recipiente(String recipiente) {
+    public Recipiente(Long recipiente) {
         this.recipiente = recipiente;
     }
 
-    public String getRecipiente() {
+    public Long getRecipiente() {
         return recipiente;
     }
 
-    public void setRecipiente(String recipiente) {
+    public void setRecipiente(Long recipiente) {
         this.recipiente = recipiente;
     }
 
@@ -88,12 +97,12 @@ public class Recipiente implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Exame> getExamesCollection() {
-        return examesCollection;
+    public List<Exame> getExamesList() {
+        return examesList;
     }
 
-    public void setExamesCollection(Collection<Exame> examesCollection) {
-        this.examesCollection = examesCollection;
+    public void setExamesList(List<Exame> examesList) {
+        this.examesList = examesList;
     }
 
     @Override
@@ -120,5 +129,13 @@ public class Recipiente implements Serializable {
     public String toString() {
         return "br.com.entidades.Recipientes[ recipiente=" + recipiente + " ]";
     }
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
     
 }

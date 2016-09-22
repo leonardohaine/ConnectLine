@@ -12,10 +12,13 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,26 +38,31 @@ public class Material implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_MAT")
+	@SequenceGenerator(name = "SEQ_MAT", sequenceName = "seq_material")
+	@Basic(optional = false)
     @Column(name = "material")
-    private String material;
+    private Long material;
     @Column(name = "descricao")
     private String descricao;
     @OneToMany(mappedBy = "material")
     private List<Exame> exameList;
+    
+    @Column(name = "ativo")
+    private Boolean ativo;
 
     public Material() {
     }
 
-    public Material(String material) {
+    public Material(Long material) {
         this.material = material;
     }
 
-    public String getMaterial() {
+    public Long getMaterial() {
         return material;
     }
 
-    public void setMaterial(String material) {
+    public void setMaterial(Long material) {
         this.material = material;
     }
 
@@ -67,7 +75,7 @@ public class Material implements Serializable {
     }
 
     @XmlTransient
-    public List<Exame> getExamaList() {
+    public List<Exame> getExameList() {
         return exameList;
     }
 
@@ -99,5 +107,13 @@ public class Material implements Serializable {
     public String toString() {
         return "br.com.entidades.Materiais[ material=" + material + " ]";
     }
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
     
 }

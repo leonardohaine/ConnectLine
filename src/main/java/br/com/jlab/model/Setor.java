@@ -60,13 +60,13 @@ public class Setor implements Serializable {
     }
 
     public Long getSetor() {
-    	StringUtils.leftPad(setor == null ? null : setor.toString(), 3, "3");
+    	//StringUtils.leftPad(setor == null ? null : setor, 3, "3");
     	System.out.println("Setor: " + setor);
         return setor;
     }
 
     public void setSetor(Long setor) {
-    	setor = Long.parseLong(StringUtils.leftPad(setor.toString(), 3, "3"));
+    	//StringUtils.leftPad(setor, 3, "3");
     	System.out.println("Setor: " + setor);
         this.setor = setor;
     }
