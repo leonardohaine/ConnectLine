@@ -26,11 +26,11 @@
         </f:facet>
        
         <p:row>
-            <p:column colspan="2">Material:<br/><p:inputText size="29" value="#{setores.setor.setor}" /></p:column>
+            <p:column colspan="2">Material:<br/><p:inputText size="29" value="#{material.material.material}" /></p:column>
            
-            <p:column colspan="2">Descrição:<br/><p:inputText size="29" value="#{setores.setor.descricao}" /></p:column>
+            <p:column colspan="2">Descrição:<br/><p:inputText size="29" value="#{material.material.descricao}" /></p:column>
               
-            <p:column colspan="2">Ativo:<br/><p:selectBooleanButton value="#{setores.setor.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+            <p:column colspan="2">Ativo:<br/><p:selectBooleanButton value="#{material.material.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
             
         </p:row>
         <p:row>
@@ -41,10 +41,10 @@
                 <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelMatrial">
                     <p:resetInput target="panelMatrial" />
                 </p:commandButton>
-                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{setores.salvarSetor}" update="panelMatrial" global="true" />
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{material.save}" update="panelMatrial" global="true" />
                 
                 <p:focus context="panelMatrial"/>  
-                <p:messages /> 
+                <p:messages id="messagesMaterial" showDetail="true" autoUpdate="true" closable="true" />
             </p:column> 
         </p:row>
         

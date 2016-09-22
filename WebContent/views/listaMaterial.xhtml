@@ -5,6 +5,7 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -21,6 +22,10 @@
 	        
 	            
 		        <p:dataTable var="mat" value="#{material.materiais}" reflow="true" rows="10" paginator="true">
+				    <f:facet name="header">
+				        LISTA DE MATERIAIS
+				    </f:facet>
+				    
 				    <p:column headerText="Id">
 				        <h:outputText value="#{mat.material}" />
 				    </p:column>
@@ -38,15 +43,18 @@
 			                <f:setPropertyActionListener value="#{mat}" target="#{material.selectedMaterial}" />
 			            </p:commandButton>
 			            
-			            <p:commandButton update=":formMaterial" action="#{material.Edit}" icon="ui-icon-close" title="Deletar">
+			            <p:commandButton update=":formMaterial" action="#{material.delete}" icon="ui-icon-close" title="Deletar">
 			                <f:setPropertyActionListener value="#{mat}" target="#{material.selectedMaterial}" />
 			            </p:commandButton>
 				    </p:column>
+				    
+				    <f:facet name="footer">
+				        Total: #{fn:length(material.materiais)}
+				    </f:facet>
 				 
 				</p:dataTable>	
-	        
-	        
-	        
+	        	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+	        	<p:commandButton value="Cadastrar" id="ajax"  onclick="location.href='./material.jsf';" styleClass="ui-priority-primary" />
 	        <p:blockUI block="" trigger="" /> 
 	    </h:form>
     

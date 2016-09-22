@@ -42,10 +42,10 @@
                 <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelSetor">
                     <p:resetInput target="panelSetor" />
                 </p:commandButton>
-                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{setor.salvarSetor}" update="panelSetor" global="true" />
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{setor.save}" update="panelSetor" global="true" />
                 
                 <p:focus context="panelSetor"/>  
-                <p:messages /> 
+                <p:messages id="messagesSetor" showDetail="true" autoUpdate="true" closable="true" />
             </p:column> 
         </p:row>
         

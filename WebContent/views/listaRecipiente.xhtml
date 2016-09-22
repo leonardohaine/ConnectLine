@@ -5,6 +5,7 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -20,33 +21,40 @@
 	      
 	        
 	            
-		        <p:dataTable var="mat" value="#{material.materiais}" reflow="true" rows="10" paginator="true">
+		        <p:dataTable var="recip" value="#{recipiente.recipientes}" reflow="true" rows="10" paginator="true">
+				    <f:facet name="header">
+				        LISTA DE RECIPIENTES
+				    </f:facet>
+				    
 				    <p:column headerText="Id">
-				        <h:outputText value="#{mat.material}" />
+				        <h:outputText value="#{recip.recipiente}" />
 				    </p:column>
 				 
 				    <p:column headerText="Descrição">
-				        <h:outputText value="#{mat.descricao}" />
+				        <h:outputText value="#{recip.descricao}" />
 				    </p:column>
 				 
 				    <p:column headerText="Ativo">
-				        <p:graphicImage value="#{mat.ativo ? '../imagens/ledgreen22.png' : '../imagens/ledred22.png'}" />
+				        <p:graphicImage value="#{recip.ativo ? '../imagens/ledgreen22.png' : '../imagens/ledred22.png'}" />
 				    </p:column>
 				    
 				    <p:column headerText="Ação">
-				        <p:commandButton update=":formMaterial" action="#{material.Edit}" icon="ui-icon-pencil" title="Editar">
-			                <f:setPropertyActionListener value="#{mat}" target="#{material.selectedMaterial}" />
+				        <p:commandButton update=":formMaterial" action="#{recipiente.Edit}" icon="ui-icon-pencil" title="Editar">
+			                <f:setPropertyActionListener value="#{recip}" target="#{recipiente.selectedRecipiente}" />
 			            </p:commandButton>
 			            
-			            <p:commandButton update=":formMaterial" action="#{material.Edit}" icon="ui-icon-close" title="Deletar">
-			                <f:setPropertyActionListener value="#{mat}" target="#{material.selectedMaterial}" />
+			            <p:commandButton update=":formMaterial" action="#{recipiente.delete}" icon="ui-icon-close" title="Deletar">
+			                <f:setPropertyActionListener value="#{recip}" target="#{recipiente.selectedRecipiente}" />
 			            </p:commandButton>
 				    </p:column>
+				    
+				    <f:facet name="footer">
+				        Total: #{fn:length(recipiente.recipientes)}
+				    </f:facet>
 				 
 				</p:dataTable>	
-	        
-	        
-	        
+	        	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+	        	<p:commandButton value="Cadastrar" id="ajax"  onclick="location.href='./recipiente.jsf';" styleClass="ui-priority-primary" />
 	        <p:blockUI block="" trigger="" /> 
 	    </h:form>
     
