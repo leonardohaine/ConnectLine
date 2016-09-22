@@ -1,8 +1,6 @@
 package br.com.jlab.model;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -10,11 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
+
+import org.apache.commons.lang.StringUtils;
+
 
 /**
  *
@@ -62,10 +60,14 @@ public class Setor implements Serializable {
     }
 
     public Long getSetor() {
+    	StringUtils.leftPad(setor == null ? null : setor.toString(), 3, "3");
+    	System.out.println("Setor: " + setor);
         return setor;
     }
 
     public void setSetor(Long setor) {
+    	setor = Long.parseLong(StringUtils.leftPad(setor.toString(), 3, "3"));
+    	System.out.println("Setor: " + setor);
         this.setor = setor;
     }
 

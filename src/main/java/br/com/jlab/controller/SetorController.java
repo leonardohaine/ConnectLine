@@ -14,9 +14,9 @@ import javax.faces.context.FacesContext;
 import br.com.jlab.model.Setor;
 import br.com.jlab.service.SetorService;
 
-@ManagedBean(name = "setores")
+@ManagedBean(name = "setor")
 @ViewScoped
-public class SetoresController implements Serializable {
+public class SetorController implements Serializable {
 	
 	/**
 	 * 
@@ -30,7 +30,7 @@ public class SetoresController implements Serializable {
 	@ManagedProperty(value = "#{SetorService}")
 	private SetorService setorService;
 	
-	public SetoresController(){
+	public SetorController(){
 		
 	}
 	

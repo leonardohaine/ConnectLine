@@ -28,47 +28,47 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author diego
  */
 @Entity
-@Table(name = "equipamentos")
+@Table(name = "equipamento")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Equipamentos.findAll", query = "SELECT e FROM Equipamentos e"),
-    @NamedQuery(name = "Equipamentos.findByEquipamento", query = "SELECT e FROM Equipamentos e WHERE e.equipamento = :equipamento"),
-    @NamedQuery(name = "Equipamentos.findByDescricao", query = "SELECT e FROM Equipamentos e WHERE e.descricao = :descricao"),
-    @NamedQuery(name = "Equipamentos.findByBoundrate", query = "SELECT e FROM Equipamentos e WHERE e.boundrate = :boundrate"),
-    @NamedQuery(name = "Equipamentos.findByNbits", query = "SELECT e FROM Equipamentos e WHERE e.nbits = :nbits"),
-    @NamedQuery(name = "Equipamentos.findByStopbits", query = "SELECT e FROM Equipamentos e WHERE e.stopbits = :stopbits"),
-    @NamedQuery(name = "Equipamentos.findByParidade", query = "SELECT e FROM Equipamentos e WHERE e.paridade = :paridade"),
-    @NamedQuery(name = "Equipamentos.findByFlowcontrol", query = "SELECT e FROM Equipamentos e WHERE e.flowcontrol = :flowcontrol"),
-    @NamedQuery(name = "Equipamentos.findByPosicaohorizontal", query = "SELECT e FROM Equipamentos e WHERE e.posicaohorizontal = :posicaohorizontal"),
-    @NamedQuery(name = "Equipamentos.findByPosicaovertical", query = "SELECT e FROM Equipamentos e WHERE e.posicaovertical = :posicaovertical"),
-    @NamedQuery(name = "Equipamentos.findByDescricaotecnica", query = "SELECT e FROM Equipamentos e WHERE e.descricaotecnica = :descricaotecnica"),
-    @NamedQuery(name = "Equipamentos.findBySetor", query = "SELECT e FROM Equipamentos e WHERE e.setor = :setor"),
-    @NamedQuery(name = "Equipamentos.findByPorta", query = "SELECT e FROM Equipamentos e WHERE e.porta = :porta"),
-    @NamedQuery(name = "Equipamentos.findByComputador", query = "SELECT e FROM Equipamentos e WHERE e.computador = :computador"),
-    @NamedQuery(name = "Equipamentos.findByIp", query = "SELECT e FROM Equipamentos e WHERE e.ip = :ip"),
-    @NamedQuery(name = "Equipamentos.findByPort", query = "SELECT e FROM Equipamentos e WHERE e.port = :port"),
-    @NamedQuery(name = "Equipamentos.findByDllname", query = "SELECT e FROM Equipamentos e WHERE e.dllname = :dllname"),
-    @NamedQuery(name = "Equipamentos.findByImgdir", query = "SELECT e FROM Equipamentos e WHERE e.imgdir = :imgdir"),
-    @NamedQuery(name = "Equipamentos.findByImpressora", query = "SELECT e FROM Equipamentos e WHERE e.impressora = :impressora"),
-    @NamedQuery(name = "Equipamentos.findByAtivo", query = "SELECT e FROM Equipamentos e WHERE e.ativo = :ativo"),
-    @NamedQuery(name = "Equipamentos.findByComputadorbackup", query = "SELECT e FROM Equipamentos e WHERE e.computadorbackup = :computadorbackup"),
-    @NamedQuery(name = "Equipamentos.findBySerialbackup", query = "SELECT e FROM Equipamentos e WHERE e.serialbackup = :serialbackup"),
-    @NamedQuery(name = "Equipamentos.findByBackupautomatico", query = "SELECT e FROM Equipamentos e WHERE e.backupautomatico = :backupautomatico"),
-    @NamedQuery(name = "Equipamentos.findByTipocomunicacao", query = "SELECT e FROM Equipamentos e WHERE e.tipocomunicacao = :tipocomunicacao"),
-    @NamedQuery(name = "Equipamentos.findByThread", query = "SELECT e FROM Equipamentos e WHERE e.thread = :thread"),
-    @NamedQuery(name = "Equipamentos.findByNovo", query = "SELECT e FROM Equipamentos e WHERE e.novo = :novo"),
-    @NamedQuery(name = "Equipamentos.findByTimer", query = "SELECT e FROM Equipamentos e WHERE e.timer = :timer"),
-    @NamedQuery(name = "Equipamentos.findByLista", query = "SELECT e FROM Equipamentos e WHERE e.lista = :lista"),
-    @NamedQuery(name = "Equipamentos.findByNumeroserie", query = "SELECT e FROM Equipamentos e WHERE e.numeroserie = :numeroserie"),
-    @NamedQuery(name = "Equipamentos.findByDataativo", query = "SELECT e FROM Equipamentos e WHERE e.dataativo = :dataativo"),
-    @NamedQuery(name = "Equipamentos.findByDatadesativo", query = "SELECT e FROM Equipamentos e WHERE e.datadesativo = :datadesativo"),
-    @NamedQuery(name = "Equipamentos.findByTeste", query = "SELECT e FROM Equipamentos e WHERE e.teste = :teste"),
-    @NamedQuery(name = "Equipamentos.findByTeste2", query = "SELECT e FROM Equipamentos e WHERE e.teste2 = :teste2"),
-    @NamedQuery(name = "Equipamentos.findByChecked", query = "SELECT e FROM Equipamentos e WHERE e.checked = :checked"),
-    @NamedQuery(name = "Equipamentos.findByTipoEquipamento", query = "SELECT e FROM Equipamentos e WHERE e.tipoEquipamento = :tipoEquipamento"),
-    @NamedQuery(name = "Equipamentos.findByEmpresa", query = "SELECT e FROM Equipamentos e WHERE e.empresa = :empresa"),
-    @NamedQuery(name = "Equipamentos.findByImgdirgrava", query = "SELECT e FROM Equipamentos e WHERE e.imgdirgrava = :imgdirgrava")})
-public class Equipamentos implements Serializable {
+    @NamedQuery(name = "Equipamento.findAll", query = "SELECT e FROM Equipamento e"),
+    @NamedQuery(name = "Equipamento.findByEquipamento", query = "SELECT e FROM Equipamento e WHERE e.equipamento = :equipamento"),
+    @NamedQuery(name = "Equipamento.findByDescricao", query = "SELECT e FROM Equipamento e WHERE e.descricao = :descricao"),
+    @NamedQuery(name = "Equipamento.findByBoundrate", query = "SELECT e FROM Equipamento e WHERE e.boundrate = :boundrate"),
+    @NamedQuery(name = "Equipamento.findByNbits", query = "SELECT e FROM Equipamento e WHERE e.nbits = :nbits"),
+    @NamedQuery(name = "Equipamento.findByStopbits", query = "SELECT e FROM Equipamento e WHERE e.stopbits = :stopbits"),
+    @NamedQuery(name = "Equipamento.findByParidade", query = "SELECT e FROM Equipamento e WHERE e.paridade = :paridade"),
+    @NamedQuery(name = "Equipamento.findByFlowcontrol", query = "SELECT e FROM Equipamento e WHERE e.flowcontrol = :flowcontrol"),
+    @NamedQuery(name = "Equipamento.findByPosicaohorizontal", query = "SELECT e FROM Equipamento e WHERE e.posicaohorizontal = :posicaohorizontal"),
+    @NamedQuery(name = "Equipamento.findByPosicaovertical", query = "SELECT e FROM Equipamento e WHERE e.posicaovertical = :posicaovertical"),
+    @NamedQuery(name = "Equipamento.findByDescricaotecnica", query = "SELECT e FROM Equipamento e WHERE e.descricaotecnica = :descricaotecnica"),
+    @NamedQuery(name = "Equipamento.findBySetor", query = "SELECT e FROM Equipamento e WHERE e.setor = :setor"),
+    @NamedQuery(name = "Equipamento.findByPorta", query = "SELECT e FROM Equipamento e WHERE e.porta = :porta"),
+    @NamedQuery(name = "Equipamento.findByComputador", query = "SELECT e FROM Equipamento e WHERE e.computador = :computador"),
+    @NamedQuery(name = "Equipamento.findByIp", query = "SELECT e FROM Equipamento e WHERE e.ip = :ip"),
+    @NamedQuery(name = "Equipamento.findByPort", query = "SELECT e FROM Equipamento e WHERE e.port = :port"),
+    @NamedQuery(name = "Equipamento.findByDllname", query = "SELECT e FROM Equipamento e WHERE e.dllname = :dllname"),
+    @NamedQuery(name = "Equipamento.findByImgdir", query = "SELECT e FROM Equipamento e WHERE e.imgdir = :imgdir"),
+    @NamedQuery(name = "Equipamento.findByImpressora", query = "SELECT e FROM Equipamento e WHERE e.impressora = :impressora"),
+    @NamedQuery(name = "Equipamento.findByAtivo", query = "SELECT e FROM Equipamento e WHERE e.ativo = :ativo"),
+    @NamedQuery(name = "Equipamento.findByComputadorbackup", query = "SELECT e FROM Equipamento e WHERE e.computadorbackup = :computadorbackup"),
+    @NamedQuery(name = "Equipamento.findBySerialbackup", query = "SELECT e FROM Equipamento e WHERE e.serialbackup = :serialbackup"),
+    @NamedQuery(name = "Equipamento.findByBackupautomatico", query = "SELECT e FROM Equipamento e WHERE e.backupautomatico = :backupautomatico"),
+    @NamedQuery(name = "Equipamento.findByTipocomunicacao", query = "SELECT e FROM Equipamento e WHERE e.tipocomunicacao = :tipocomunicacao"),
+    @NamedQuery(name = "Equipamento.findByThread", query = "SELECT e FROM Equipamento e WHERE e.thread = :thread"),
+    @NamedQuery(name = "Equipamento.findByNovo", query = "SELECT e FROM Equipamento e WHERE e.novo = :novo"),
+    @NamedQuery(name = "Equipamento.findByTimer", query = "SELECT e FROM Equipamento e WHERE e.timer = :timer"),
+    @NamedQuery(name = "Equipamento.findByLista", query = "SELECT e FROM Equipamento e WHERE e.lista = :lista"),
+    @NamedQuery(name = "Equipamento.findByNumeroserie", query = "SELECT e FROM Equipamento e WHERE e.numeroserie = :numeroserie"),
+    @NamedQuery(name = "Equipamento.findByDataativo", query = "SELECT e FROM Equipamento e WHERE e.dataativo = :dataativo"),
+    @NamedQuery(name = "Equipamento.findByDatadesativo", query = "SELECT e FROM Equipamento e WHERE e.datadesativo = :datadesativo"),
+    @NamedQuery(name = "Equipamento.findByTeste", query = "SELECT e FROM Equipamento e WHERE e.teste = :teste"),
+    @NamedQuery(name = "Equipamento.findByTeste2", query = "SELECT e FROM Equipamento e WHERE e.teste2 = :teste2"),
+    @NamedQuery(name = "Equipamento.findByChecked", query = "SELECT e FROM Equipamento e WHERE e.checked = :checked"),
+    @NamedQuery(name = "Equipamento.findByTipoEquipamento", query = "SELECT e FROM Equipamento e WHERE e.tipoEquipamento = :tipoEquipamento"),
+    @NamedQuery(name = "Equipamento.findByEmpresa", query = "SELECT e FROM Equipamento e WHERE e.empresa = :empresa"),
+    @NamedQuery(name = "Equipamento.findByImgdirgrava", query = "SELECT e FROM Equipamento e WHERE e.imgdirgrava = :imgdirgrava")})
+public class Equipamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -156,16 +156,16 @@ public class Equipamentos implements Serializable {
     @Column(name = "imgdirgrava")
     private String imgdirgrava;
     @OneToMany(mappedBy = "equipamento")
-    private Collection<Exames> examesCollection;
+    private Collection<Exame> examesCollection;
 
-    public Equipamentos() {
+    public Equipamento() {
     }
 
-    public Equipamentos(String equipamento) {
+    public Equipamento(String equipamento) {
         this.equipamento = equipamento;
     }
 
-    public Equipamentos(String equipamento, String thread) {
+    public Equipamento(String equipamento, String thread) {
         this.equipamento = equipamento;
         this.thread = thread;
     }
@@ -475,11 +475,11 @@ public class Equipamentos implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Exames> getExamesCollection() {
+    public Collection<Exame> getExamesCollection() {
         return examesCollection;
     }
 
-    public void setExamesCollection(Collection<Exames> examesCollection) {
+    public void setExamesCollection(Collection<Exame> examesCollection) {
         this.examesCollection = examesCollection;
     }
 
@@ -493,10 +493,10 @@ public class Equipamentos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Equipamentos)) {
+        if (!(object instanceof Equipamento)) {
             return false;
         }
-        Equipamentos other = (Equipamentos) object;
+        Equipamento other = (Equipamento) object;
         if ((this.equipamento == null && other.equipamento != null) || (this.equipamento != null && !this.equipamento.equals(other.equipamento))) {
             return false;
         }

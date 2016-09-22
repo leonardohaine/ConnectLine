@@ -7,6 +7,8 @@ package br.com.jlab.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,13 +25,13 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author diego
  */
 @Entity
-@Table(name = "materiais")
+@Table(name = "material")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Materiais.findAll", query = "SELECT m FROM Materiais m"),
-    @NamedQuery(name = "Materiais.findByMaterial", query = "SELECT m FROM Materiais m WHERE m.material = :material"),
-    @NamedQuery(name = "Materiais.findByDescricao", query = "SELECT m FROM Materiais m WHERE m.descricao = :descricao")})
-public class Materiais implements Serializable {
+    @NamedQuery(name = "Material.findAll", query = "SELECT m FROM Material m"),
+    @NamedQuery(name = "Material.findByMaterial", query = "SELECT m FROM Material m WHERE m.material = :material"),
+    @NamedQuery(name = "Material.findByDescricao", query = "SELECT m FROM Material m WHERE m.descricao = :descricao")})
+public class Material implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,12 +41,12 @@ public class Materiais implements Serializable {
     @Column(name = "descricao")
     private String descricao;
     @OneToMany(mappedBy = "material")
-    private Collection<Exames> examesCollection;
+    private List<Exame> exameList;
 
-    public Materiais() {
+    public Material() {
     }
 
-    public Materiais(String material) {
+    public Material(String material) {
         this.material = material;
     }
 
@@ -65,12 +67,12 @@ public class Materiais implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Exames> getExamesCollection() {
-        return examesCollection;
+    public List<Exame> getExamaList() {
+        return exameList;
     }
 
-    public void setExamesCollection(Collection<Exames> examesCollection) {
-        this.examesCollection = examesCollection;
+    public void setExameList(List<Exame> exameList) {
+        this.exameList = exameList;
     }
 
     @Override
@@ -83,10 +85,10 @@ public class Materiais implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Materiais)) {
+        if (!(object instanceof Material)) {
             return false;
         }
-        Materiais other = (Materiais) object;
+        Material other = (Material) object;
         if ((this.material == null && other.material != null) || (this.material != null && !this.material.equals(other.material))) {
             return false;
         }

@@ -16,21 +16,21 @@
   
     <div align="center">
         
-        <h:form id="formUsu" enctype="multipart/form-data">
-        <p:panelGrid  id="panelSetor" style="margin-top:20px; background-color: #cccccc;" >
+        <h:form id="formMat" enctype="multipart/form-data">
+        <p:panelGrid  id="panelMatrial" style="margin-top:20px; background-color: #cccccc;" >
             
         <f:facet name="header">  
             <p:row>
-                <p:column colspan="10">CADASTRO DE SETORES</p:column>  
-            </p:row>    
+                <p:column colspan="10">CADASTRO DE MATERIAIS</p:column>
+            </p:row>
         </f:facet>
        
         <p:row>
-            <p:column colspan="2">Setor:<br/><p:inputText size="29" value="#{setor.setor.setor}" /></p:column>
+            <p:column colspan="2">Material:<br/><p:inputText size="29" value="#{setores.setor.setor}" /></p:column>
            
-            <p:column colspan="2">Descrição:<br/><p:inputText size="29" value="#{setor.setor.descricao}" /></p:column>  
+            <p:column colspan="2">Descrição:<br/><p:inputText size="29" value="#{setores.setor.descricao}" /></p:column>
               
-            <p:column colspan="2">Ativo:<br/><p:selectBooleanButton value="#{setor.setor.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+            <p:column colspan="2">Ativo:<br/><p:selectBooleanButton value="#{setores.setor.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
             
         </p:row>
         <p:row>
@@ -38,20 +38,19 @@
             
             	<p:commandButton icon="icone-cancel"  id="up" value="Update" ajax="true" update="@form" />
             
-                
-                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelSetor">
-                    <p:resetInput target="panelSetor" />
+                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelMatrial">
+                    <p:resetInput target="panelMatrial" />
                 </p:commandButton>
-                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{setor.salvarSetor}" update="panelSetor" global="true" />
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{setores.salvarSetor}" update="panelMatrial" global="true" />
                 
-                <p:focus context="panelSetor"/>  
+                <p:focus context="panelMatrial"/>  
                 <p:messages /> 
             </p:column> 
         </p:row>
         
         </p:panelGrid>
         
-        <p:blockUI block="panelSetor" trigger="saveBtn, clearBtn" /> 
+        <p:blockUI block="panelMatrial" trigger="saveBtn, clearBtn" /> 
     </h:form>
     
     <ui:remove>

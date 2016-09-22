@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Postos.findByRodapetam", query = "SELECT p FROM Postos p WHERE p.rodapetam = :rodapetam"),
     @NamedQuery(name = "Postos.findByCmes", query = "SELECT p FROM Postos p WHERE p.cmes = :cmes"),
     @NamedQuery(name = "Postos.findByCnes", query = "SELECT p FROM Postos p WHERE p.cnes = :cnes")})
-public class Postos implements Serializable {
+public class Posto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -67,10 +67,10 @@ public class Postos implements Serializable {
     @Column(name = "rodapeexporta")
     private byte[] rodapeexporta;
 
-    public Postos() {
+    public Posto() {
     }
 
-    public Postos(String posto) {
+    public Posto(String posto) {
         this.posto = posto;
     }
 
@@ -180,10 +180,10 @@ public class Postos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Postos)) {
+        if (!(object instanceof Posto)) {
             return false;
         }
-        Postos other = (Postos) object;
+        Posto other = (Posto) object;
         if ((this.posto == null && other.posto != null) || (this.posto != null && !this.posto.equals(other.posto))) {
             return false;
         }

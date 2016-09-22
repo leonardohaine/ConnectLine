@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.jlab.dao.SetorDAO;
-import br.com.jlab.dao.UsuarioDAO;
 import br.com.jlab.model.Setor;
-import br.com.jlab.model.Usuario;
 
 @Service("SetorService")
 @Transactional(readOnly = true)
@@ -29,7 +27,7 @@ public class SetorService {
 	}
 
 	@Transactional(readOnly = false)
-	public void updateUsuario(Setor setor) {
+	public void updateSetor(Setor setor) {
 		getSetorDAO().updateSetor(setor);
 	}
 
@@ -38,17 +36,17 @@ public class SetorService {
 	}
 
 	/**
-	 * @return the usuarioDAO
+	 * @return the setorDAO
 	 */
 	public SetorDAO getSetorDAO() {
 		return setorDAO;
 	}
 
 	/**
-	 * @param safx04DAO
-	 *            the usuarioDAO to set
+	 * @param setorDAO
+	 *            the setorDAO to set
 	 */
-	public void setUsuarioDAO(SetorDAO setorDAO) {
+	public void setSetorDAO(SetorDAO setorDAO) {
 		this.setorDAO = setorDAO;
 	}
 

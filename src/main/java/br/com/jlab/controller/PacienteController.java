@@ -45,12 +45,11 @@ public class PacienteController implements Serializable {
 		Exame col = new Exame();
 		Exame tri = new Exame();
 		
-		col.setId(1L);
-		col.setExame("COL");
+		
+		col.setExame(1L);
 		col.setDescricao("Colesterol");
 		
-		tri.setId(2L);
-		tri.setExame("TRI");
+		tri.setExame(2L);
 		tri.setDescricao("Trigricerides");
 		
 		exames.add(col);

@@ -1,8 +1,8 @@
 package br.com.jlab.dao;
 
-import br.com.jlab.model.Exames;
+import br.com.jlab.model.Exame;
 
-public class ExamesDAO extends GenericDAO<Exames>{
+public class ExamesDAO extends GenericDAO<Exame>{
 	
 	
 	
