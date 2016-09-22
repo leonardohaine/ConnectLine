@@ -20,7 +20,7 @@
 	      
 	        
 	            
-		        <p:dataTable var="set" value="#{setores.setores}" reflow="true" rows="10" paginator="true">
+		        <p:dataTable var="set" value="#{setor.setores}" reflow="true" rows="10" paginator="true">
 				    <p:column headerText="Id">
 				        <h:outputText value="#{set.setor}" />
 				    </p:column>
@@ -34,12 +34,12 @@
 				    </p:column>
 				    
 				    <p:column headerText="Ação">
-				        <p:commandButton update=":formSetor" action="#{setores.Edit}" icon="ui-icon-pencil" title="Editar">
-			                <f:setPropertyActionListener value="#{set}" target="#{setores.selectedSetor}" />
+				        <p:commandButton update=":formSetor" action="#{setor.Edit}" icon="ui-icon-pencil" title="Editar">
+			                <f:setPropertyActionListener value="#{set}" target="#{setor.selectedSetor}" />
 			            </p:commandButton>
 			            
-			            <p:commandButton update=":formSetor" action="#{setores.Edit}" icon="ui-icon-close" title="Deletar">
-			                <f:setPropertyActionListener value="#{set}" target="#{setores.selectedSetor}" />
+			            <p:commandButton update=":formSetor" action="#{setor.Edit}" icon="ui-icon-close" title="Deletar">
+			                <f:setPropertyActionListener value="#{set}" target="#{setor.selectedSetor}" />
 			            </p:commandButton>
 				    </p:column>
 				 
