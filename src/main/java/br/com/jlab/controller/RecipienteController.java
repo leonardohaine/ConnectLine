@@ -14,7 +14,7 @@ import javax.faces.context.FacesContext;
 import br.com.jlab.model.Recipiente;
 import br.com.jlab.service.RecipienteService;
 
-@ManagedBean(name = "recipientes")
+@ManagedBean(name = "recipiente")
 @ViewScoped
 public class RecipienteController implements Serializable {
 	
@@ -36,15 +36,30 @@ public class RecipienteController implements Serializable {
 	
 	
 	
-	public void salvarRecipiente(){
+	public String save(){
 		try{
 			getRecipienteService().saveRecipiente(recipiente);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Recipiente cadastrado com sucesso!", "Sucesso"));
+					"Sucesso!", "Recipiente cadastrado"));
 		}catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Erro ao cadastrar recipiente! ", "Erro" +e));
+					"Erro!", "Erro ao tentar cadastrar recipiente: " +e));
 		}
+		
+		return "listaRecipiente";
+	}
+	
+	public String delete(){
+		try{
+			getRecipienteService().deleteRecipiente(selectedRecipiente);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Sucesso!", "Recipiente deletado"));
+		}catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Erro!", "Erro ao tentar deletar recipiente: " +e));
+		}
+		
+		return "listaRecipiente";
 	}
 	
 	@PostConstruct
@@ -80,7 +95,7 @@ public class RecipienteController implements Serializable {
 
 
 
-	public void setRecipientees(List<Recipiente> recipientes) {
+	public void setRecipientes(List<Recipiente> recipientes) {
 		this.recipientes = recipientes;
 	}
 

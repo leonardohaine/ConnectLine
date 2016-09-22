@@ -36,15 +36,30 @@ public class SetorController implements Serializable {
 	
 	
 	
-	public void salvarSetor(){
+	public String save(){
 		try{
 			getSetorService().saveSetor(setor);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Setor cadastrado com sucesso!", "Sucesso"));
+					"Sucesso!", "Setor cadastrado"));
 		}catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Erro ao cadastrar usuário! ", "Erro" +e));
+					"Erro!", "Erro ao tentar cadastrar setor: " +e));
 		}
+		return "listaSetor";
+	}
+	
+	public String delete(){
+		System.out.println("DELETE SETOR: " + selectedSetor);
+		try{
+			getSetorService().deleteSetor(selectedSetor);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Sucesso!", "Setor deletado: " + selectedSetor.getDescricao().toUpperCase() ));
+		}catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Erro!", "Erro ao tentar deletar setor: " +e));
+		}
+		
+		return "listaSetor";
 	}
 	
 	@PostConstruct

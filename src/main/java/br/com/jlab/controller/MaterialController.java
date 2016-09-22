@@ -36,15 +36,30 @@ public class MaterialController implements Serializable {
 	
 	
 	
-	public void salvarMaterial(){
+	public String save(){
 		try{
 			getMaterialService().saveMaterial(material);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Material cadastrado com sucesso!", "Sucesso"));
+					"Sucesso!", "Material cadastrado"));
 		}catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Erro ao cadastrar Material! ", "Erro" +e));
+					"Erro!", "Erro ao tentar cadastrar material: " +e));
 		}
+		
+		return "listaMaterial";
+	}
+	
+	public String delete(){
+		try{
+			getMaterialService().deleteMaterial(selectedMaterial);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Sucesso!", "Material deletado: " + selectedMaterial.getDescricao()));
+		}catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Erro!", "Erro ao deletar material: " +e));
+		}
+		
+		return "listaSetor";
 	}
 	
 	@PostConstruct
