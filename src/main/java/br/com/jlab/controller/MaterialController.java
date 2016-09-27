@@ -59,7 +59,7 @@ public class MaterialController implements Serializable {
 					"Erro!", "Erro ao deletar material: " +e));
 		}
 		
-		return "listaSetor";
+		return "listaMaterial";
 	}
 	
 	@PostConstruct

@@ -22,14 +22,22 @@
 				}  
 			}  
 		</script> 
-        
+        <style>
+        	html { 
+			  background: url(./imagens/wall1600x1200new.png) no-repeat center center fixed; 
+			  -webkit-background-size: cover;
+			  -moz-background-size: cover;
+			  -o-background-size: cover;
+			  background-size: cover;
+			}
+        </style>
     </h:head>
 
-	<h:body style="font-size: 12px; background: darkblue; font-color: black;">
+	<h:body style="font-size: 12px; font-color: black;">
     	<div align="center">
         
         <h:form id="formNf" >
-        	
+        	 <ui:remove>   	
 			<h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show();" title="Clique para entrar"> 
             	<p:graphicImage value="./imagens/tubos_ensaio.png" width="450" height="150" />
            	</h:outputLink>
@@ -37,7 +45,7 @@
         	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 			<p:outputLabel value="JLab" 
 					style="font: bold 100px Goudy Stout; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px white;" />
-        
+        </ui:remove>
         <ui:remove>   	
            	<h:panelGrid bgcolor="white" columns="2" cellpadding="5" border="0" cellspacing="0" style="border-radius: 15px; box-shadow: 10px 10px 5px blue;">  
 	             
@@ -46,13 +54,13 @@
             		<p:graphicImage value="./imagens/lock.png" width="45" height="35" />
             	</f:facet>	
 	            
-	            <p:outputLabel for="username1" value="Usuário:" />  
-	            <p:inputText value="#{auth.user}" 
-	                    id="username1" required="true" label="username1" />  
+	            <p:outputLabel for="username" value="Usuário:" />  
+	            <p:inputText value="#{auth.user}" id="username" required="true" label="username" />  
+	            <p:watermark for="username" value="Usuário" id="wateruser" />
 	              
-	            <p:outputLabel for="password1" value="Senha:" />  
-	            <p:password value="#{auth.senha}"
-	                    id="password1" required="true" label="password1" />  
+	            <p:outputLabel for="password" value="Senha:" />  
+	            <p:password value="#{auth.senha}" id="password" required="true" label="password" />  
+	            <p:watermark for="password" value="Senha" id="waterpass" />
 	            
 	            <f:facet name="footer">
 	                <div style="text-align: center;">        
@@ -65,27 +73,35 @@
         </ui:remove>  	
            	<p:growl id="growl" showDetail="true" life="3000" />
    
-        <p:dialog id="dialog" header="Login"  widgetVar="dlg" resizable="false" visible="true"
-       			style="border-radius: 15px; box-shadow: 7px 7px 5px blue;">
+        <p:dialog id="dialog" header="Login"  widgetVar="dlg" resizable="false" visible="true" closable="false"
+       			style="border-radius: 15px; box-shadow: 7px 7px 5px black;">
   
-	        <h:panelGrid columns="2" cellpadding="5">  
+	        <h:panelGrid cellpadding="5">  
 	            <f:facet name="header">  
             		<p:outputLabel value="FAÇA SEU LOGIN" style="text-shadow: 2px 2px 4px darkblue;"/>   
             		<p:graphicImage value="./imagens/lock.png" width="45" height="35" />
             	</f:facet>	
 	            
-	            <p:outputLabel for="username1" value="Usuário:" />  
-	            <p:inputText value="#{auth.user}" style="border-radius: 15px;"
-	                    id="username1" required="true" label="username1" />  
+	            <p:outputLabel for="username" value="Usuário:" />  
+	            <p:inputText value="#{auth.user}" style="border-radius: 15px;" id="username" onkeyup="value=value.toUpperCase()" required="true" label="username" >
+	            	<p:watermark for="username" value="Usuário" id="wateruser" />
+	            </p:inputText>
+	            
 	              
-	            <p:outputLabel for="password1" value="Senha:" />  
-	            <p:password value="#{auth.senha}" style="border-radius: 15px;"
-	                    id="password1" required="true" label="password1" />  
+	            <p:outputLabel for="password" value="Senha:" />  
+	            <p:password value="#{auth.senha}" style="border-radius: 15px;" id="password" required="true" label="password">
+	            	<p:watermark for="password" value="Senha" id="waterpass" />
+	            </p:password>
+	            
+	            
+	            <div align="center">        
+	                   <p:commandButton id="loginButton1" value="Entrar" update="growl" oncomplete="handleLoginRequest(xhr, status, args)"
+	                                 style="border-radius: 15px;" actionListener="#{auth.login}" action="#{auth.login}" />
+	            </div>
 	            
 	            <f:facet name="footer">
 	                <div style="text-align: center;">        
-	                <p:commandButton id="loginButton1" value="Entrar" update="growl" oncomplete="handleLoginRequest(xhr, status, args)"
-	                                 style="border-radius: 15px;" actionListener="#{auth.login}" action="#{auth.login}" />  
+	                <p:commandLink id="esqueci" value="Esqueci a senha"></p:commandLink> 
 	                </div> 
 	            </f:facet>
 	        </h:panelGrid>  
@@ -96,7 +112,7 @@
 	    
         <p:ajaxStatus style="width:32px;height:32px;" id="ajaxStatusPanel">  
             <f:facet name="start">  
-                <h:graphicImage value="./imagens/loader1.gif" />  
+                <h:graphicImage value="./imagens/loader2.gif" />  
             </f:facet>  
 
             <f:facet name="complete">  

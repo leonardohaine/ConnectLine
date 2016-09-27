@@ -35,13 +35,26 @@
 				
 			</div>
 		</p:layoutUnit>
-		<p:layoutUnit position="south" size="27" resizable="false" gutter="0" style="background: darkblue;"
+		<p:layoutUnit position="south" size="28" resizable="false" gutter="0" maxSize="67" style="background: darkblue; overflow: hidden;"
 			closable="false" collapsible="true">
-			<p:outputLabel dir="ltr" value="Copyright © 2016, JLab. Todos os direitos reservados."></p:outputLabel>
-			<div align="right" style="float: left; border:0px solid;">
-					<p:clock pattern="dd/mm/yyyy - HH:mm:ss" mode="server" />
-					
-				</div>
+			<div class="container" >
+			   <div style="float: left; width: 33%;"><p:clock pattern="dd/mm/yyyy - HH:mm:ss" mode="server" /></div>
+			   <div style="float: right; width: 33%;" align="right">
+				   <p:outputLabel value="Copyright © 2016, JLab. Todos os direitos reservados.     " />
+	           </div>
+			   <div style="display: inline-block; width: 34%;" align="center">
+			   		<p:ajaxStatus style="width:128px;height:5px;" id="ajaxStatusPanel">  
+			           <f:facet name="start">  
+			               <h:graphicImage value="../imagens/30.gif" />  
+			           </f:facet>  
+			
+			           <f:facet name="complete">  
+			               <h:outputText value="" />  
+			           </f:facet>  
+		           </p:ajaxStatus>
+			   </div>
+			</div>
+			
 		</p:layoutUnit>
 		<p:layoutUnit position="west" size="210" resizable="false" gutter="0"
 			closable="false" collapsible="true" effect="drop">

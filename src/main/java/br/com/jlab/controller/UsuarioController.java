@@ -7,6 +7,7 @@ package br.com.jlab.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -15,6 +16,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
+import br.com.jlab.model.Material;
 import br.com.jlab.model.Usuario;
 import br.com.jlab.service.UsuarioService;
 
@@ -26,7 +28,7 @@ import br.com.jlab.service.UsuarioService;
 @ViewScoped
 public class UsuarioController {
 
-	private Usuario usuarios = new Usuario();
+	private Usuario usuario = new Usuario();
 	private List<Usuario> listUsuario;
 	private Usuario selectedUsuario = new Usuario();
 
@@ -40,16 +42,16 @@ public class UsuarioController {
 	/**
 	 * @return the usuario
 	 */
-	public Usuario getUsuarios() {
-		return usuarios;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	/**
 	 * @param usuario
 	 *            the usuario to set
 	 */
-	public void setUsuarios(Usuario usuarios) {
-		this.usuarios = usuarios;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	/**
@@ -69,38 +71,47 @@ public class UsuarioController {
 		this.listUsuario = listUsuario;
 	}
 
-	public String saveUpdate() {
+	public String save() {
 		try {
-			getUsuarioService().getUsuarioDAO().saveUsuario(usuarios);
+			getUsuarioService().getUsuarioDAO().saveUsuario(usuario);
 
-			usuarios = new Usuario();
+			usuario = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Usuário cadastrado com sucesso!", "Usuário cadastrado com sucesso!"));
-			return "usuarios";
+					"Sucesso!", "Usuário cadastrado"));
+			return "usuario";
 		} catch (Exception e) {
 			e.printStackTrace();
-			usuarios = new Usuario();
+			usuario = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Erro ao cadastrar usuário!", "Erro ao cadastrar usuário! " + e));
-			return "usuarios";
+					"Erro!", "Erro ao tentar cadastrar usuário: " +e));
+			return "usuario";
 		}
+	}
+	
+	@PostConstruct
+	public String Edit(){
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedUsuario", selectedUsuario);
+		
+		setUsuario((Usuario)FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selectedUsuario"));
+		System.out.println("selectedUsuario: " + selectedUsuario);
+		System.out.println("usuario: " + usuario);
+		
+		return "usuario";
 	}
 	
 	public String delete() {
 
 		try {
-			getUsuarioService().getUsuarioDAO().deleteUsuario(usuarios);
-			usuarios = new Usuario();
+			getUsuarioService().getUsuarioDAO().deleteUsuario(usuario);
+			usuario = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Usuário deletado com sucesso!", "Usuário deletado com sucesso!"));
+					"Sucesso!", "Usuário deletado: " + selectedUsuario.getLogin()));
 			return "usuarios";
 		} catch (Exception e) {
 
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Ocorreu um erro ao deletar usuário " + usuarios.getNome() + "!",
-							"Ocorreu um erro ao deletar usuário " + usuarios.getNome() + "!"));
-			return "usuarios";
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Erro!", "Erro ao deletar usuário: " +e));
+			return "usuario";
 		}
 	}
 
@@ -109,7 +120,7 @@ public class UsuarioController {
 
 		if (event.getObject() != null) {
 			Usuario usuario = (Usuario) event.getObject();
-			setUsuarios(getUsuarioService().getUsuarioDAO().getUsuarioById(usuario.getCodusuario()));
+			setUsuario(getUsuarioService().getUsuarioDAO().getUsuarioById(usuario.getCodusuario()));
 
 		}
 	}

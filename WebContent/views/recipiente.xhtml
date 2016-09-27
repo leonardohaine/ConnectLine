@@ -21,12 +21,14 @@
             
         <f:facet name="header">  
             <p:row>
-                <p:column colspan="10">CADASTRO DE RECIPIENTES</p:column>
-            </p:row>
+		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+		            <p:spacer height="0" >CADASTRO DE RECIPIENTES</p:spacer>
+		        </p:column>
+		    </p:row>
         </f:facet>
        
         <p:row>
-            <p:column colspan="2">Material:<br/><p:inputText size="29" value="#{recipiente.recipiente.recipiente}" /></p:column>
+            <p:column colspan="2">Recipiente:<br/><p:inputText size="29" value="#{recipiente.recipiente.recipiente}" /></p:column>
            
             <p:column colspan="2">Descrição:<br/><p:inputText size="29" value="#{recipiente.recipiente.descricao}" /></p:column>
               
@@ -53,19 +55,6 @@
         <p:blockUI block="panelMatrial" trigger="saveBtn, clearBtn" /> 
     </h:form>
     
-    <ui:remove>
-    	<ui:include src="menu.xhtml"></ui:include>
-    </ui:remove>
-    
-        <p:ajaxStatus style="width:32px;height:32px;" id="ajaxStatusPanel2">  
-            <f:facet name="start">  
-                <h:graphicImage value="../imagens/loader1.gif" />  
-            </f:facet>  
-
-            <f:facet name="complete">  
-                <h:outputText value="" />  
-            </f:facet>  
-        </p:ajaxStatus>
     </div> 
     
     </ui:define>   

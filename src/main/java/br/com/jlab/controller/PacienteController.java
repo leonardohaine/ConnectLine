@@ -7,12 +7,16 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
 import br.com.jlab.model.Exame;
+import br.com.jlab.model.Paciente;
+import br.com.jlab.model.Setor;
+import br.com.jlab.service.PacienteService;
 
 @ManagedBean(name = "paciente")
 @ViewScoped
@@ -22,9 +26,17 @@ public class PacienteController implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2457514004956272802L;
+	
+	private Paciente paciente = new Paciente();
+	private List<Paciente> pacientes = new ArrayList<Paciente>();
+	private Setor selectedPaciente;
+	
 	private Long idade;
 	private char prontuario = 'P';
 	private List<Exame> exames = new ArrayList<Exame>();
+	
+	@ManagedProperty(value = "#{PacienteService}")
+	private PacienteService pacienteService;
 	
 	public PacienteController(){
 		
@@ -36,9 +48,16 @@ public class PacienteController implements Serializable {
 		return;
 	}
 	
-	public void salvarPaciente(){
-		
-		
+	public String save(){
+		try{
+			getPacienteService().savePaciente(paciente);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Sucesso!", "Paciente cadastrado"));
+		}catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Erro!", "Erro ao tentar cadastrar paciente: " +e));
+		}
+		return "listaSetor";
 	}
 	
 	public void addExame(){
@@ -89,6 +108,38 @@ public class PacienteController implements Serializable {
 
 	public void setExames(List<Exame> exames) {
 		this.exames = exames;
+	}
+
+	public PacienteService getPacienteService() {
+		return pacienteService;
+	}
+
+	public void setPacienteService(PacienteService pacienteService) {
+		this.pacienteService = pacienteService;
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+	public List<Paciente> getPacientes() {
+		return pacientes;
+	}
+
+	public void setPacientes(List<Paciente> pacientes) {
+		this.pacientes = pacientes;
+	}
+
+	public Setor getSelectedPaciente() {
+		return selectedPaciente;
+	}
+
+	public void setSelectedPaciente(Setor selectedPaciente) {
+		this.selectedPaciente = selectedPaciente;
 	}
 	
 }
