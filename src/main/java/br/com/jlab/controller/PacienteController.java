@@ -15,8 +15,11 @@ import org.primefaces.event.SelectEvent;
 
 import br.com.jlab.model.Exame;
 import br.com.jlab.model.Paciente;
+import br.com.jlab.model.Requisicao;
 import br.com.jlab.model.Setor;
 import br.com.jlab.service.PacienteService;
+import br.com.jlab.util.BuscaCep;
+import br.com.jlab.util.Endereco;
 
 @ManagedBean(name = "paciente")
 @ViewScoped
@@ -28,6 +31,7 @@ public class PacienteController implements Serializable {
 	private static final long serialVersionUID = 2457514004956272802L;
 	
 	private Paciente paciente = new Paciente();
+	private Requisicao requisicao = new Requisicao();
 	private List<Paciente> pacientes = new ArrayList<Paciente>();
 	private Setor selectedPaciente;
 	
@@ -48,8 +52,24 @@ public class PacienteController implements Serializable {
 		return;
 	}
 	
+	public void endereco(){
+		Endereco end = BuscaCep.getEndereco(paciente.getCep());
+		
+		paciente.setEndereco(end.getLogradouro());
+		paciente.setBairro(end.getBairro());
+		paciente.setCidade(end.getLocalidade());
+		paciente.setUf(end.getUf());
+		
+		System.out.println("Cep encontrado: " + end.getCep());
+	}
+	
 	public String save(){
 		try{
+			
+			List<Requisicao> req = new ArrayList<Requisicao>();
+			
+			req.add(requisicao);
+			paciente.setRequisicoes(req);
 			getPacienteService().savePaciente(paciente);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Paciente cadastrado"));
@@ -140,6 +160,14 @@ public class PacienteController implements Serializable {
 
 	public void setSelectedPaciente(Setor selectedPaciente) {
 		this.selectedPaciente = selectedPaciente;
+	}
+
+	public Requisicao getRequisicao() {
+		return requisicao;
+	}
+
+	public void setRequisicao(Requisicao requisicao) {
+		this.requisicao = requisicao;
 	}
 	
 }
