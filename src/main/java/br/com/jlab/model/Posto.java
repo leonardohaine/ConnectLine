@@ -21,25 +21,25 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author diego
  */
 @Entity
-@Table(name = "postos")
+@Table(name = "posto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Postos.findAll", query = "SELECT p FROM Postos p"),
-    @NamedQuery(name = "Postos.findByPosto", query = "SELECT p FROM Postos p WHERE p.posto = :posto"),
-    @NamedQuery(name = "Postos.findByDescricao", query = "SELECT p FROM Postos p WHERE p.descricao = :descricao"),
-    @NamedQuery(name = "Postos.findByNumerorequisicao", query = "SELECT p FROM Postos p WHERE p.numerorequisicao = :numerorequisicao"),
-    @NamedQuery(name = "Postos.findByRequisicao", query = "SELECT p FROM Postos p WHERE p.requisicao = :requisicao"),
-    @NamedQuery(name = "Postos.findByCabectam", query = "SELECT p FROM Postos p WHERE p.cabectam = :cabectam"),
-    @NamedQuery(name = "Postos.findByRodapetam", query = "SELECT p FROM Postos p WHERE p.rodapetam = :rodapetam"),
-    @NamedQuery(name = "Postos.findByCmes", query = "SELECT p FROM Postos p WHERE p.cmes = :cmes"),
-    @NamedQuery(name = "Postos.findByCnes", query = "SELECT p FROM Postos p WHERE p.cnes = :cnes")})
+    @NamedQuery(name = "Posto.findAll", query = "SELECT p FROM Posto p"),
+    @NamedQuery(name = "Posto.findByPosto", query = "SELECT p FROM Posto p WHERE p.posto = :posto"),
+    @NamedQuery(name = "Posto.findByDescricao", query = "SELECT p FROM Posto p WHERE p.descricao = :descricao"),
+    @NamedQuery(name = "Posto.findByNumerorequisicao", query = "SELECT p FROM Posto p WHERE p.numerorequisicao = :numerorequisicao"),
+    @NamedQuery(name = "Posto.findByRequisicao", query = "SELECT p FROM Posto p WHERE p.requisicao = :requisicao"),
+    @NamedQuery(name = "Posto.findByCabectam", query = "SELECT p FROM Posto p WHERE p.cabectam = :cabectam"),
+    @NamedQuery(name = "Posto.findByRodapetam", query = "SELECT p FROM Posto p WHERE p.rodapetam = :rodapetam"),
+    @NamedQuery(name = "Posto.findByCmes", query = "SELECT p FROM Posto p WHERE p.cmes = :cmes"),
+    @NamedQuery(name = "Posto.findByCnes", query = "SELECT p FROM Posto p WHERE p.cnes = :cnes")})
 public class Posto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "posto")
-    private String posto;
+    private Long posto;
     @Column(name = "descricao")
     private String descricao;
     @Column(name = "numerorequisicao")
@@ -70,15 +70,15 @@ public class Posto implements Serializable {
     public Posto() {
     }
 
-    public Posto(String posto) {
+    public Posto(Long posto) {
         this.posto = posto;
     }
 
-    public String getPosto() {
+    public Long getPosto() {
         return posto;
     }
 
-    public void setPosto(String posto) {
+    public void setPosto(Long posto) {
         this.posto = posto;
     }
 

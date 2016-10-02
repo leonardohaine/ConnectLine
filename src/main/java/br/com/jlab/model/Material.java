@@ -6,7 +6,6 @@
 package br.com.jlab.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -22,6 +21,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -47,7 +48,7 @@ public class Material implements Serializable {
     private String descricao;
     @OneToMany(mappedBy = "material")
     private List<Exame> exameList;
-    
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "ativo")
     private Boolean ativo;
 

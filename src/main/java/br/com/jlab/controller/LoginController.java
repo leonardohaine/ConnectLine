@@ -51,9 +51,7 @@ public class LoginController implements Serializable {
 	private UsuarioService usuarioService;
 
 	public LoginController() {
-		// auth = new LoginController();
-		System.out.println("@PostConstruct");
-		RequestContext.getCurrentInstance().openDialog("dlg");
+		
 	}
 
 	/**
@@ -110,7 +108,7 @@ public class LoginController implements Serializable {
 			setCheckconfig(usu.getCheckconfig());
 			setCheckSafx2013(usu.getChecksafx2013());
 			isadmin = usu.getIsadmin();
-			isativo = usu.getIsativo();
+			isativo = usu.getAtivo();
 			
 
 			loggedIn = true;
@@ -126,9 +124,10 @@ public class LoginController implements Serializable {
 
 			loggedIn = true;
 			this.loggedIn = loggedIn;
-			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Seja bem-vindo", usuario.getNome());
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+			//msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Seja bem-vindo", usuario.getNome());
+			//FacesContext.getCurrentInstance().addMessage(null, msg);
 			context.addCallbackParam("loggedIn", loggedIn);
+			context.openDialog("unidade");
 			return "./views/inicial";
 		} else {
 

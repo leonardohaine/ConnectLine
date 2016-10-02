@@ -3,6 +3,8 @@ package br.com.jlab.controller;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -34,9 +36,9 @@ public class PacienteController implements Serializable {
 	private Requisicao requisicao = new Requisicao();
 	private List<Paciente> pacientes = new ArrayList<Paciente>();
 	private Setor selectedPaciente;
-	
+	private String pesquisa;
 	private Long idade;
-	private char prontuario = 'P';
+	private char tipoPesquisa = 'P';
 	private List<Exame> exames = new ArrayList<Exame>();
 	
 	@ManagedProperty(value = "#{PacienteService}")
@@ -48,19 +50,41 @@ public class PacienteController implements Serializable {
 	
 	public void calcularIdade(){
 		System.out.println("Calculando idade");
-		idade = 30L;
-		return;
+		
+		if(paciente.getNascimento() != null){
+			int anoAtual = Calendar.getInstance().getTime().getYear();
+			int anoPaciente = paciente.getNascimento().getYear();
+			idade = (long) (anoAtual - anoPaciente);
+			paciente.setIdade(idade.intValue());
+			System.out.println("Idade: " + idade);
+		}
+		
+	}
+	
+	public void pesquisaPaciente(){
+		
+		paciente = getPacienteService().getPaciente(pesquisa, tipoPesquisa);
+		if(paciente == null){
+			System.out.println("Paciente não encontrado");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+					"Paciente não encontrado", "Paciente não encontrado"));
+			return;
+		}
+		System.out.println("Paciente encontrado: " + paciente);
 	}
 	
 	public void endereco(){
-		Endereco end = BuscaCep.getEndereco(paciente.getCep());
 		
-		paciente.setEndereco(end.getLogradouro());
-		paciente.setBairro(end.getBairro());
-		paciente.setCidade(end.getLocalidade());
-		paciente.setUf(end.getUf());
-		
-		System.out.println("Cep encontrado: " + end.getCep());
+		if(paciente.getCep() != null && paciente.getCep().length() == 8){
+			Endereco end = BuscaCep.getEndereco(paciente.getCep());
+			
+			paciente.setEndereco(end.getLogradouro());
+			paciente.setBairro(end.getBairro());
+			paciente.setCidade(end.getLocalidade());
+			paciente.setUf(end.getUf());
+			
+			System.out.println("Cep encontrado: " + end.getCep());
+		}	
 	}
 	
 	public String save(){
@@ -68,16 +92,19 @@ public class PacienteController implements Serializable {
 			
 			List<Requisicao> req = new ArrayList<Requisicao>();
 			
+			requisicao.setPosto(paciente.getPosto());
+			requisicao.setProntuario(paciente);
 			req.add(requisicao);
 			paciente.setRequisicoes(req);
 			getPacienteService().savePaciente(paciente);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Paciente cadastrado"));
 		}catch (Exception e) {
+			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro!", "Erro ao tentar cadastrar paciente: " +e));
 		}
-		return "listaSetor";
+		return "paciente";
 	}
 	
 	public void addExame(){
@@ -114,12 +141,12 @@ public class PacienteController implements Serializable {
 		this.idade = idade;
 	}
 	
-	public void setProntuario(char prontuario){
-		this.prontuario = prontuario;
+	public void setTipoPesquisa(char tipoPesquisa){
+		this.tipoPesquisa = tipoPesquisa;
 	}
 	
-	public char getProntuario() {
-		return prontuario;
+	public char getTipoPesquisa() {
+		return tipoPesquisa;
 	}
 
 	public List<Exame> getExames() {
@@ -168,6 +195,14 @@ public class PacienteController implements Serializable {
 
 	public void setRequisicao(Requisicao requisicao) {
 		this.requisicao = requisicao;
+	}
+
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
 	}
 	
 }

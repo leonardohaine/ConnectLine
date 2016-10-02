@@ -31,8 +31,20 @@ public class PacienteService {
 		getPacienteDAO().updatePaciente(paciente);
 	}
 
-	public Paciente gePacienteById(Integer id) {
-		return getPacienteDAO().getPacienteById(id);
+	@Transactional(readOnly = false)
+	public Paciente getPaciente(String id, char tipo) {
+		Paciente paciente = new Paciente();
+		System.out.println("Tipo consulta: " + tipo);
+		if(tipo == 'P'){
+			paciente = getPacienteDAO().getPacienteByProntuario(id);
+		}	
+		else if(tipo == 'S'){
+			paciente = getPacienteDAO().getPacienteBySUS(id);
+		}	
+		else if(tipo == 'N'){
+			paciente = getPacienteDAO().getPacienteByNome(id);
+		}
+		return paciente;
 	}
 
 	/**
@@ -50,8 +62,8 @@ public class PacienteService {
 		this.pacienteDAO = pacienteDAO;
 	}
 
-	public List<Paciente> getPaciente() {
-		return getPacienteDAO().getPaciente();
+	public List<Paciente> getPacientes() {
+		return getPacienteDAO().getPacientes();
 	}
 
 }

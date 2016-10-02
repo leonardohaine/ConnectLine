@@ -10,6 +10,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+
+import org.primefaces.context.RequestContext;
 
 import br.com.jlab.model.Material;
 import br.com.jlab.service.MaterialService;
@@ -62,15 +65,19 @@ public class MaterialController implements Serializable {
 		return "listaMaterial";
 	}
 	
-	@PostConstruct
-	public String Edit(){
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedMaterial", selectedMaterial);
-		
-		setMaterial((Material)FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selectedMaterial"));
-		System.out.println("selectedMaterial: " + selectedMaterial);
-		System.out.println("material: " + material);
-		
+	
+	public String outcome(){
 		return "material";
+	}
+	
+	public void Edit(ActionEvent event){
+		setMaterial((Material) event.getComponent().getAttributes().get("matSelecionado"));
+		System.out.println("selectedMaterial: " + selectedMaterial);
+		System.out.println("material: " + (Material) event.getComponent().getAttributes().get("matSelecionado"));
+		
+		RequestContext.getCurrentInstance().update("formMat");
+		
+		//return "material";
 	}
 	
 	public MaterialService getMaterialService() {

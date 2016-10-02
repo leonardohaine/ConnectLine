@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="./css.css" />  
+</h:head>
+  
+  <ui:composition template="inicial.xhtml">
+   <ui:define name="conteudo">
+  
+    <div align="center">
+        
+        <h:form id="formHosp" enctype="multipart/form-data">
+        <p:panelGrid  id="panelHosp" style="margin-top:5px; background-color: #cccccc;" >
+            
+        <f:facet name="header">  
+            <p:row>
+		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+		            <p:spacer height="0" >CADASTRO DE HOSPITAIS</p:spacer>
+		        </p:column>
+		    </p:row>  
+        </f:facet>
+        
+        <p:row>
+            <p:column colspan="2">Id:<br/><p:inputText size="25" value="#{hospital.hospital.hospital}" /></p:column>
+            
+            <p:column colspan="2">Razão Social:<br/><p:inputText size="29" value="#{hospital.hospital.razaoSocial}" /></p:column>  
+        
+            <p:column colspan="2">Fantasia:<br/><p:inputText  id="senha" size="25" value="#{hospital.hospital.fantasia}"/></p:column>
+            
+            <p:column colspan="2">Cnpj:<br/><p:inputText id="cnpj" size="29" value="#{hospital.hospital.cnpj}" /></p:column>
+        </p:row>
+        <p:row>  
+            <p:column colspan="2">IE:<br/><p:inputText size="25" value="#{hospital.hospital.ie}" /></p:column>
+            
+            <p:column colspan="2">Resposável:<br/><p:inputText size="25" value="#{hospital.hospital.responsavel}" /></p:column>
+            
+            <p:column colspan="2">Email:<br/><p:inputText size="25" value="#{hospital.hospital.email}" /></p:column>
+            
+            <p:column colspan="2">Telefone:<br/><p:inputText size="25" value="#{hospital.hospital.telefone}" /></p:column>
+        </p:row>
+        <p:row>
+            
+            <p:column colspan="2">CEP:<br/><p:inputText size="25" value="#{hospital.hospital.cep}" /></p:column>
+            
+            <p:column colspan="2">Endereco:<br/><p:inputText size="25" value="#{hospital.hospital.endereco}" /></p:column>
+            
+            <p:column colspan="2">Bairro:<br/><p:inputText size="25" value="#{hospital.hospital.bairro}" /></p:column>
+            
+            <p:column colspan="2">Cidade:<br/><p:inputText size="25" value="#{hospital.hospital.cidade}" /></p:column>
+        </p:row>
+        <p:row>    
+            
+            
+            <p:column colspan="2">Uf:<br/><p:inputText size="25" value="#{hospital.hospital.uf}" /></p:column>
+            
+            
+            
+            <p:column colspan="4">Ativo: <p:selectBooleanButton value="#{hospital.hospital.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+        </p:row>
+        <p:row>
+            <p:column style="text-align: center;" colspan="8">
+                <p:commandButton icon="icone-add" id="novoBtn" update="panelHosp" process="@this" value="Novo">
+                    <p:resetInput target="panelHosp" />
+                </p:commandButton> 
+                <p:commandButton icon="icone-cancel" async="right" id="deleteBtn" action="#{hospital.delete}" value="Deletar" ajax="false" />
+                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelHosp">
+                    <p:resetInput target="panelHosp" />
+                </p:commandButton>
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{hospital.save}" update="panelHosp" global="true" />
+                
+                <p:focus context="panelHosp"/>  
+                <p:messages /> 
+            </p:column> 
+        </p:row>
+        
+        </p:panelGrid>
+        
+        <p:blockUI block="panelHosp" trigger="saveBtn, deleteBtn, clearBtn" /> 
+    </h:form>
+    
+    </div> 
+    
+    </ui:define>   
+    </ui:composition>
+    
+</html>

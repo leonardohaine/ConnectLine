@@ -27,15 +27,16 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
     <context:spring-configured/>
     <!-- Data Source Declaration -->
     <bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="org.postgresql.Driver" />
         
-        <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/jlab" />
-        <property name="user" value="postgres" />
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE" />
+        <property name="user" value="oracle" />
         <property name="password" value="leonardo" />
         
-      <!--  <property name="jdbcUrl" value="jdbc:postgresql://gaminfo.com.br:5432/gaminfo_jlab" />
-        <property name="user" value="gaminfo_postgres" />
-        <property name="password" value="postgres" />  -->
+   <!-- <property name="driverClass" value="org.postgresql.Driver" />
+   		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/jlab" />
+        <property name="user" value="postgres" />
+        <property name="password" value="leonardo" /> -->
         
         <property name="maxPoolSize" value="2" />
         <property name="maxStatements" value="0" />
@@ -56,14 +57,16 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
                 <value>br.com.jlab.model.Equipamento</value>
                 <value>br.com.jlab.model.Paciente</value>
                 <value>br.com.jlab.model.Requisicao</value>
+                <value>br.com.jlab.model.Hospital</value>
             </list>
         </property>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <!-- <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>  -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+                <prop key="hibernate.temp.use_jdbc_metadata_defaults">true</prop>
             </props>
         </property>
     </bean>

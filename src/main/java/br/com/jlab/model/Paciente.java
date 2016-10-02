@@ -8,12 +8,15 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -45,6 +48,7 @@ public class Paciente implements Serializable {
     @Column(name = "nascimento")
     @Temporal(TemporalType.DATE)
     private Date nascimento;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "sexo")
     private Boolean sexo;
     @Column(name = "cor")
@@ -114,7 +118,7 @@ public class Paciente implements Serializable {
     private String peso;
     @Column(name = "altura")
     private String altura;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prontuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prontuario", fetch = FetchType.EAGER)
     private List<Requisicao> requisicoes;
 
     public Paciente() {

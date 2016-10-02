@@ -27,7 +27,7 @@
       <h:form id="formPac" enctype="multipart/form-data" >
        	  <p:focus context="panelPesqPac" for="pesquisa"/>
        	
-	      <p:panelGrid id="panelPesqPac" columns="3" style="margin-bottom:5px; width: 890px;" >
+	      <p:panelGrid id="panelPesqPac" columns="4" style="margin-bottom:5px; width: 890px;" >
 		      <f:facet name="header">  
 	            <p:row>
 	               <p:column  style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
@@ -36,14 +36,14 @@
 	            </p:row>    
 	          </f:facet>
 	    		
-		        <p:selectOneRadio label="Tipo" value="#{paciente.prontuario}" >
+		        <p:selectOneRadio id="tipoPesquisa" label="Tipo" immediate="true" widgetVar="tp" value="#{paciente.tipoPesquisa}" >
 		            <f:selectItem itemLabel="Prontuário" itemValue="P"  />
 		            <f:selectItem itemLabel="SUS" itemValue="S" />
 		            <f:selectItem itemLabel="Nome" itemValue="N" />
 		            <f:selectItem itemLabel="Requisição" itemValue="R" />
 		        </p:selectOneRadio>
-		        Pesquisa:<p:inputText id="pesquisa" size="20" value="" />
-		      
+		        Pesquisa:<p:inputText id="pesquisa" size="60"  value="#{paciente.pesquisa}" />
+		      	<p:commandButton id="pesq" value="Buscar"  action="#{paciente.pesquisaPaciente}" update="panelPaciente"></p:commandButton>
 	      </p:panelGrid>
 		  
 	        
@@ -55,50 +55,58 @@
 		        </p:column>
 		    </p:row>
 	        <p:row>
-	            <p:column colspan="2">Prontuário:<br/><p:inputText id="prontuario" size="15" value="#{paciente.paciente.prontuario}" /></p:column>
+	            <p:column colspan="2">Prontuário:<br/><p:inputText id="prontuario" size="30" value="#{paciente.paciente.prontuario}" required="#{paciente.pesquisa != null}" requiredMessage="Prontuário é obrigatório" /></p:column>
 	            
 	            
 	            <p:column colspan="2">Nome:<br/><p:inputText size="30" value="#{paciente.paciente.nome}" /></p:column>  
 	          
 	            
 	            <p:column colspan="2">Nasc:<br/><p:calendar pattern="dd/MM/yyyy" mask="true" showOn="button" id="nasc" 
-	            							 locale="pt"	size="15" value="#{paciente.paciente.nascimento}" >
+	            							 locale="pt"	size="20" value="#{paciente.paciente.nascimento}" >
+	            							 <p:ajax event="blur" listener="#{paciente.calcularIdade}" partialSubmit="true" update="formPac:idade"/>
         							  </p:calendar>
 			    </p:column>
 	           
-	            <p:column colspan="2">Idade:<br/><p:inputText id="idade" size="5" readonly="false" value="#{paciente.paciente.idade}" >
-			            						<p:ajax event="blur" listener="#{paciente.calcularIdade}" update="idade"/>
+	            <p:column colspan="1">Idade:<br/><p:inputText id="idade" size="5" readonly="false" value="#{paciente.paciente.idade}" >
+			            						<p:keyFilter for="idade" mask="int" />
 			            					</p:inputText>
+				</p:column>
+				<p:column colspan="1">Sexo:<br/>
+					<p:selectOneRadio label="Tipo" value="#{paciente.paciente.sexo}" >
+			            <f:selectItem itemLabel="Masc" itemValue="P"  />
+			            <f:selectItem itemLabel="Fem" itemValue="S" />
+			        </p:selectOneRadio>
 				</p:column>
 	        </p:row>
 	        <p:row>
 	            
 	        </p:row>
 	        <p:row>  
-	            <p:column colspan="2">SUS:<br/><p:inputText size="15" value="#{paciente.paciente.pacStSus}" /></p:column>  
-
-	            <p:column colspan="2">RG:<br/><p:inputText size="15" value="#{paciente.paciente.rg}" /></p:column>  
-
-	            <p:column colspan="2">CPF:<br/><p:inputText size="15" value="#{paciente.paciente.cpf}" /></p:column>
-	            
-	            <p:column colspan="2">Telefone:<br/><p:inputMask size="15" mask="99999-9999" value="#{paciente.paciente.telefone}" /></p:column>
+	            <p:column colspan="2">SUS:<br/><p:inputText id="sus" size="30" value="#{paciente.paciente.pacStSus}" /></p:column>  
+													<p:keyFilter for="sus" regEx="/[0123456789]/i" mask="pnum" />
+	            <p:column colspan="2">RG:<br/><p:inputText id="rg" size="30" value="#{paciente.paciente.rg}" /></p:column>  
+													<p:keyFilter for="rg" mask="int" />
+	            <p:column colspan="2">CPF:<br/><p:inputText id="cpf" size="25" value="#{paciente.paciente.cpf}" /></p:column>
+	            									<p:keyFilter for="cpf" mask="num" />
+	            <p:column colspan="2">Telefone:<br/><p:inputMask size="30" mask="99999-9999" value="#{paciente.paciente.telefone}" /></p:column>
 	        </p:row>
 	        <p:row>
 	        	
-	        	<p:column colspan="2">Celular:<br/><p:inputMask size="15" mask="99999-9999" value="#{paciente.paciente.celular}"  /></p:column>
+	        	<p:column colspan="2">Celular:<br/><p:inputMask size="30" mask="99999-9999" value="#{paciente.paciente.celular}"  /></p:column>
 				<p:column colspan="2">Nome mãe:<br/><p:inputText size="30" value="#{paciente.paciente.cpf}" /></p:column>
-				<p:column colspan="2">CEP:<br/><p:inputText size="15" value="#{paciente.paciente.cep}">
-          									   	<p:ajax event="blur" listener="#{paciente.endereco}" onsuccess="document.getElementById('formPac:num').focus();" partialSubmit="true" update="@form"/>
+				<p:column colspan="2">CEP:<br/><p:inputText id="cep" size="25" value="#{paciente.paciente.cep}">
+												<p:keyFilter for="cep" mask="pnum" />
+          									   	<p:ajax event="blur" listener="#{paciente.endereco}" onsuccess="document.getElementById('formPac:num').focus();" partialSubmit="true" update="formPac:end formPac:bairro formPac:cidade formPac:uf"/>
           									   </p:inputText>
 	            </p:column>
-	            <p:column colspan="2">Endereço:<br/><p:inputText size="30" value="#{paciente.paciente.endereco}" /></p:column>
+	            <p:column colspan="2">Endereço:<br/><p:inputText id="end" size="30" value="#{paciente.paciente.endereco}" /></p:column>
 
 	        </p:row>
 	        <p:row>
-	        	<p:column colspan="2">Numero:<br/><p:inputText size="15" id="num" value="#{paciente.paciente.numero}" /></p:column>
-	        	<p:column colspan="2">Bairro:<br/><p:inputText size="15" value="#{paciente.paciente.bairro}" /></p:column>
-	            <p:column colspan="2">Cidade:<br/><p:inputText size="15" value="#{paciente.paciente.cidade}" /></p:column>
-	            <p:column colspan="2">UF:<br/><p:inputText size="15" value="#{paciente.paciente.uf}" /></p:column>
+	        	<p:column colspan="2">Bairro:<br/><p:inputText id="bairro" size="30" value="#{paciente.paciente.bairro}" /></p:column>
+	            <p:column colspan="2">Cidade:<br/><p:inputText id="cidade" size="30" value="#{paciente.paciente.cidade}" /></p:column>
+	            <p:column colspan="2">UF:<br/><p:inputText id="uf" size="25" value="#{paciente.paciente.uf}" /></p:column>
+	            <p:column colspan="2">Numero:<br/><p:inputText size="30" id="num" value="#{paciente.paciente.numero}" /></p:column>
 	        </p:row>
 	        <p:row>
 		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
@@ -107,30 +115,33 @@
 		    </p:row>
 		    
 		    <p:row>  
-	            <p:column colspan="2">Origem:<br/>
-	            	<p:inputText size="3" value="#{paciente.requisicao.posto}" />
+	            <p:column colspan="4">Origem:<br/>
+	            	<p:inputText size="3" value="#{paciente.paciente.posto}" />
 	            	 <p:commandButton value=" " icon="ui-icon-search" /> 
 	            	<p:inputText size="25" value="#{paciente.paciente.email}" />
             	</p:column>  
 
-	            <p:column colspan="2">Pedido:<br/><p:inputText id="pedido" size="15" value="#{paciente.requisicao.controle}" /></p:column>  
-
-	            <p:column colspan="2"></p:column>  
+	            <p:column colspan="2">Pedido:<br/><p:inputText id="pedido" size="25" value="#{paciente.requisicao.controle}" /></p:column>  
 
 	            <p:column colspan="2">Gestante: <p:selectBooleanButton value="#{paciente.requisicao.gestante}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>  
 	        </p:row>
 	        <p:row>
-	        	<p:column colspan="2">Solicitante:<br/>
+	        	<p:column colspan="4">Médico:<br/>
 	        		<p:inputText size="3" value="#{paciente.paciente.email}" />
 	        		 <p:commandButton value=" " icon="ui-icon-search" /> 
 	        		<p:inputText size="25" value="#{paciente.requisicao.medico}" />
         		</p:column>
 
-	            <p:column colspan="2">Diagnóstico:<br/><p:inputText size="30" value="#{paciente.requisicao}" /></p:column>
+	            <p:column colspan="2">Diagnóstico:<br/><p:inputText size="25" value="#{paciente.requisicao.observacao}" /></p:column>
 
-	            <p:column colspan="2"></p:column>
+	            <p:column colspan="2">Medicamentos:<br/><p:inputText size="30" value="#{paciente.requisicao.observacao}" /></p:column>
+	        </p:row>
+	        <p:row>
+	            <p:column colspan="4">Observação:<br/><p:inputText size="70" value="#{paciente.requisicao.observacao}" /></p:column>
 
-	            <p:column colspan="2">Observação:<br/><p:inputText size="15" value="#{paciente.requisicao.observacao}" /></p:column>
+	            <p:column colspan="2">Especialidade:<br/><p:inputText size="25" value="#{paciente.requisicao.observacao}" /></p:column>
+	            
+	            <p:column colspan="2">vazio:<br/><p:inputText size="30" value="#{paciente.requisicao.observacao}" /></p:column>
 	        </p:row>
 		<ui:remove>    
 		    <p:row>
@@ -202,7 +213,7 @@
 	                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelPaciente">
 	                    <p:resetInput target="panelPaciente" />
 	                </p:commandButton>
-	                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{usuario.saveUpdate}" update="panelPaciente" global="true" />
+	                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{paciente.save}" update="panelPaciente" global="true" />
 	                
 	                <p:focus context="panelPaciente"/>  
 	                <p:messages /> 

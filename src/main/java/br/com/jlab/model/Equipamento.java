@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +23,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -115,8 +118,9 @@ public class Equipamento implements Serializable {
     private String imgdir;
     @Column(name = "impressora")
     private String impressora;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "ativo")
-    private String ativo;
+    private Boolean ativo;
     @Column(name = "computadorbackup")
     private String computadorbackup;
     @Column(name = "serialbackup")
@@ -330,11 +334,11 @@ public class Equipamento implements Serializable {
         this.impressora = impressora;
     }
 
-    public String getAtivo() {
+    public Boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(String ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
 

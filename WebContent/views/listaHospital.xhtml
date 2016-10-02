@@ -17,48 +17,48 @@
   
     <div align="center">
         
-        <h:form id="formUsu" enctype="multipart/form-data">
+        <h:form id="formHosp" enctype="multipart/form-data">
 	      
 	        
 	            
-		        <p:dataTable var="usu" value="#{usuario.listUsuario}" reflow="true" rows="10" paginator="true">
+		        <p:dataTable var="hosp" value="#{hospital.listHospital}" reflow="true" rows="10" paginator="true">
 				    <f:facet name="header">
-				        LISTA DE USUÁRIOS
+				        LISTA DE HOSPITAIS
 				    </f:facet>
 				    
 				    <p:column headerText="Id">
-				        <h:outputText value="#{usu.codusuario}" />
+				        <h:outputText value="#{hosp.hospital}" />
 				    </p:column>
 				 
-				 	<p:column headerText="Login">
-				        <h:outputText value="#{usu.login}" />
+				 	<p:column headerText="Cnpj">
+				        <h:outputText value="#{hosp.cnpj}" />
 				    </p:column>
 				 
-				    <p:column headerText="Descrição">
-				        <h:outputText value="#{usu.nome}" />
+				    <p:column headerText="Razão Social">
+				        <h:outputText value="#{hosp.razaoSocial}" />
 				    </p:column>
 				 
 				    <p:column headerText="Ativo">
-				        <p:graphicImage value="#{usu.ativo ? '../imagens/ledgreen22.png' : '../imagens/ledred22.png'}" />
+				        <p:graphicImage value="#{hosp.ativo ? '../imagens/ledgreen22.png' : '../imagens/ledred22.png'}" />
 				    </p:column>
 				    
 				    <p:column headerText="Ação">
-				        <p:commandButton update=":formUsu" action="#{usuario.Edit}" icon="ui-icon-pencil" title="Editar">
-			                <f:setPropertyActionListener value="#{usu}" target="#{usuario.selectedUsuario}" />
+				        <p:commandButton update=":formHosp" action="#{hospital.Edit}" icon="ui-icon-pencil" title="Editar">
+			                <f:setPropertyActionListener value="#{hosp}" target="#{hospital.selectedHospital}" />
 			            </p:commandButton>
 			            
-			            <p:commandButton update=":formUsu" action="#{usuario.delete}" icon="ui-icon-close" title="Deletar">
-			                <f:setPropertyActionListener value="#{usu}" target="#{usuario.selectedUsuario}" />
+			            <p:commandButton update=":formHosp" action="#{hospital.delete}" icon="ui-icon-close" title="Deletar">
+			                <f:setPropertyActionListener value="#{hosp}" target="#{hospital.selectedHospital}" />
 			            </p:commandButton>
 				    </p:column>
 				    
 				    <f:facet name="footer">
-				        Total: #{fn:length(usuario.listUsuario)}
+				        Total: #{fn:length(hospital.listHospital)}
 				    </f:facet>
 				 
 				</p:dataTable>	
 	        	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-	        	<p:commandButton value="Cadastrar" id="ajax"  onclick="location.href='./usuario.jsf';" styleClass="ui-priority-primary" />
+	        	<p:commandButton value="Cadastrar" id="ajax"  onclick="location.href='./hospital.jsf';" styleClass="ui-priority-primary" />
 	        <p:blockUI block="" trigger="" /> 
 	    </h:form>
     </div> 

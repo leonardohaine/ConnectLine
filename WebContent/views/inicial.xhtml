@@ -19,8 +19,14 @@
 			
 			<div align="center" style="border: 0px solid red; height: 55px;">
 				<div align="left" style="float: left; border:0px solid;">
-					
-					
+					<h:form id="formLink">
+						<p:commandLink onclick="PF('unidade').show()" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px white;">
+							Unidade: <br/>
+							<p:ajax event="dialogReturn" listener="#{unidade.onHospUnidade}" update="messages" />
+						</p:commandLink>
+						<p:outputLabel id="cnp"  value="#{unidade.hospital.cnpj}" ><f:convertNumber pattern="##.###.###/####-##" locale="pl_PL"/></p:outputLabel> - 
+						<p:outputLabel id="uni" value="#{unidade.hospital.fantasia}" />
+					</h:form>
 				</div>
 				<div align="center" style="float: center; height: 20px; border: 0px solid orange;">
 					<p:outputLabel value="SISTEMA DE GERENCIAMENTO DE AMOSTRAS" 
@@ -38,7 +44,7 @@
 		<p:layoutUnit position="south" size="28" resizable="false" gutter="0" maxSize="67" style="background: darkblue; overflow: hidden;"
 			closable="false" collapsible="true">
 			<div class="container" >
-			   <div style="float: left; width: 33%;"><p:clock pattern="dd/mm/yyyy - HH:mm:ss" mode="server" /></div>
+			   <div style="float: left; width: 33%;"><p:clock pattern="dd/MM/yyyy - HH:mm:ss" mode="server" /></div>
 			   <div style="float: right; width: 33%;" align="right">
 				   <p:outputLabel value="Copyright © 2016, JLab. Todos os direitos reservados.     " />
 	           </div>
@@ -64,5 +70,30 @@
 			<ui:insert name="conteudo" />
 		</p:layoutUnit>
 	</p:layout>
+	
+	<h:form>
+	<p:dialog header="ESCOLHA UNIDADE" widgetVar="unidade" visible="false" modal="true" resizable="false" responsive="true" width="40%">
+	
+		<p:dataTable var="hos" value="#{unidade.listHospital}" >
+                <f:facet name="header">
+                	HOSPITAIS
+                </f:facet>
+ 
+                <p:column headerText="Cnpj">
+                    <h:outputText value="#{hos.cnpj}" />
+                </p:column>
+ 
+                <p:column headerText="Unidade">
+                    <h:outputText value="#{hos.fantasia}" />
+                </p:column>
+ 
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton icon="ui-icon-check" oncomplete="PF('unidade').hide()" actionListener="#{unidade.selectHospFromDialog(hos)}" update=":formLink" />
+                </p:column>
+            </p:dataTable>
+	
+	</p:dialog>
+	</h:form>
+	
 </h:body>
 </html>

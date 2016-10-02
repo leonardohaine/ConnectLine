@@ -6,6 +6,7 @@
 package br.com.jlab.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -32,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findByCheckusuarios", query = "SELECT u FROM Usuario u WHERE u.checkusuarios = :checkusuarios"),
     @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
     @NamedQuery(name = "Usuario.findByIsadmin", query = "SELECT u FROM Usuario u WHERE u.isadmin = :isadmin"),
-    @NamedQuery(name = "Usuario.findByIsativo", query = "SELECT u FROM Usuario u WHERE u.isativo = :isativo"),
+    @NamedQuery(name = "Usuario.findByativo", query = "SELECT u FROM Usuario u WHERE u.ativo = :ativo"),
     @NamedQuery(name = "Usuario.findByLogin", query = "SELECT u FROM Usuario u WHERE u.login = :login"),
     @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome"),
     @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")})
@@ -43,22 +46,29 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "codusuario")
     private Integer codusuario;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "checkconfig")
     private Boolean checkconfig;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "checksafx04")
     private Boolean checksafx04;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "checksafx0708")
     private Boolean checksafx0708;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "checksafx2013")
     private Boolean checksafx2013;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "checkusuarios")
     private Boolean checkusuarios;
     @Column(name = "email")
     private String email;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "isadmin")
     private Boolean isadmin;
-    @Column(name = "isativo")
-    private Boolean isativo;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
+    @Column(name = "ativo")
+    private Boolean ativo;
     @Column(name = "login")
     private String login;
     @Column(name = "nome")
@@ -137,12 +147,12 @@ public class Usuario implements Serializable {
         this.isadmin = isadmin;
     }
 
-    public Boolean getIsativo() {
-        return isativo;
+    public Boolean getAtivo() {
+        return ativo;
     }
 
-    public void setIsativo(Boolean isativo) {
-        this.isativo = isativo;
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
     public String getLogin() {

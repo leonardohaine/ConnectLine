@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.Type;
 
 
 /**
@@ -46,6 +46,7 @@ public class Setor implements Serializable {
     private byte[] laudoresp;*/
     @Column(name = "laudotam")
     private Integer laudotam;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "ativo")
     private Boolean ativo;
     @Column(name = "loinc")

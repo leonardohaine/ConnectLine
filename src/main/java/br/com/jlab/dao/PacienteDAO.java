@@ -7,6 +7,7 @@ package br.com.jlab.dao;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,14 +50,38 @@ public class PacienteDAO extends GenericDAO<Paciente>{
 		getSessionFactory().getCurrentSession().update(paciente);
 	}
 
-	public Paciente getPacienteById(Integer id) {
+	public Paciente getPacienteByProntuario(String id) {
+		Paciente paciente = (Paciente) getSessionFactory().getCurrentSession().get(Paciente.class, id);
+
+		return paciente;
+
+	}
+	
+	public Paciente getPacienteBySUS(String sus) {
+		Paciente paciente = (Paciente) getSessionFactory().getCurrentSession().createCriteria(Paciente.class)
+				.add(Restrictions.eq("pacStSus", sus)).uniqueResult();
+
+		return paciente;
+
+	}
+	
+	public Paciente getPacienteByNome(String nome) {
+		System.out.println("Nome: " + nome);
+		Paciente paciente = (Paciente) getSessionFactory().getCurrentSession().createCriteria(Paciente.class)
+				.add(Restrictions.like("nome", nome, MatchMode.START)).uniqueResult();
+
+		return paciente;
+
+	}
+	
+	public Paciente getPacienteById(String id) {
 		Paciente paciente = (Paciente) getSessionFactory().getCurrentSession().get(Paciente.class, id);
 
 		return paciente;
 
 	}
 
-	public List<Paciente> getPaciente() {
+	public List<Paciente> getPacientes() {
 		List list = getSessionFactory().getCurrentSession().createQuery("from Paciente").list();
 		return list;
 	}

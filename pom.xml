@@ -41,6 +41,11 @@
 		<version>9.3-1103-jdbc4</version>
 	</dependency>
 	<dependency>
+	    <groupId>com.oracle</groupId>
+	    <artifactId>ojdbc</artifactId>
+	    <version>6.0</version>
+	</dependency>
+	<dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-core</artifactId>
         <version>5.0.5.Final</version>

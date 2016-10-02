@@ -6,10 +6,14 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,13 +27,16 @@ import javax.persistence.TemporalType;
 public class Requisicao implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
-    @Column(name = "posto")
-    private String posto;
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_REQ")
+	@SequenceGenerator(name = "SEQ_REQ", sequenceName = "seq_requisicao")
     @Basic(optional = false)
     @Column(name = "requisicao")
     private Long requisicao;
+    @Basic(optional = false)
+    @Column(name = "posto")
+    private String posto;
     @Column(name = "entrada")
     @Temporal(TemporalType.DATE)
     private Date entrada;
@@ -100,7 +107,7 @@ public class Requisicao implements Serializable {
     private String prontuariolab;
     @Column(name = "image")
     private String image;
-    @Column(name = "offline")
+    @Column(name = "offlinne")
     private Integer offline;
     @Column(name = "req_st_etiquetaimpressa")
     private String reqStEtiquetaimpressa;
@@ -119,7 +126,7 @@ public class Requisicao implements Serializable {
     @Column(name = "req_st_etiquetareimpressa")
     private Character reqStEtiquetareimpressa;
     @JoinColumn(name = "prontuario", referencedColumnName = "prontuario")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Paciente prontuario;
 
     public Requisicao() {
