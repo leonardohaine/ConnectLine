@@ -37,6 +37,8 @@ public class Requisicao implements Serializable {
     @Basic(optional = false)
     @Column(name = "posto")
     private String posto;
+    @Column(name = "cnpj_unidade")
+    private Integer cnpjUnidade;
     @Column(name = "entrada")
     @Temporal(TemporalType.DATE)
     private Date entrada;
@@ -157,7 +159,15 @@ public class Requisicao implements Serializable {
         this.requisicao = requisicao;
     }
 
-    public Date getEntrada() {
+    public Integer getCnpjUnidade() {
+		return cnpjUnidade;
+	}
+
+	public void setCnpjUnidade(Integer cnpjUnidade) {
+		this.cnpjUnidade = cnpjUnidade;
+	}
+
+	public Date getEntrada() {
         return entrada;
     }
 

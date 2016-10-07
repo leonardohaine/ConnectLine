@@ -77,26 +77,24 @@ public class HospitalController {
 
 			hospital = new Hospital();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Sucesso!", "Usuário cadastrado"));
-			return "hospital";
+					"Sucesso!", "Hospital cadastrado"));
+			return "listaHospital";
 		} catch (Exception e) {
 			e.printStackTrace();
 			hospital = new Hospital();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Erro!", "Erro ao tentar cadastrar usuário: " +e));
+					"Erro!", "Erro ao tentar cadastrar hospital: " +e));
 			return "hospital";
 		}
 	}
 	
 	@PostConstruct
-	public String Edit(){
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedHospital", selectedHospital);
-		
-		setHospital((Hospital)FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selectedHospital"));
-		System.out.println("selectedHospital: " + selectedHospital);
-		System.out.println("hospital: " + hospital);
-		
-		return "hospital";
+	public void editar(){
+		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("hospitalId");
+		if(id != null){
+			System.out.println("ID editar: " + id);
+			hospital = getHospitalService().getHospitalById(Long.valueOf(id));
+		}
 	}
 	
 	public String delete() {
@@ -105,13 +103,13 @@ public class HospitalController {
 			getHospitalService().getHospitalDAO().deleteHospital(hospital);
 			hospital = new Hospital();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Sucesso!", "Usuário deletado: " + selectedHospital.getHospital()));
-			return "hospitals";
+					"Sucesso!", "Hospital deletado: " + selectedHospital.getHospital()));
+			return "listahHospital";
 		} catch (Exception e) {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Erro!", "Erro ao deletar usuário: " +e));
-			return "hospital";
+					"Erro!", "Erro ao deletar hospital: " +e));
+			return "listaHospital";
 		}
 	}
 	

@@ -33,7 +33,7 @@ public class MaterialService {
 		getMaterialDAO().updateMaterial(material);
 	}
 
-	public Material geMaterialById(Integer id) {
+	public Material geMaterialById(Long id) {
 		return getMaterialDAO().getMaterialById(id);
 	}
 

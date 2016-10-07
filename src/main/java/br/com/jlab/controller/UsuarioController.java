@@ -73,7 +73,7 @@ public class UsuarioController {
 
 	public String save() {
 		try {
-			getUsuarioService().getUsuarioDAO().saveUsuario(usuario);
+			getUsuarioService().saveUsuario(usuario);
 
 			usuario = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -84,19 +84,17 @@ public class UsuarioController {
 			usuario = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro!", "Erro ao tentar cadastrar usuário: " +e));
-			return "usuario";
+			return "listaUsuario";
 		}
 	}
 	
 	@PostConstruct
-	public String Edit(){
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedUsuario", selectedUsuario);
-		
-		setUsuario((Usuario)FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selectedUsuario"));
-		System.out.println("selectedUsuario: " + selectedUsuario);
-		System.out.println("usuario: " + usuario);
-		
-		return "usuario";
+	public void editar(){
+		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("usuarioId");
+		if(id != null){
+			System.out.println("ID editar: " + id);
+			usuario = getUsuarioService().getUsuarioById(Long.valueOf(id));
+		}
 	}
 	
 	public String delete() {
@@ -120,7 +118,7 @@ public class UsuarioController {
 
 		if (event.getObject() != null) {
 			Usuario usuario = (Usuario) event.getObject();
-			setUsuario(getUsuarioService().getUsuarioDAO().getUsuarioById(usuario.getCodusuario()));
+			setUsuario(getUsuarioService().getUsuarioDAO().getUsuarioById(usuario.getCodusuario().longValue()));
 
 		}
 	}

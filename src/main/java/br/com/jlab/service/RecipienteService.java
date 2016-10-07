@@ -31,7 +31,7 @@ public class RecipienteService {
 		getRecipienteDAO().updateRecipiente(recipiente);
 	}
 
-	public Recipiente geRecipienteById(Integer id) {
+	public Recipiente getRecipienteById(Long id) {
 		return getRecipienteDAO().getRecipienteById(id);
 	}
 	

@@ -43,7 +43,7 @@ public class UsuarioDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		getSessionFactory().getCurrentSession().saveOrUpdate(usuario);
+		getSessionFactory().getCurrentSession().merge(usuario);
 	}
 
 	public void deleteUsuario(Usuario usuario) {
@@ -54,7 +54,7 @@ public class UsuarioDAO {
 		getSessionFactory().getCurrentSession().update(usuario);
 	}
 
-	public Usuario getUsuarioById(Integer id) {
+	public Usuario getUsuarioById(Long id) {
 		Usuario usuarios = (Usuario) getSessionFactory().getCurrentSession().get(Usuario.class, id);
 
 		return usuarios;

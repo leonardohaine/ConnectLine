@@ -58,6 +58,7 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
                 <value>br.com.jlab.model.Paciente</value>
                 <value>br.com.jlab.model.Requisicao</value>
                 <value>br.com.jlab.model.Hospital</value>
+                <value>br.com.jlab.model.Posto</value>
             </list>
         </property>
         <property name="hibernateProperties">

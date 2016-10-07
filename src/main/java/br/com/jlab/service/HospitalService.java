@@ -31,7 +31,7 @@ public class HospitalService {
 		getHospitalDAO().updateHospital(hospital);
 	}
 
-	public Hospital geHospitalById(Long id) {
+	public Hospital getHospitalById(Long id) {
 		return getHospitalDAO().getHospitalById(id);
 	}
 

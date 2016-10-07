@@ -10,9 +10,12 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -43,9 +46,11 @@ public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_USU")
+	@SequenceGenerator(name = "SEQ_USU", sequenceName = "seq_usuario")
     @Basic(optional = false)
     @Column(name = "codusuario")
-    private Integer codusuario;
+    private Long codusuario;
     @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "checkconfig")
     private Boolean checkconfig;
@@ -79,15 +84,15 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Integer codusuario) {
+    public Usuario(Long codusuario) {
         this.codusuario = codusuario;
     }
 
-    public Integer getCodusuario() {
+    public Long getCodusuario() {
         return codusuario;
     }
 
-    public void setCodusuario(Integer codusuario) {
+    public void setCodusuario(Long codusuario) {
         this.codusuario = codusuario;
     }
 
@@ -168,7 +173,7 @@ public class Usuario implements Serializable {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getSenha() {

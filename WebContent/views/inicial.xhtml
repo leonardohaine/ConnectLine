@@ -20,16 +20,17 @@
 			<div align="center" style="border: 0px solid red; height: 55px;">
 				<div align="left" style="float: left; border:0px solid;">
 					<h:form id="formLink">
-						<p:commandLink onclick="PF('unidade').show()" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px white;">
+						<p:link onclick="PF('unidade').show(); return false;" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px white;">
 							Unidade: <br/>
-							<p:ajax event="dialogReturn" listener="#{unidade.onHospUnidade}" update="messages" />
-						</p:commandLink>
+							
+						</p:link>
+						<p:inputText type="hidden" id="cnpjUnidade" value="#{unidade.hospital.cnpj}"></p:inputText>
 						<p:outputLabel id="cnp"  value="#{unidade.hospital.cnpj}" ><f:convertNumber pattern="##.###.###/####-##" locale="pl_PL"/></p:outputLabel> - 
 						<p:outputLabel id="uni" value="#{unidade.hospital.fantasia}" />
 					</h:form>
 				</div>
 				<div align="center" style="float: center; height: 20px; border: 0px solid orange;">
-					<p:outputLabel value="SISTEMA DE GERENCIAMENTO DE AMOSTRAS" 
+					<p:outputLabel value="SISTEMA DE GERENCIAMENTO" 
 					style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px white;" />
 				
 					<div align="center" style="float: right; border: 0px solid green;">

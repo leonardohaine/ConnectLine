@@ -118,7 +118,7 @@ public class Paciente implements Serializable {
     private String peso;
     @Column(name = "altura")
     private String altura;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prontuario", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prontuario")
     private List<Requisicao> requisicoes;
 
     public Paciente() {

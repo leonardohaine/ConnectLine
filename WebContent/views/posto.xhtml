@@ -7,6 +7,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
+
 <h:head>
 	<link rel="stylesheet" type="text/css" href="./css.css" />  
 </h:head>
@@ -16,39 +17,39 @@
   
     <div align="center">
         
-        <h:form id="formUsu" enctype="multipart/form-data">
-        <p:panelGrid  id="panelSetor" style="margin-top:20px; background-color: #cccccc;" >
+        <h:form id="formMat" enctype="multipart/form-data">
+        <p:panelGrid  id="panelPosto" style="margin-top:20px; background-color: #cccccc;" >
             
         <f:facet name="header">  
             <p:row>
 		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
-		            <p:spacer height="0" >CADASTRO DE SETORES</p:spacer>
+		            <p:spacer height="0" >CADASTRO DE POSTOS</p:spacer>
 		        </p:column>
-		    </p:row>   
+		    </p:row>
         </f:facet>
        
         <p:row>
-            <p:column colspan="2">Setor:<br/><p:inputText size="29" value="#{setor.setor.setor}" /></p:column>
+            <p:column colspan="2">Posto:<br/><p:inputText size="29" value="#{posto.posto.posto}" /></p:column>
            
-            <p:column colspan="2">Descrição:<br/><p:inputText size="29" value="#{setor.setor.descricao}" /></p:column>  
+            <p:column colspan="2">Descrição:<br/><p:inputText size="29" value="#{posto.posto.descricao}" /></p:column>
               
-            <p:column colspan="2">Ativo:<br/><p:selectBooleanButton value="#{setor.setor.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+            <p:column colspan="2">Ativo:<br/><p:selectBooleanButton value="#{posto.posto.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
             
         </p:row>
         <p:row>
             <p:column style="text-align: center;" colspan="8">
             
-            	<<p:button value="Cancelar" outcome="listaSetor" />
-                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{setor.save}" update="panelSetor" global="true" />
+            	<p:button value="Cancelar" outcome="listaPosto" />
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{posto.save}" update="panelPosto" global="true" />
                 
-                <p:focus context="panelSetor"/>  
-                <p:messages id="messagesSetor" showDetail="true" autoUpdate="true" closable="true" />
+                <p:focus context="panelPosto"/>  
+                <p:messages id="messagesPosto" showDetail="true" autoUpdate="true" closable="true" />
             </p:column> 
         </p:row>
         
         </p:panelGrid>
         
-        <p:blockUI block="panelSetor" trigger="saveBtn" /> 
+        <p:blockUI block="panelPosto" trigger="saveBtn" /> 
     </h:form>
     
     </div> 

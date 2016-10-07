@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -12,16 +11,19 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.SelectEvent;
 
 import br.com.jlab.model.Exame;
 import br.com.jlab.model.Paciente;
+import br.com.jlab.model.Posto;
 import br.com.jlab.model.Requisicao;
 import br.com.jlab.model.Setor;
 import br.com.jlab.service.PacienteService;
 import br.com.jlab.util.BuscaCep;
 import br.com.jlab.util.Endereco;
+import br.com.jlab.util.Util;
 
 @ManagedBean(name = "paciente")
 @ViewScoped
@@ -39,7 +41,11 @@ public class PacienteController implements Serializable {
 	private String pesquisa;
 	private Long idade;
 	private char tipoPesquisa = 'P';
+	
 	private List<Exame> exames = new ArrayList<Exame>();
+	
+	@ManagedProperty(value = "#{unidade.hospital.cnpj}")
+	private String cnpj;
 	
 	@ManagedProperty(value = "#{PacienteService}")
 	private PacienteService pacienteService;
@@ -70,7 +76,14 @@ public class PacienteController implements Serializable {
 					"Paciente não encontrado", "Paciente não encontrado"));
 			return;
 		}
+		
 		System.out.println("Paciente encontrado: " + paciente);
+	}
+	
+	public void postoSelecionado(SelectEvent event) {
+		Posto posto = (Posto) event.getObject();
+		paciente.setPosto(posto.getPosto().toString());
+		System.out.println("Posto selecionado; " + posto);
 	}
 	
 	public void endereco(){
@@ -90,10 +103,15 @@ public class PacienteController implements Serializable {
 	public String save(){
 		try{
 			
+			System.out.println("CNPJ HOSP: " + cnpj);
 			List<Requisicao> req = new ArrayList<Requisicao>();
+			
+			HttpSession session = Util.getSession();
+			FacesContext.getCurrentInstance().getExternalContext().setResponseContentType("multipart/form-data");
 			
 			requisicao.setPosto(paciente.getPosto());
 			requisicao.setProntuario(paciente);
+			requisicao.setCnpjUnidade(Integer.valueOf(session.getAttribute("cnpjUnidade").toString()));
 			req.add(requisicao);
 			paciente.setRequisicoes(req);
 			getPacienteService().savePaciente(paciente);
@@ -203,6 +221,14 @@ public class PacienteController implements Serializable {
 
 	public void setPesquisa(String pesquisa) {
 		this.pesquisa = pesquisa;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 	
 }

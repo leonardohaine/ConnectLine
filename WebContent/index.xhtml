@@ -5,9 +5,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
+    <h:head class="header fullheight">
         <title>Sistema de gerenciamento de laboratório</title>
-        <link rel="stylesheet" type="text/css" href="./css.css" />  
+        <link rel="stylesheet" type="text/css" href="./views/css.css" />  
         <link rel="stylesheet" type="image/ico" href="./favicon.ico" />
         
         <script type="text/javascript">  
@@ -22,19 +22,11 @@
 				}  
 			}  
 		</script> 
-        <style>
-        	html { 
-			  background: url(./imagens/wall1600x1200new.png) no-repeat center center fixed; 
-			  -webkit-background-size: cover;
-			  -moz-background-size: cover;
-			  -o-background-size: cover;
-			  background-size: cover;
-			}
-        </style>
+        
     </h:head>
 
-	<h:body style="font-size: 12px; font-color: black;">
-    	<div align="center">
+	<h:body style="font-size: 12px; font-color: black;" styleClass="header fullheight">
+    	<div align="center" class="ui-fluid">
         
         <h:form id="formNf" >
         	 <ui:remove>   	

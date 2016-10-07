@@ -36,7 +36,6 @@ public class SetorDAO extends GenericDAO<Setor>{
 	}
 
 	public void saveSetor(Setor setor) {
-		setor.setSetor(null);
 		System.out.println("Save: " + setor.toString());
 		getSessionFactory().getCurrentSession().merge(setor);
 	}
@@ -49,7 +48,7 @@ public class SetorDAO extends GenericDAO<Setor>{
 		getSessionFactory().getCurrentSession().update(setor);
 	}
 
-	public Setor getSetorById(Integer id) {
+	public Setor getSetorById(Long id) {
 		Setor setor = (Setor) getSessionFactory().getCurrentSession().get(Setor.class, id);
 
 		return setor;

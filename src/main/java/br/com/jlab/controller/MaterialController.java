@@ -12,8 +12,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import org.primefaces.context.RequestContext;
-
 import br.com.jlab.model.Material;
 import br.com.jlab.service.MaterialService;
 
@@ -34,13 +32,12 @@ public class MaterialController implements Serializable {
 	private MaterialService materialService;
 	
 	public MaterialController(){
-		
+
 	}
-	
-	
 	
 	public String save(){
 		try{
+			System.out.println("Save Material: " + material);
 			getMaterialService().saveMaterial(material);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Material cadastrado"));
@@ -65,19 +62,13 @@ public class MaterialController implements Serializable {
 		return "listaMaterial";
 	}
 	
-	
-	public String outcome(){
-		return "material";
-	}
-	
-	public void Edit(ActionEvent event){
-		setMaterial((Material) event.getComponent().getAttributes().get("matSelecionado"));
-		System.out.println("selectedMaterial: " + selectedMaterial);
-		System.out.println("material: " + (Material) event.getComponent().getAttributes().get("matSelecionado"));
-		
-		RequestContext.getCurrentInstance().update("formMat");
-		
-		//return "material";
+	@PostConstruct
+	public void editar(){
+		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("materialId");
+		if(id != null){
+			System.out.println("ID editar: " + id);
+			material = getMaterialService().geMaterialById(Long.valueOf(id));
+		}
 	}
 	
 	public MaterialService getMaterialService() {
@@ -124,5 +115,5 @@ public class MaterialController implements Serializable {
 	public void setSelectedMaterial(Material selectedMaterial) {
 		this.selectedMaterial = selectedMaterial;
 	}
-	
+
 }

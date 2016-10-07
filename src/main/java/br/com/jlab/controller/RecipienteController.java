@@ -63,22 +63,20 @@ public class RecipienteController implements Serializable {
 	}
 	
 	@PostConstruct
-	public String Edit(){
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedRecipiente", selectedRecipiente);
-		
-		setRecipiente((Recipiente)FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selectedRecipiente"));
-		System.out.println("selectedRecipiente: " + selectedRecipiente);
-		System.out.println("recipiente: " + recipiente);
-		
-		return "recipiente";
+	public void editar(){
+		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("recipienteId");
+		if(id != null){
+			System.out.println("ID editar: " + id);
+			recipiente = getRecipienteService().getRecipienteById(Long.valueOf(id));
+		}
 	}
 	
 	public RecipienteService getRecipienteService() {
 		return recipienteService;
 	}
 
-	public void setRecipienteService(RecipienteService setorService) {
-		this.recipienteService = setorService;
+	public void setRecipienteService(RecipienteService recipienteService) {
+		this.recipienteService = recipienteService;
 	}
 
 

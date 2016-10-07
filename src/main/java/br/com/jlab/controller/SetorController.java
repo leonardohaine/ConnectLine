@@ -63,14 +63,12 @@ public class SetorController implements Serializable {
 	}
 	
 	@PostConstruct
-	public String Edit(){
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedSetor", selectedSetor);
-		
-		setSetor((Setor)FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selectedSetor"));
-		System.out.println("selectedSetor: " + selectedSetor);
-		System.out.println("setor: " + setor);
-		
-		return "setor";
+	public void editar(){
+		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("setorId");
+		if(id != null){
+			System.out.println("ID editar: " + id);
+			setor = getSetorService().getSetorById(Long.valueOf(id));
+		}
 	}
 	
 	public SetorService getSetorService() {

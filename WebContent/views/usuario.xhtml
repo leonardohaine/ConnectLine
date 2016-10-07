@@ -56,23 +56,18 @@
         </p:row>
         <p:row>
             <p:column style="text-align: center;" colspan="8">
-                <p:commandButton icon="icone-add" id="novoBtn" update="panelUsuario" process="@this" value="Novo">
-                    <p:resetInput target="panelUsuario" />
-                </p:commandButton> 
-                <p:commandButton icon="icone-cancel" async="right" id="deleteBtn" action="#{usuario.delete}" value="Deletar" ajax="false" />
-                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelUsuario">
-                    <p:resetInput target="panelUsuario" />
-                </p:commandButton>
+                <p:button value="Cancelar" outcome="listaUsuario"/>
+                
                 <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{usuario.save}" update="panelUsuario" global="true" />
                 
                 <p:focus context="panelUsuario"/>  
-                <p:messages /> 
+                <p:messages id="messagesMaterial" showDetail="true" autoUpdate="true" closable="true" />
             </p:column> 
         </p:row>
         
         </p:panelGrid>
         
-        <p:blockUI block="panelUsuario" trigger="saveBtn, deleteBtn, clearBtn" /> 
+        <p:blockUI block="panelUsuario" trigger="saveBtn" /> 
     </h:form>
     
     </div> 

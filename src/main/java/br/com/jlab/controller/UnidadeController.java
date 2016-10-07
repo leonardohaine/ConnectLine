@@ -13,11 +13,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.SelectEvent;
 
 import br.com.jlab.model.Hospital;
 import br.com.jlab.service.HospitalService;
+import br.com.jlab.util.Util;
 
 /**
  *
@@ -128,6 +130,10 @@ public class UnidadeController {
 		System.out.println("selectHospFromDialog: " + hosp);
 		setHospital(getHospitalService().getHospitalDAO().getHospitalById(hosp.getHospital()));
         setSelectedHospital(getHospitalService().getHospitalDAO().getHospitalById(hosp.getHospital()));
+        
+        HttpSession session = Util.getSession();
+		FacesContext.getCurrentInstance().getExternalContext().setResponseContentType("multipart/form-data");
+		session.setAttribute("cnpjUnidade", hosp.getCnpj());
     }
 	
 	public void selectHospital(SelectEvent event) {

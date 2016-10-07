@@ -116,9 +116,16 @@
 		    
 		    <p:row>  
 	            <p:column colspan="4">Origem:<br/>
-	            	<p:inputText size="3" value="#{paciente.paciente.posto}" />
-	            	 <p:commandButton value=" " icon="ui-icon-search" /> 
+	            	<p:inputText size="3" id="posto" value="#{paciente.requisicao.posto}" />
+	            	<p:commandButton icon="ui-icon-search" title="Pesquisa" action="#{selecaoPosto.abrirDialogo}"
+						process="@this" update="@none">
+						<p:ajax event="dialogReturn" listener="#{paciente.postoSelecionado}" process="@this" update="posto" />
+						<p:resetInput target="posto" />
+					</p:commandButton>
 	            	<p:inputText size="25" value="#{paciente.paciente.email}" />
+	            	<p:dialog widgetVar="setPosto" draggable="">
+	            		<ui:include src="selecaoPosto.xhtml"></ui:include>
+	            	</p:dialog>
             	</p:column>  
 
 	            <p:column colspan="2">Pedido:<br/><p:inputText id="pedido" size="25" value="#{paciente.requisicao.controle}" /></p:column>  
@@ -216,7 +223,7 @@
 	                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{paciente.save}" update="panelPaciente" global="true" />
 	                
 	                <p:focus context="panelPaciente"/>  
-	                <p:messages /> 
+	                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 	            </p:column> 
 	        </p:row>
         

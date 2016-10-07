@@ -16,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Type;
+
 /**
  *
  * @author diego
@@ -66,6 +68,10 @@ public class Posto implements Serializable {
     @Lob
     @Column(name = "rodapeexporta")
     private byte[] rodapeexporta;
+    
+    @Type(type= "org.hibernate.type.NumericBooleanType")
+    @Column(name = "ativo")
+    private Boolean ativo;
 
     public Posto() {
     }
@@ -194,5 +200,13 @@ public class Posto implements Serializable {
     public String toString() {
         return "br.com.entidades.Postos[ posto=" + posto + " ]";
     }
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
     
 }

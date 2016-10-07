@@ -6,6 +6,7 @@ package br.com.jlab.dao;
 
 import java.util.List;
 
+import org.hibernate.FetchMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
@@ -68,6 +69,7 @@ public class PacienteDAO extends GenericDAO<Paciente>{
 	public Paciente getPacienteByNome(String nome) {
 		System.out.println("Nome: " + nome);
 		Paciente paciente = (Paciente) getSessionFactory().getCurrentSession().createCriteria(Paciente.class)
+				.setFetchMode("prontuario", FetchMode.SELECT)
 				.add(Restrictions.like("nome", nome, MatchMode.START)).uniqueResult();
 
 		return paciente;

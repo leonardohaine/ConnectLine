@@ -31,7 +31,7 @@ public class SetorService {
 		getSetorDAO().updateSetor(setor);
 	}
 
-	public Setor geSetorById(Integer id) {
+	public Setor getSetorById(Long id) {
 		return getSetorDAO().getSetorById(id);
 	}
 

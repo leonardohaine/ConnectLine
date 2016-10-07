@@ -36,7 +36,6 @@ public class MaterialDAO extends GenericDAO<Material>{
 	}
 
 	public void saveMaterial(Material material) {
-		material.setMaterial(null);
 		System.out.println("Save: " + material.toString());
 		getSessionFactory().getCurrentSession().merge(material);
 	}
@@ -49,7 +48,7 @@ public class MaterialDAO extends GenericDAO<Material>{
 		getSessionFactory().getCurrentSession().update(material);
 	}
 
-	public Material getMaterialById(Integer id) {
+	public Material getMaterialById(Long id) {
 		Material Material = (Material) getSessionFactory().getCurrentSession().get(Material.class, id);
 
 		return Material;

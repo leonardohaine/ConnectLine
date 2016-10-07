@@ -36,7 +36,6 @@ public class RecipienteDAO extends GenericDAO<Setor>{
 	}
 
 	public void saveRecipiente(Recipiente recipiente) {
-		recipiente.setRecipiente(null);
 		System.out.println("Save: " + recipiente.toString());
 		getSessionFactory().getCurrentSession().merge(recipiente);
 	}
@@ -49,7 +48,7 @@ public class RecipienteDAO extends GenericDAO<Setor>{
 		getSessionFactory().getCurrentSession().update(recipiente);
 	}
 
-	public Recipiente getRecipienteById(Integer id) {
+	public Recipiente getRecipienteById(Long id) {
 		Recipiente recipiente = (Recipiente) getSessionFactory().getCurrentSession().get(Recipiente.class, id);
 
 		return recipiente;

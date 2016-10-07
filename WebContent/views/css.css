@@ -6,6 +6,54 @@
         Purpose of the stylesheet follows.
 */
 
+ /* No aruivo css este é o conteúdo que mais nos interessa */
+.fullheight {
+  /*com isso o header ficará sempre com o tamanho da tela */
+  height: 100vh;
+  /*background geralmente uso o modo compacto, mas aqui vou colocar separadamente para explicar cada parte*/
+  /* aqui defino a imagem maior*/
+  background-image: url("../imagens/1366x768.png");
+  /*deixa o background com efeito paralax*/
+  background-attachment: fixed;
+  /* cover é para nunca deixar espaço sem imagem*/
+  background-size: cover;
+   overflow:hidden;
+}
+/* aqui troco a imagem pra cada resolução na ordem do maior pro menor */
+@media screen and (max-width: 100px) {
+  .header.fullheight {
+    background-image: url("../imagens/wall1600x1200new.png");
+  }
+}
+@media screen and (max-width: 1366px) {
+  .header.fullheight {
+    background-image: url("../imagens/1366x768.png");
+  }
+}
+@media screen and (max-width: 800px) {
+  .header.fullheight {
+    background-image: url("../imagens/wall1600x1200new.png");
+  }
+}
+@media screen and (max-width: 600px) {
+  .header.fullheight {
+    background-image: url("../imagens/wall1600x1200new.png");
+  }
+}
+@media screen and (max-width: 400px) {
+  .header.fullheight {
+    background-image: url("../imagens/wall1600x1200new.png");
+  }
+}
+@media screen and (max-width: 320px) {
+  .fullheight {
+    background-image: url("../imagens/wall1600x1200new.png");
+  }
+}
+
+body {
+   /* overflow:hidden;*/
+}
 
 .ui-layout-unit-top .ui-layout-bd { border: 0; }
 .ui-layout-unit-left .ui-layout-bd { border: 0; }

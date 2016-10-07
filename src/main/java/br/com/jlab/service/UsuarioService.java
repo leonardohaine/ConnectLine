@@ -31,7 +31,7 @@ public class UsuarioService {
 		getUsuarioDAO().updateUsuario(usuarios);
 	}
 
-	public Usuario geUsuarioById(Integer id) {
+	public Usuario getUsuarioById(Long id) {
 		return getUsuarioDAO().getUsuarioById(id);
 	}
 
