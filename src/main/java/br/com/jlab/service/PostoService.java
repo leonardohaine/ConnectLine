@@ -54,8 +54,8 @@ public class PostoService {
 		this.postoDAO = PostoDAO;
 	}
 
-	public List<Posto> getPosto() {
-		return getPostoDAO().getPosto();
+	public List<Posto> getPostos() {
+		return getPostoDAO().getPostos();
 	}
 
 }

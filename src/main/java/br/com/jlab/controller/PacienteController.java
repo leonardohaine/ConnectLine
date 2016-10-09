@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import br.com.jlab.model.Exame;
@@ -81,6 +82,7 @@ public class PacienteController implements Serializable {
 	}
 	
 	public void postoSelecionado(SelectEvent event) {
+		System.out.println("Event selecionado; " + event);
 		Posto posto = (Posto) event.getObject();
 		paciente.setPosto(posto.getPosto().toString());
 		System.out.println("Posto selecionado; " + posto);
@@ -111,7 +113,9 @@ public class PacienteController implements Serializable {
 			
 			requisicao.setPosto(paciente.getPosto());
 			requisicao.setProntuario(paciente);
-			requisicao.setCnpjUnidade(Integer.valueOf(session.getAttribute("cnpjUnidade").toString()));
+			requisicao.setCnpjUnidade(Integer.valueOf((String)session.getAttribute("cnpjUnidade").toString()));
+			session.getAttribute("");
+			
 			req.add(requisicao);
 			paciente.setRequisicoes(req);
 			getPacienteService().savePaciente(paciente);

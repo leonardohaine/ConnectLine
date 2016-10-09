@@ -68,13 +68,13 @@
 			    </p:column>
 	           
 	            <p:column colspan="1">Idade:<br/><p:inputText id="idade" size="5" readonly="false" value="#{paciente.paciente.idade}" >
-			            						<p:keyFilter for="idade" mask="int" />
+			            						
 			            					</p:inputText>
 				</p:column>
 				<p:column colspan="1">Sexo:<br/>
 					<p:selectOneRadio label="Tipo" value="#{paciente.paciente.sexo}" >
-			            <f:selectItem itemLabel="Masc" itemValue="P"  />
-			            <f:selectItem itemLabel="Fem" itemValue="S" />
+			            <f:selectItem itemLabel="Masc" itemValue="true"  />
+			            <f:selectItem itemLabel="Fem" itemValue="false" />
 			        </p:selectOneRadio>
 				</p:column>
 	        </p:row>
@@ -83,11 +83,11 @@
 	        </p:row>
 	        <p:row>  
 	            <p:column colspan="2">SUS:<br/><p:inputText id="sus" size="30" value="#{paciente.paciente.pacStSus}" /></p:column>  
-													<p:keyFilter for="sus" regEx="/[0123456789]/i" mask="pnum" />
+													
 	            <p:column colspan="2">RG:<br/><p:inputText id="rg" size="30" value="#{paciente.paciente.rg}" /></p:column>  
-													<p:keyFilter for="rg" mask="int" />
+													
 	            <p:column colspan="2">CPF:<br/><p:inputText id="cpf" size="25" value="#{paciente.paciente.cpf}" /></p:column>
-	            									<p:keyFilter for="cpf" mask="num" />
+	            									
 	            <p:column colspan="2">Telefone:<br/><p:inputMask size="30" mask="99999-9999" value="#{paciente.paciente.telefone}" /></p:column>
 	        </p:row>
 	        <p:row>
@@ -95,7 +95,7 @@
 	        	<p:column colspan="2">Celular:<br/><p:inputMask size="30" mask="99999-9999" value="#{paciente.paciente.celular}"  /></p:column>
 				<p:column colspan="2">Nome mãe:<br/><p:inputText size="30" value="#{paciente.paciente.cpf}" /></p:column>
 				<p:column colspan="2">CEP:<br/><p:inputText id="cep" size="25" value="#{paciente.paciente.cep}">
-												<p:keyFilter for="cep" mask="pnum" />
+												
           									   	<p:ajax event="blur" listener="#{paciente.endereco}" onsuccess="document.getElementById('formPac:num').focus();" partialSubmit="true" update="formPac:end formPac:bairro formPac:cidade formPac:uf"/>
           									   </p:inputText>
 	            </p:column>
@@ -116,22 +116,22 @@
 		    
 		    <p:row>  
 	            <p:column colspan="4">Origem:<br/>
-	            	<p:inputText size="3" id="posto" value="#{paciente.requisicao.posto}" />
+	            	
+	            	<p:inputText size="3" id="posto" value="#{paciente.paciente.posto}" />
 	            	<p:commandButton icon="ui-icon-search" title="Pesquisa" action="#{selecaoPosto.abrirDialogo}"
 						process="@this" update="@none">
-						<p:ajax event="dialogReturn" listener="#{paciente.postoSelecionado}" process="@this" update="posto" />
+						<p:ajax event="dialogReturn" listener="#{paciente.postoSelecionado}" immediate="true" update=":formPac:posto" />
 						<p:resetInput target="posto" />
 					</p:commandButton>
 	            	<p:inputText size="25" value="#{paciente.paciente.email}" />
-	            	<p:dialog widgetVar="setPosto" draggable="">
-	            		<ui:include src="selecaoPosto.xhtml"></ui:include>
-	            	</p:dialog>
+	            	
             	</p:column>  
 
 	            <p:column colspan="2">Pedido:<br/><p:inputText id="pedido" size="25" value="#{paciente.requisicao.controle}" /></p:column>  
 
 	            <p:column colspan="2">Gestante: <p:selectBooleanButton value="#{paciente.requisicao.gestante}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>  
 	        </p:row>
+	        
 	        <p:row>
 	        	<p:column colspan="4">Médico:<br/>
 	        		<p:inputText size="3" value="#{paciente.paciente.email}" />
@@ -213,24 +213,64 @@
 		</ui:remove>    
 	        <p:row>
 	            <p:column style="text-align: center;" colspan="8">
+	                <p:toolbar style="background-color: darkblue; color:white; text-align: center;">
+	                	<f:facet name="right">
 	                <p:commandButton icon="icone-add" id="novoBtn" update="panelPaciente" process="@this" value="Novo">
 	                    <p:resetInput target="panelPaciente" />
 	                </p:commandButton> 
-	                <p:commandButton icon="icone-cancel" async="right" id="deleteBtn" action="#{usuario.delete}" value="Deletar" ajax="false" />
+	                
 	                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelPaciente">
 	                    <p:resetInput target="panelPaciente" />
 	                </p:commandButton>
-	                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{paciente.save}" update="panelPaciente" global="true" />
 	                
-	                <p:focus context="panelPaciente"/>  
+	                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{paciente.save}" update="panelPaciente" global="true" />
+	                </f:facet>
+	                </p:toolbar>
+	                  
 	                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 	            </p:column> 
 	        </p:row>
         
         </p:panelGrid>
         
-        <p:blockUI block="panelPaciente" trigger="saveBtn, deleteBtn, clearBtn" /> 
-    </h:form>
+        <p:blockUI block="panelPaciente" trigger="saveBtn" /> 
+   
+    
+    
+	<p:dialog header="ESCOLHA POSTO"  widgetVar="posto" visible="false" modal="false" resizable="false" responsive="true" width="40%">
+	
+		<div  style="margin-top: 5px; margin-bottom: 20px">
+    		<p:inputText id="nome" size="40" value="#{selecaoPosto.nome}" placeholder="Nome do posto" />
+    		
+    		<p:spacer width="10px"/>
+    		
+    		<p:commandButton value="Pesquisar" action="#{selecaoPosto.pesquisar}" update="postoList" />
+    	
+    	
+	    	<p:dataTable value="#{selecaoPosto.postosFiltrados}" var="pos" id="postoList"
+	    		emptyMessage="Nenhum posto encontrado." rows="5"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		
+	    		<p:column headerText="Código" style="text-align: center; width: 40px">
+	    			<h:outputText value="#{pos.posto}" />
+	    		</p:column>
+	    		<p:column headerText="Descrição">
+	    			<h:outputText value="#{pos.descricao}" />
+	    		</p:column>
+	    		<p:column style="width: 30px; text-align: center">
+	    			
+	   				<p:commandButton id="commit" icon="ui-icon-check" oncomplete="PF('posto').hide()" update=":formPac:formPosto"
+	   						title="Selecionar" actionListener="#{selecaoPosto.selectPostoFromDialog(pos)}" />
+	   						
+					<p:commandButton icon="ui-icon-check" oncomplete="PF('posto').hide()" 
+                    		actionListener="#{selecaoPosto.selectPostoFromDialog(pos)}" update=":formPac" />
+	   				
+	    		</p:column>
+	    	</p:dataTable>
+    	</div>
+	
+	</p:dialog>
+	 </h:form>
     
     </div> 
     

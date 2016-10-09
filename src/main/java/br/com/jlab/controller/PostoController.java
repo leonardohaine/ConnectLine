@@ -100,7 +100,7 @@ public class PostoController implements Serializable {
 
 
 	public List<Posto> getPostos() {
-		postos = getPostoService().getPosto();
+		postos = getPostoService().getPostos();
 		return postos;
 	}
 

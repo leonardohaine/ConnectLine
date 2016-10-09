@@ -1,41 +1,39 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui">
+
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<link rel="stylesheet" type="text/css" href="./css.css" />  
 </h:head>
-<h:body >
+
 
 	<h:form id="formPosto">
-    	<div class="ui-fluid" style="margin-top: 5px; margin-bottom: 20px">
-    		<p:inputText id="nome" size="40" value="#{selecaoPosto.nome}" placeholder="Nome do posto" />
-    		
-    		<p:spacer width="10px"/>
-    		
-    		<p:commandButton value="Pesquisar" action="#{selecaoPosto.pesquisar}" update="formPosto" />
-    	</div>
+    	<div  style="margin-top: 5px; margin-bottom: 20px">
     	
-    	<p:dataTable value="#{selecaoPosto.postosFiltrados}" var="pos" id="postoList"
-    		emptyMessage="Nenhum posto encontrado." rows="10"
-    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+    	<p:dataTable value="#{posto.postos}" var="pos" id="postoList"
+    		emptyMessage="Nenhum posto encontrado." rows="6" 
+    		paginator="true" paginatorAlwaysVisible="true" paginatorPosition="bottom">
     		
-    		<p:column headerText="Código" style="text-align: center; width: 40px">
+    		<p:column headerText="CÃ³digo" style="text-align: center; width: 40px">
     			<h:outputText value="#{pos.posto}" />
     		</p:column>
-    		<p:column headerText="Descrição">
+    		<p:column headerText="DescriÃ§Ã£o" filterBy="#{pos.descricao}" filterMatchMode="contains">
     			<h:outputText value="#{pos.descricao}" />
     		</p:column>
     		<p:column style="width: 30px; text-align: center">
-    			<p:commandButton icon="ui-icon-check" title="Selecionar" process="@this" action="#{selecaoPosto.selecionar(pos)}" />
+    			
+   				<p:commandButton id="commit" icon="ui-icon-check" process="@form"  immediate="true" global="true"
+   						title="Selecionar" actionListener="#{selecaoPosto.selecionar(pos)}" >
+   				</p:commandButton>
     		</p:column>
-    		
     	</p:dataTable>
+    	</div>
 	</h:form>
 
-</h:body>
 </html>

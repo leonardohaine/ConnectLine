@@ -9,24 +9,24 @@
 	<h:form id="formMenu">
 		<div class="ui-fluid">
 		<p:slideMenu style="width:180px; height: 415px" backLabel="Voltar">
-			<p:menuitem value="Home" url="inicial.jsf" update="messages" icon="ui-icon-home" />
+			<p:menuitem value="Home" url="inicial.jsf"  icon="ui-icon-home" />
 			<p:separator />
 	        <p:submenu label="Cadastro" icon=" ui-icon-check" expanded="true" >
-	        	<p:menuitem icon="ui-icon-bullet" value="Hospital" url="listaHospital.jsf" update="messages" />
-	            <p:menuitem icon="ui-icon-bullet" value="Usuários" url="listaUsuario.jsf" update="messages" />
-	            <p:menuitem icon="ui-icon-bullet" value="Pacientes" url="paciente.jsf" update="messages" />
-	            <p:menuitem icon="ui-icon-bullet" value="Material" url="listaMaterial.jsf" update="messages" />
-	            <p:menuitem icon="ui-icon-bullet" value="Setor" url="listaSetor.jsf" update="messages" />
-	            <p:menuitem icon="ui-icon-bullet" value="Posto" url="listaPosto.jsf" update="messages" />
-	            <p:menuitem icon="ui-icon-bullet" value="Recipiente" url="listaRecipiente.jsf" update="messages" />
+	        	<p:menuitem icon="ui-icon-bullet" value="Hospital" url="listaHospital.jsf" />
+	            <p:menuitem icon="ui-icon-bullet" value="Usuários" url="listaUsuario.jsf" />
+	            <p:menuitem icon="ui-icon-bullet" value="Pacientes" url="paciente.jsf" />
+	            <p:menuitem icon="ui-icon-bullet" value="Material" url="listaMaterial.jsf" />
+	            <p:menuitem icon="ui-icon-bullet" value="Setor" url="listaSetor.jsf" />
+	            <p:menuitem icon="ui-icon-bullet" value="Posto" url="listaPosto.jsf" />
+	            <p:menuitem icon="ui-icon-bullet" value="Recipiente" url="listaRecipiente.jsf" />
 	            
 	        </p:submenu>
 	        <p:submenu label="Controle" icon=" ui-icon-check">
-	            <p:menuitem value="Controle Material" url="controleMaterial.jsf" update="messages" />
+	            <p:menuitem value="Controle Material" url="controleMaterial.jsf" />
 	            <p:menuitem value="" url="" update="" />
 	        </p:submenu>
 	        <p:separator />
-	        <p:menuitem value="Sair	" update="messages" actionListener="#{auth.logout}"/>
+	        <p:menuitem value="Sair" actionListener="#{auth.logout}" />
 	    </p:slideMenu>
 	  </div>  
 	</h:form>

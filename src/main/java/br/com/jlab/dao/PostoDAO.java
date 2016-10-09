@@ -57,7 +57,7 @@ public class PostoDAO extends GenericDAO<Posto>{
 
 	}
 
-	public List<Posto> getPosto() {
+	public List<Posto> getPostos() {
 		List list = getSessionFactory().getCurrentSession().createQuery("from Posto").list();
 		return list;
 	}
