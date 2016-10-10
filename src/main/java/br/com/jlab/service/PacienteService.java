@@ -1,6 +1,11 @@
 package br.com.jlab.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.jlab.dao.PacienteDAO;
 import br.com.jlab.model.Paciente;
+import br.com.jlab.model.Requisicao;
+import br.com.jlab.util.Util;
 
 @Service("PacienteService")
 @Transactional(readOnly = true)
@@ -17,7 +24,22 @@ public class PacienteService {
 	PacienteDAO pacienteDAO;
 
 	@Transactional(readOnly = false)
-	public void savePaciente(Paciente paciente) {
+	public void savePaciente(Paciente paciente, Requisicao requisicao) {
+		
+		List<Requisicao> req = new ArrayList<Requisicao>();
+		
+		HttpSession session = Util.getSession();
+		FacesContext.getCurrentInstance().getExternalContext().setResponseContentType("multipart/form-data");
+		
+		paciente.setEntrada(new Date());
+		requisicao.setPosto(paciente.getPosto());
+		requisicao.setProntuario(paciente);
+		requisicao.setCnpjUnidade(Long.valueOf((String)session.getAttribute("cnpjUnidade").toString()));
+		
+		
+		req.add(requisicao);
+		paciente.setRequisicoes(req);
+		
 		getPacienteDAO().savePaciente(paciente);
 	}
 

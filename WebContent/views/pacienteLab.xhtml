@@ -27,26 +27,23 @@
       <h:form id="formPac" enctype="multipart/form-data" >
        	  <p:focus context="panelPesqPac" for="pesquisa"/>
        	
-	      <p:panelGrid id="panelPesqPac" style="margin-bottom:0px; width: 920px;" >
-		     
-            <p:row>
-               <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
-               		 <p:spacer height="0">PESQUISA DE PACIENTES</p:spacer>
-              	   </p:column>  
-            </p:row>    
-	         
-	    	<p:row>
-	            <p:column >	
-			        <p:selectOneRadio id="tipoPesquisa" label="Tipo" immediate="true" widgetVar="tp" value="#{paciente.tipoPesquisa}" >
-			            <f:selectItem itemLabel="Prontuário" itemValue="P"  />
-			            <f:selectItem itemLabel="SUS" itemValue="S" />
-			            <f:selectItem itemLabel="Nome" itemValue="N" />
-			            <f:selectItem itemLabel="Requisição" itemValue="R" />
-			        </p:selectOneRadio>
-			        Pesquisa:<p:inputText id="pesquisa" size="30"  value="#{paciente.pesquisa}" />
-			      	<p:commandButton id="pesq" value="Buscar"  action="#{paciente.pesquisaPaciente}" update="panelPaciente"></p:commandButton>
-			     </p:column>
-	     	</p:row> 	
+	      <p:panelGrid id="panelPesqPac" columns="4" style="margin-bottom:5px; width: 890px;" >
+		      <f:facet name="header">  
+	            <p:row>
+	               <p:column  style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+	               		PESQUISA DE PACIENTES
+               	   </p:column>  
+	            </p:row>    
+	          </f:facet>
+	    		
+		        <p:selectOneRadio id="tipoPesquisa" label="Tipo" immediate="true" widgetVar="tp" value="#{paciente.tipoPesquisa}" >
+		            <f:selectItem itemLabel="Prontuário" itemValue="P"  />
+		            <f:selectItem itemLabel="SUS" itemValue="S" />
+		            <f:selectItem itemLabel="Nome" itemValue="N" />
+		            <f:selectItem itemLabel="Requisição" itemValue="R" />
+		        </p:selectOneRadio>
+		        Pesquisa:<p:inputText id="pesquisa" size="60"  value="#{paciente.pesquisa}" />
+		      	<p:commandButton id="pesq" value="Buscar"  action="#{paciente.pesquisaPaciente}" update="panelPaciente"></p:commandButton>
 	      </p:panelGrid>
 		  
 	        
@@ -117,11 +114,42 @@
 		        </p:column>
 		    </p:row>
 		    
-		    <p:row>
-		    	<p:column colspan="2">Responsável:<br/><p:inputText size="30" value="#{paciente.requisicao.responsavel}" /></p:column>
-		    	
-		    	<p:column colspan="2">RG Resp.:<br/><p:inputText id="rgResp" size="30" value="#{paciente.requisicao.rgResponsavel}" /></p:column>
-		    	
+		    <p:row>  
+	            <p:column colspan="4">Origem:<br/>
+	            	
+	            	<p:inputText size="3" id="posto" value="#{paciente.paciente.posto}" />
+	            	<p:commandButton icon="ui-icon-search" title="Pesquisa" action="#{selecaoPosto.abrirDialogo}"
+						process="@this" update="@none">
+						<p:ajax event="dialogReturn" listener="#{paciente.postoSelecionado}" immediate="true" update=":formPac:posto :formPac:postoDesc" />
+						<p:resetInput target="posto" />
+					</p:commandButton>
+	            	<p:outputLabel size="25" id="postoDesc" value="#{paciente.selectedPosto.descricao}" />
+	            	
+            	</p:column>  
+
+	            <p:column colspan="2">Pedido:<br/><p:inputText id="pedido" size="25" value="#{paciente.requisicao.controle}" /></p:column>  
+
+	            <p:column colspan="2">Gestante: <p:selectBooleanButton value="#{paciente.requisicao.gestante}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>  
+	        </p:row>
+	        
+	        <p:row>
+	        	<p:column colspan="4">Médico:<br/>
+	        		<p:inputText size="3" id="medico" value="#{paciente.requisicao.medico}" />
+	        		<p:commandButton icon="ui-icon-search" title="Pesquisa" action="#{selecaoMedico.abrirDialogo}"
+						process="@this" update="@none">
+						<p:ajax event="dialogReturn" listener="#{paciente.medicoSelecionado}" immediate="true" update=":formPac:medico" />
+						<p:resetInput target="medico" />
+					</p:commandButton>
+	        		<p:inputText size="25" value="#{paciente.requisicao.medico}" />
+        		</p:column>
+
+	            <p:column colspan="2">Diagnóstico:<br/><p:inputText size="25" value="#{paciente.requisicao.observacao}" /></p:column>
+
+	            <p:column colspan="2">Medicamentos:<br/><p:inputText size="30" value="#{paciente.requisicao.observacao}" /></p:column>
+	        </p:row>
+	        <p:row>
+	            <p:column colspan="4">Observação:<br/><p:inputText size="70" value="#{paciente.requisicao.observacao}" /></p:column>
+
 	            <p:column colspan="2">Especialidade:<br/>
 	            	<p:selectOneMenu id="especialidade" value="#{paciente.requisicao.especialidade}" style="width:125px">
 						<f:selectItem itemLabel="" itemValue="0" />
@@ -136,11 +164,8 @@
 			            <f:selectItem itemLabel="OTORRINO" itemValue="9" />
 			        </p:selectOneMenu>
             	</p:column>
-            	<p:column colspan="2">Gestante: <p:selectBooleanButton value="#{paciente.requisicao.gestante}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
-	        </p:row>
-	        <p:row>
-	        	<p:column colspan="8">Observação:<br/><p:inputTextarea rows="3" cols="145" value="#{paciente.requisicao.observacao}" /></p:column>	        	
-	        	
+	            
+	            <p:column colspan="2">vazio:<br/><p:inputText size="30" value="#{paciente.requisicao.observacao}" /></p:column>
 	        </p:row>
 		<ui:remove>    
 		    <p:row>

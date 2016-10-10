@@ -13,14 +13,12 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import br.com.jlab.model.Exame;
 import br.com.jlab.model.Paciente;
 import br.com.jlab.model.Posto;
 import br.com.jlab.model.Requisicao;
-import br.com.jlab.model.Setor;
 import br.com.jlab.service.PacienteService;
 import br.com.jlab.util.BuscaCep;
 import br.com.jlab.util.Endereco;
@@ -38,7 +36,8 @@ public class PacienteController implements Serializable {
 	private Paciente paciente = new Paciente();
 	private Requisicao requisicao = new Requisicao();
 	private List<Paciente> pacientes = new ArrayList<Paciente>();
-	private Setor selectedPaciente;
+	private Paciente selectedPaciente;
+	private Posto selectedPosto;
 	private String pesquisa;
 	private Long idade;
 	private char tipoPesquisa = 'P';
@@ -82,8 +81,9 @@ public class PacienteController implements Serializable {
 	}
 	
 	public void postoSelecionado(SelectEvent event) {
-		System.out.println("Event selecionado; " + event);
+		
 		Posto posto = (Posto) event.getObject();
+		setSelectedPosto(posto);
 		paciente.setPosto(posto.getPosto().toString());
 		System.out.println("Posto selecionado; " + posto);
 	}
@@ -92,7 +92,12 @@ public class PacienteController implements Serializable {
 		
 		if(paciente.getCep() != null && paciente.getCep().length() == 8){
 			Endereco end = BuscaCep.getEndereco(paciente.getCep());
-			
+			if(end == null){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+						"Aviso!", "CEP não encontrado: " + paciente.getCep()));
+				
+				return;
+			}
 			paciente.setEndereco(end.getLogradouro());
 			paciente.setBairro(end.getBairro());
 			paciente.setCidade(end.getLocalidade());
@@ -105,28 +110,17 @@ public class PacienteController implements Serializable {
 	public String save(){
 		try{
 			
-			System.out.println("CNPJ HOSP: " + cnpj);
-			List<Requisicao> req = new ArrayList<Requisicao>();
-			
-			HttpSession session = Util.getSession();
-			FacesContext.getCurrentInstance().getExternalContext().setResponseContentType("multipart/form-data");
-			
-			requisicao.setPosto(paciente.getPosto());
-			requisicao.setProntuario(paciente);
-			requisicao.setCnpjUnidade(Integer.valueOf((String)session.getAttribute("cnpjUnidade").toString()));
-			session.getAttribute("");
-			
-			req.add(requisicao);
-			paciente.setRequisicoes(req);
-			getPacienteService().savePaciente(paciente);
+			getPacienteService().savePaciente(paciente, requisicao);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Paciente cadastrado"));
+			return "paciente";
 		}catch (Exception e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro!", "Erro ao tentar cadastrar paciente: " +e));
+			return null;
 		}
-		return "paciente";
+		
 	}
 	
 	public void addExame(){
@@ -203,11 +197,11 @@ public class PacienteController implements Serializable {
 		this.pacientes = pacientes;
 	}
 
-	public Setor getSelectedPaciente() {
+	public Paciente getSelectedPaciente() {
 		return selectedPaciente;
 	}
 
-	public void setSelectedPaciente(Setor selectedPaciente) {
+	public void setSelectedPaciente(Paciente selectedPaciente) {
 		this.selectedPaciente = selectedPaciente;
 	}
 
@@ -233,6 +227,14 @@ public class PacienteController implements Serializable {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+
+	public Posto getSelectedPosto() {
+		return selectedPosto;
+	}
+
+	public void setSelectedPosto(Posto selectedPosto) {
+		this.selectedPosto = selectedPosto;
 	}
 	
 }

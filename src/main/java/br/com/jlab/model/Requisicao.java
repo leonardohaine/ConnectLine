@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Type;
+
 /**
  *
  * @author diego
@@ -38,10 +40,18 @@ public class Requisicao implements Serializable {
     @Column(name = "posto")
     private String posto;
     @Column(name = "cnpj_unidade")
-    private Integer cnpjUnidade;
+    private Long cnpjUnidade;
     @Column(name = "entrada")
     @Temporal(TemporalType.DATE)
     private Date entrada;
+    @Column(name = "especialidade")
+    private Long especialidade;
+    
+    @Column(name = "responsavel")
+    private String responsavel;
+    
+    @Column(name = "rg_responsavel")
+    private Long rgResponsavel;
     @Column(name = "sequencia")
     private String sequencia;
     @Column(name = "controle")
@@ -80,8 +90,9 @@ public class Requisicao implements Serializable {
     private Date entradahora;
     @Column(name = "origem")
     private String origem;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
     @Column(name = "gestante")
-    private String gestante;
+    private Boolean gestante;
     @Column(name = "observacao")
     private String observacao;
     @Column(name = "status")
@@ -148,6 +159,7 @@ public class Requisicao implements Serializable {
     }
 
     public void setPosto(String posto) {
+    	
         this.posto = posto;
     }
 
@@ -159,19 +171,23 @@ public class Requisicao implements Serializable {
         this.requisicao = requisicao;
     }
 
-    public Integer getCnpjUnidade() {
+    public Long getCnpjUnidade() {
 		return cnpjUnidade;
 	}
 
-	public void setCnpjUnidade(Integer cnpjUnidade) {
+	public void setCnpjUnidade(Long cnpjUnidade) {
 		this.cnpjUnidade = cnpjUnidade;
 	}
 
 	public Date getEntrada() {
+		if(entrada == null){
+    		entrada = new Date();
+    	}
         return entrada;
     }
 
     public void setEntrada(Date entrada) {
+    	
         this.entrada = entrada;
     }
 
@@ -311,11 +327,11 @@ public class Requisicao implements Serializable {
         this.origem = origem;
     }
 
-    public String getGestante() {
+    public Boolean getGestante() {
         return gestante;
     }
 
-    public void setGestante(String gestante) {
+    public void setGestante(Boolean gestante) {
         this.gestante = gestante;
     }
 
@@ -519,5 +535,29 @@ public class Requisicao implements Serializable {
     public String toString() {
         return "br.com.entidades.Requisicoes[ requisicao=" + requisicao + " ]";
     }
+
+	public Long getEspecialidade() {
+		return especialidade;
+	}
+
+	public void setEspecialidade(Long especialidade) {
+		this.especialidade = especialidade;
+	}
+
+	public String getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
+	}
+
+	public Long getRgResponsavel() {
+		return rgResponsavel;
+	}
+
+	public void setRgResponsavel(Long rgResponsavel) {
+		this.rgResponsavel = rgResponsavel;
+	}
     
 }

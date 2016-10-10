@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="./css.css" />  
+</h:head>
+  
+  <ui:composition template="inicial.xhtml">
+   <ui:define name="conteudo">
+  
+    <div align="center">
+        
+        <h:form id="formMed" enctype="multipart/form-data">
+        <p:panelGrid  id="panelMedico" style="margin-top:20px; background-color: #cccccc;" >
+            
+        <f:facet name="header">  
+            <p:row>
+		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+		            <p:spacer height="0" >CADASTRO DE MÉDICO</p:spacer>
+		        </p:column>
+		    </p:row>   
+        </f:facet>
+    	<p:row>
+            <p:column colspan="2">Nome:<br/><p:inputText size="30" value="#{medico.medico.nome}" /></p:column>
+            
+            <p:column colspan="2">CRM:<br/><p:inputText id="crm" size="30" value="#{medico.medico.medicosol}" /></p:column>
+            
+            <p:column colspan="2">Estado CRM:<br/><p:inputText id="UfCrm" size="30" value="#{medico.medico.estadocrm}" /></p:column>
+            <p:column colspan="2">Especialidade:<br/>
+            	<p:selectOneMenu id="especialidade" value="#{paciente.requisicao.especialidade}" style="width:125px">
+						<f:selectItem itemLabel="" itemValue="0" />
+			            <f:selectItem itemLabel="CLINICO GERAL" itemValue="1" />
+			            <f:selectItem itemLabel="ORTOPEDIA" itemValue="2" />
+			            <f:selectItem itemLabel="CARDIOLOGIA" itemValue="3" />
+			            <f:selectItem itemLabel="PEDIATRIA" itemValue="4" />
+			            <f:selectItem itemLabel="NEUROLOGIA" itemValue="5" />
+			            <f:selectItem itemLabel="OFTALMOLOGIA" itemValue="6" />
+			            <f:selectItem itemLabel="ONCOLOGIA" itemValue="7" />
+			            <f:selectItem itemLabel="DERMATOLOGIA" itemValue="8" />
+			            <f:selectItem itemLabel="OTORRINO" itemValue="9" />
+			        </p:selectOneMenu>
+            </p:column>
+        </p:row>
+        <p:row>
+        	<p:column colspan="2">Telefone:<br/><p:inputMask size="30" mask="(99)99999-9999" value="#{medico.medico.telefone1}"  /></p:column>
+        	
+        	<p:column colspan="2">Celular:<br/><p:inputMask size="30" mask="(99)99999-9999" value="#{medico.medico.celular}"  /></p:column>
+        	
+        	<p:column colspan="2">CEP:<br/>
+	        	<p:inputText id="cep" size="25" value="#{medico.medico.cep}">
+			    	<p:ajax event="blur" listener="#{medico.endereco}" onsuccess="document.getElementById('formMed:num').focus();" partialSubmit="true" update="formMed:end formMed:bairro formMed:cidade formMed:uf"/>
+			    </p:inputText>
+            </p:column>
+            
+            <p:column colspan="2">Endereço:<br/><p:inputText id="end" size="30" value="#{medico.medico.endereco}" /></p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">Número:<br/><p:inputText id="num" size="30" /></p:column>
+            
+            <p:column colspan="2">Complemento:<br/><p:inputText id="compl" size="30" value="#{medico.medico.complemento}" /></p:column>
+            
+            <p:column colspan="2">Bairro:<br/><p:inputText id="bairro" size="30" value="#{medico.medico.bairro}" /></p:column>
+            
+            <p:column colspan="2">Cidade:<br/><p:inputText id="cidade" size="30" value="#{medico.medico.cidade}" /></p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">UF:<br/><p:inputText id="uf" size="30" value="#{medico.medico.uf}" /></p:column>
+            
+            <p:column colspan="6">E-mail:<br/><p:inputText id="email" size="70" value="#{medico.medico.email}" /></p:column>
+       	</p:row>
+        <p:row>
+            <p:column style="text-align: center;" colspan="8">
+            
+            	<p:button value="Cancelar" outcome="listaMedico" />
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{medico.save}" update="panelMedico" global="true" />
+                
+                <p:focus context="panelMedico"/>  
+                <p:messages id="messagesMedico" showDetail="true" autoUpdate="true" closable="true" />
+            </p:column> 
+        </p:row>
+        
+        </p:panelGrid>
+        
+        <p:blockUI block="panelMedico" trigger="saveBtn" /> 
+    </h:form>
+    
+    </div> 
+    
+    </ui:define>   
+    </ui:composition>
+    
+</html>

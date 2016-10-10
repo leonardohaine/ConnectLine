@@ -14,14 +14,14 @@ import javax.persistence.Table;
  * @author diego
  */
 @Entity
-@Table(name = "medicosol")
-public class Medicosol implements Serializable {
+@Table(name = "medico")
+public class Medico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "medicosol")
-    private String medicosol;
+    private Long medicosol;
     @Column(name = "nome")
     private String nome;
     @Column(name = "endereco")
@@ -67,23 +67,23 @@ public class Medicosol implements Serializable {
     @Column(name = "medicosus")
     private String medicosus;
 
-    public Medicosol() {
+    public Medico() {
     }
 
-    public Medicosol(String medicosol) {
+    public Medico(Long medicosol) {
         this.medicosol = medicosol;
     }
 
-    public Medicosol(String medicosol, String estadocrm) {
+    public Medico(Long medicosol, String estadocrm) {
         this.medicosol = medicosol;
         this.estadocrm = estadocrm;
     }
 
-    public String getMedicosol() {
+    public Long getMedicosol() {
         return medicosol;
     }
 
-    public void setMedicosol(String medicosol) {
+    public void setMedicosol(Long medicosol) {
         this.medicosol = medicosol;
     }
 
@@ -265,10 +265,10 @@ public class Medicosol implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Medicosol)) {
+        if (!(object instanceof Medico)) {
             return false;
         }
-        Medicosol other = (Medicosol) object;
+        Medico other = (Medico) object;
         if ((this.medicosol == null && other.medicosol != null) || (this.medicosol != null && !this.medicosol.equals(other.medicosol))) {
             return false;
         }

@@ -6,7 +6,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head class="header fullheight">
-        <title>Sistema de gerenciamento de laboratório</title>
+        <title> :: Connect Line :: Sistema de Gestão Hospitalar</title>
         <link rel="stylesheet" type="text/css" href="./views/css.css" />  
         <link rel="stylesheet" type="image/ico" href="./favicon.ico" />
         
@@ -14,7 +14,7 @@
 			function handleLoginRequest(xhr, status, args) {  
 				if(args.validationFailed || !args.loggedIn) {  
 					PF('dlg').jq.effect("explode", { times:5 }, 100);
-				}   
+				}
 				else {  
 					PF('dlg').hide();  
 					$('#loginLink').fadeOut();
@@ -29,7 +29,7 @@
     	<div align="center" class="ui-fluid">
         
         <h:form id="formNf" >
-        	 <ui:remove>   	
+       	<ui:remove>   	
 			<h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show();" title="Clique para entrar"> 
             	<p:graphicImage value="./imagens/tubos_ensaio.png" width="450" height="150" />
            	</h:outputLink>

@@ -142,6 +142,9 @@ public class Paciente implements Serializable {
     }
 
     public String getPosto() {
+    	if(posto == null || posto == ""){
+    		posto = "0";
+    	}
         return posto;
     }
 
@@ -350,10 +353,14 @@ public class Paciente implements Serializable {
     }
 
     public Date getEntrada() {
+    	if(entrada == null){
+    		entrada = new Date();
+    	}
         return entrada;
     }
 
     public void setEntrada(Date entrada) {
+    	
         this.entrada = entrada;
     }
 

@@ -12,7 +12,7 @@
   height: 100vh;
   /*background geralmente uso o modo compacto, mas aqui vou colocar separadamente para explicar cada parte*/
   /* aqui defino a imagem maior*/
-  background-image: url("../imagens/1366x768.png");
+  background-image: url("../imagens/backgroung.png");
   /*deixa o background com efeito paralax*/
   background-attachment: fixed;
   /* cover é para nunca deixar espaço sem imagem*/
@@ -20,14 +20,14 @@
    overflow:hidden;
 }
 /* aqui troco a imagem pra cada resolução na ordem do maior pro menor */
-@media screen and (max-width: 100px) {
+@media screen and (max-width: 1000px) {
   .header.fullheight {
-    background-image: url("../imagens/wall1600x1200new.png");
+    background-image: url("../imagens/fundo_login.png");
   }
 }
 @media screen and (max-width: 1366px) {
   .header.fullheight {
-    background-image: url("../imagens/1366x768.png");
+    background-image: url("../imagens/backgroung.png");
   }
 }
 @media screen and (max-width: 800px) {
