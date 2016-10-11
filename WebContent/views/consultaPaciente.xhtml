@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="./css.css" />
+</h:head>
+
+<ui:composition template="inicial.xhtml">
+
+	<ui:define name="conteudo">
+
+
+		<div align="center">
+
+			<script type="text/javascript">
+</script>
+
+			<h:form>
+
+				<p:dataTable id="dadosTriagem"
+					emptyMessage="Não foi possivel encontrar informações da triagem"
+					var="triag" value="#{MBTriagem.dadosTriagens}">
+					<f:facet name="header">
+				        Consulta Paciente - Triagem
+				    </f:facet>
+
+					<br />
+					<br />
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Pesquise Qualquer campo:" />
+							<p:inputText id="filtroGlobal" placeholder="pesquisa" />
+							<!--                 <p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()" style="width:150px" placeholder="Enter keyword"/>  -->
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column headerText="Id:">
+						<h:outputText />
+					</p:column>
+
+					<p:column headerText="Prontuario">
+						<h:outputText />
+					</p:column>
+
+					<p:column headerText="Nome:">
+						<h:outputText />
+					</p:column>
+
+					<p:column headerText="Sexo:">
+						<h:outputText />
+					</p:column>
+
+					<p:column headerText="Idade">
+						<h:outputText />
+					</p:column>
+
+					<p:column headerText="Data:">
+						<h:outputText />
+					</p:column>
+
+					<p:column headerText="Opções:">
+						<p:commandButton icon="ui-icon-pencil"
+							onclick="PF('detalheTriagem').show();" />
+					</p:column>
+
+				</p:dataTable>
+
+				<p:commandButton icon="ui-icon-pencil"
+					actionListener="#{MBTriagem.teste}"
+					onclick="PF('detalheTriagem').show();" />
+			</h:form>
+
+		</div>
+
+		<!-- 
+*****
+*****
+*****
+*****
+AQUI INICIA O DIALOG E PANELGRID
+*****
+*****
+*****
+*****
+ -->
+		<h:form>
+			<p:dialog widgetVar="detalheTriagem"
+				header="Informações detalhadas da triagem" resizable="false"
+				footer="Detalhamento de triagem">
+				<p:panelGrid id="panelTriagem" style="width:1000px">
+
+					<p:row>
+						<p:column style="background-color: darkblue; color:white;"
+							colspan="6" styleClass="ui-widget-header">
+							<p:spacer height="0">NIVEL DE ATENDIMENTO</p:spacer>
+						</p:column>
+					</p:row>
+
+					<p:column colspan="6">
+						<p:graphicImage value="../imagens/ledred22.png"></p:graphicImage>
+					</p:column>
+
+					<p:row>
+						<p:column style="background-color: darkblue; color:white;"
+							colspan="6" styleClass="ui-widget-header">
+							<p:spacer height="0">Dados Pessoais</p:spacer>
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column colspan="6">Prontuario:</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column colspan="2">Nome:</p:column>
+						<p:column colspan="2">Idade:</p:column>
+						<p:column colspan="2">Peso:</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column style="background-color: darkblue; color:white;"
+							colspan="6" styleClass="ui-widget-header">
+							<p:spacer height="0">INFORMAÇÕES CLINICAS / DADOS TRIAGEM</p:spacer>
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column colspan="1">Pressão:<br />
+							<p:outputLabel />
+						</p:column>
+
+						<p:column colspan="2">Temperatura:<br />
+							<p:outputLabel />
+						</p:column>
+
+						<p:column colspan="2">Especialidade:<br />
+							<p:outputLabel />
+						</p:column>
+
+						<p:column colspan="1">Retorno: <br />
+							<p:outputLabel />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column colspan="1"> Toma Remedios?:
+							<p:outputLabel />
+						</p:column>
+
+						<p:column colspan="6">Quais:
+							<p:outputLabel />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column colspan="6">Diagnóstico:
+							<p:outputLabel />
+						</p:column>
+					</p:row>
+					<p:row>	
+
+						<p:column colspan="6">Observação:
+							<p:outputLabel />
+						</p:column>
+
+
+
+					</p:row>
+
+
+
+					<p:row>
+						<p:column style="background-color: darkblue; color:white;"
+							colspan="8" styleClass="ui-widget-header">
+							<p:spacer height="0">HISTORICO PACIENTE</p:spacer>
+						</p:column>
+					</p:row>
+					<p:row>
+
+						<p:column colspan="2">Medico:<br />
+							<p:outputLabel />
+						</p:column>
+
+
+						<p:column colspan="4">Data:
+							<p:outputLabel />
+						</p:column>
+					</p:row>
+
+
+					<p:row>
+						<p:column colspan="6">Sintomas:<br />
+							<p:outputLabel />
+						</p:column>
+					</p:row>
+
+					<p:row>
+						<p:column colspan="15">Medicamento:<br />
+							<p:outputLabel />
+						</p:column>
+					</p:row>
+
+
+
+					<p:row>
+						<p:column colspan="6">Observação:<br />
+							<p:outputLabel />
+						</p:column>
+					</p:row>
+
+
+				</p:panelGrid>
+
+			</p:dialog>
+		
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+
+</html>
