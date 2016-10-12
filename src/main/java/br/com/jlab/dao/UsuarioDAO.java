@@ -47,7 +47,11 @@ public class UsuarioDAO {
 	}
 
 	public void deleteUsuario(Usuario usuario) {
-		getSessionFactory().getCurrentSession().delete(usuario);
+		try{
+			getSessionFactory().getCurrentSession().delete(usuario);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void updateUsuario(Usuario usuario) {

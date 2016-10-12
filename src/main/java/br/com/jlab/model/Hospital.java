@@ -35,7 +35,7 @@ public class Hospital implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_HOSP")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_HOSP")
 	@SequenceGenerator(name = "SEQ_HOSP", sequenceName = "seq_hospital")
     @Basic(optional = false)
     @Column(name = "hospital")

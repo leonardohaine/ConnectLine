@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +32,7 @@ public class Requisicao implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_REQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_REQ")
 	@SequenceGenerator(name = "SEQ_REQ", sequenceName = "seq_requisicao")
     @Basic(optional = false)
     @Column(name = "requisicao")
@@ -139,7 +140,7 @@ public class Requisicao implements Serializable {
     @Column(name = "req_st_etiquetareimpressa")
     private Character reqStEtiquetareimpressa;
     @JoinColumn(name = "prontuario", referencedColumnName = "prontuario")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Paciente prontuario;
 
     public Requisicao() {

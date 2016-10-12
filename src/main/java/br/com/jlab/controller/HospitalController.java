@@ -75,7 +75,6 @@ public class HospitalController {
 		try {
 			getHospitalService().getHospitalDAO().saveHospital(hospital);
 
-			hospital = new Hospital();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Hospital cadastrado"));
 			return "listaHospital";
@@ -84,7 +83,7 @@ public class HospitalController {
 			hospital = new Hospital();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro!", "Erro ao tentar cadastrar hospital: " +e));
-			return "hospital";
+			return null;
 		}
 	}
 	
@@ -100,16 +99,16 @@ public class HospitalController {
 	public String delete() {
 
 		try {
-			getHospitalService().getHospitalDAO().deleteHospital(hospital);
-			hospital = new Hospital();
+			getHospitalService().getHospitalDAO().deleteHospital(selectedHospital);
+			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Hospital deletado: " + selectedHospital.getHospital()));
-			return "listahHospital";
+			return "listaHospital";
 		} catch (Exception e) {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro!", "Erro ao deletar hospital: " +e));
-			return "listaHospital";
+			return null;
 		}
 	}
 	

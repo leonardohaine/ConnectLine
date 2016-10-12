@@ -50,8 +50,8 @@ public class SetorService {
 		this.setorDAO = setorDAO;
 	}
 
-	public List<Setor> getSetor() {
-		return getSetorDAO().getSetor();
+	public List<Setor> getSetores() {
+		return getSetorDAO().getSetores();
 	}
 
 }

@@ -37,7 +37,7 @@ public class HospitalDAO {
 
 	public void saveHospital(Hospital hospital) {
 		
-		getSessionFactory().getCurrentSession().saveOrUpdate(hospital);
+		getSessionFactory().getCurrentSession().merge(hospital);
 	}
 
 	public void deleteHospital(Hospital hospital) {

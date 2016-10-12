@@ -75,16 +75,14 @@ public class UsuarioController {
 		try {
 			getUsuarioService().saveUsuario(usuario);
 
-			usuario = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Usuário cadastrado"));
-			return "usuario";
+			return "listaUsuario";
 		} catch (Exception e) {
 			e.printStackTrace();
-			usuario = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro!", "Erro ao tentar cadastrar usuário: " +e));
-			return "listaUsuario";
+			return null;
 		}
 	}
 	
@@ -100,16 +98,16 @@ public class UsuarioController {
 	public String delete() {
 
 		try {
-			getUsuarioService().getUsuarioDAO().deleteUsuario(usuario);
-			usuario = new Usuario();
+			getUsuarioService().deleteUsuario(selectedUsuario);
+			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Usuário deletado: " + selectedUsuario.getLogin()));
-			return "usuarios";
+			return "listaUsuario";
 		} catch (Exception e) {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro!", "Erro ao deletar usuário: " +e));
-			return "usuario";
+			return null;
 		}
 	}
 
@@ -118,7 +116,7 @@ public class UsuarioController {
 
 		if (event.getObject() != null) {
 			Usuario usuario = (Usuario) event.getObject();
-			setUsuario(getUsuarioService().getUsuarioDAO().getUsuarioById(usuario.getCodusuario().longValue()));
+			setUsuario(getUsuarioService().getUsuarioById(usuario.getCodusuario().longValue()));
 
 		}
 	}

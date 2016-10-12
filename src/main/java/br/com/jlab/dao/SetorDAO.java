@@ -55,25 +55,9 @@ public class SetorDAO extends GenericDAO<Setor>{
 
 	}
 
-	public List<Setor> getSetor() {
+	public List<Setor> getSetores() {
 		List list = getSessionFactory().getCurrentSession().createQuery("from Setor").list();
 		return list;
-	}
-
-	public Setor getSetores(String user, String senha) {
-
-		Setor setores = null;
-		boolean retorno = false;
-		try {
-			setores = (Setor) getSessionFactory().getCurrentSession().createCriteria(Setor.class)
-					.add(Restrictions.eq("login", user.toUpperCase())).add(Restrictions.eq("senha", senha))
-					.uniqueResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error in login() --> " + e.getMessage());
-		} finally {
-			return setores;
-		}
 	}
 
 }

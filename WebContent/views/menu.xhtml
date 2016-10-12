@@ -12,22 +12,23 @@
 			<p:menuitem value="Home" url="inicial.jsf"  icon="ui-icon-home" />
 			<p:separator />
 	        <p:submenu label="Cadastro" icon=" ui-icon-check" expanded="true" >
-	        	<p:menuitem icon="ui-icon-bullet" value="Hospital" url="listaHospital.jsf" />
-	            <p:menuitem icon="ui-icon-bullet" value="Usuários" url="listaUsuario.jsf" />
-	            <p:menuitem icon="ui-icon-bullet" value="Pacientes" url="paciente.jsf" />
-	            <p:menuitem icon="ui-icon-bullet" value="Material" url="listaMaterial.jsf" />
-	            <p:menuitem icon="ui-icon-bullet" value="Setor" url="listaSetor.jsf" />
-	            <p:menuitem icon="ui-icon-bullet" value="Posto" url="listaPosto.jsf" />
-	            <p:menuitem icon="ui-icon-bullet" value="Recipiente" url="listaRecipiente.jsf" />
-	            <p:menuitem icon="ui-icon-bullet" value="Médico" url="listaMedico.jsf" />
+	        	<p:menuitem icon="ui-icon-bullet" value="Hospital" url="listaHospital.jsf" rendered="true" />
+	        	<p:menuitem icon="ui-icon-bullet" value="Requisição" url="consultaPaciente.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Usuários" url="listaUsuario.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Pacientes" url="paciente.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Material" url="listaMaterial.jsf" rendered="false" />
+	            <p:menuitem icon="ui-icon-bullet" value="Setor" url="listaSetor.jsf" rendered="false" />
+	            <p:menuitem icon="ui-icon-bullet" value="Posto" url="listaPosto.jsf" rendered="false" />
+	            <p:menuitem icon="ui-icon-bullet" value="Recipiente" url="listaRecipiente.jsf" rendered="false" />
+	            <p:menuitem icon="ui-icon-bullet" value="Médico" url="listaMedico.jsf" rendered="true" />
 	            
 	        </p:submenu>
-	        <p:submenu label="Controle" icon=" ui-icon-check">
+	        <p:submenu label="Controle" icon=" ui-icon-check" rendered="false">
 	            <p:menuitem value="Controle Material" url="controleMaterial.jsf" />
 	            <p:menuitem value="" url="" update="" />
 	        </p:submenu>
 	        <p:separator />
-	        <p:menuitem value="Sair" actionListener="#{auth.logout}" />
+	        <p:menuitem icon="fa fa-sign-out" value="Sair" actionListener="#{auth.logout}" />
 	    </p:slideMenu>
 	  </div>  
 	</h:form>

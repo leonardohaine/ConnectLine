@@ -23,9 +23,9 @@
 
 			<h:form>
 
-				<p:dataTable id="dadosTriagem"
+				<p:dataTable id="dadosTriagem" rows="10" paginator="true" paginatorPosition="bottom"
 					emptyMessage="Não foi possivel encontrar informações da triagem"
-					var="triag" value="#{MBTriagem.dadosTriagens}">
+					var="triag" value="#{requisicao.requisicoes}">
 					<f:facet name="header">
 				        Consulta Paciente - Triagem
 				    </f:facet>
@@ -42,27 +42,29 @@
 					</f:facet>
 
 					<p:column headerText="Id:">
-						<h:outputText />
+						<h:outputText value="#{triag.requisicao}" />
 					</p:column>
 
 					<p:column headerText="Prontuario">
-						<h:outputText />
+						<h:outputText value="#{triag.prontuario.prontuario}" />
 					</p:column>
 
 					<p:column headerText="Nome:">
-						<h:outputText />
+						<h:outputText value="#{triag.prontuario.nome}" />
 					</p:column>
 
 					<p:column headerText="Sexo:">
-						<h:outputText />
+						<h:outputText value="#{triag.prontuario.sexo == true ? 'Masculino' : 'Feminino'}" />
 					</p:column>
 
 					<p:column headerText="Idade">
-						<h:outputText />
+						<h:outputText value="#{triag.prontuario.idade}" />
 					</p:column>
 
 					<p:column headerText="Data:">
-						<h:outputText />
+						<h:outputText value="#{triag.prontuario.entrada}"  >
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Opções:">

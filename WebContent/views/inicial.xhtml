@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -7,8 +7,9 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<link rel="stylesheet" type="text/css" href="./css.css" />  
-	<title>Sistema de Gerenciamento de Laboratório</title>
+	<link rel="stylesheet" type="text/css" href="./css.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/imagens/favicon.ico"/>
+	<title> :: Connect Line :: Sistema de GestÃ£o Hospitalar</title>
 </h:head>
 <h:body >
 	
@@ -29,9 +30,10 @@
 						<p:outputLabel id="uni" value="#{unidade.hospital.fantasia}" />
 					</h:form>
 				</div>
-				<div align="center" style="float: center; height: 20px; border: 0px solid orange;">
-					<p:outputLabel value="SISTEMA DE GERENCIAMENTO" 
-					style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px white;" />
+				<div align="center" style="float: center; height: 40px; border: 0px solid orange;">
+					<font style="font-size: 30px; text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em darkblue;" color="white">
+					:: Connect Line :: Sistema de GestÃ£o Hospitalar 
+					</font>
 				
 					<div align="center" style="float: right; border: 0px solid green;">
 						<p:graphicImage value="../imagens/icone-usuario.png" width="40" height="40" /><br/>
@@ -47,7 +49,7 @@
 			<div class="container" >
 			   <div style="float: left; width: 33%;"><p:clock pattern="dd/MM/yyyy - HH:mm:ss" mode="server" /></div>
 			   <div style="float: right; width: 33%;" align="right">
-				   <p:outputLabel value="Copyright © 2016, JLab. Todos os direitos reservados.     " />
+				   <p:outputLabel value="Copyright Â© 2016, Connect Line. Todos os direitos reservados.Â Â Â Â Â " />
 	           </div>
 			   <div style="display: inline-block; width: 34%;" align="center">
 			   		<p:ajaxStatus style="width:128px;height:5px;" id="ajaxStatusPanel">  
@@ -73,7 +75,7 @@
 	</p:layout>
 	
 	<h:form>
-	<p:dialog header="ESCOLHA UNIDADE" widgetVar="unidade" visible="false" modal="true" resizable="false" responsive="true" width="40%">
+	<p:dialog header="ESCOLHA UNIDADE" widgetVar="unidade" visible="false" modal="true" closable="false" resizable="false" responsive="true" width="40%">
 	
 		<p:dataTable var="hos" value="#{unidade.listHospital}" >
                 <f:facet name="header">

@@ -11,7 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.SelectEvent;
 
@@ -19,14 +18,13 @@ import br.com.jlab.model.Exame;
 import br.com.jlab.model.Paciente;
 import br.com.jlab.model.Posto;
 import br.com.jlab.model.Requisicao;
-import br.com.jlab.service.PacienteService;
+import br.com.jlab.service.RequisicaoService;
 import br.com.jlab.util.BuscaCep;
 import br.com.jlab.util.Endereco;
-import br.com.jlab.util.Util;
 
-@ManagedBean(name = "paciente")
+@ManagedBean(name = "requisicao")
 @ViewScoped
-public class PacienteController implements Serializable {
+public class RequisicaoController implements Serializable {
 	
 	/**
 	 * 
@@ -35,6 +33,7 @@ public class PacienteController implements Serializable {
 	
 	private Paciente paciente = new Paciente();
 	private Requisicao requisicao = new Requisicao();
+	private List<Requisicao> requisicoes = new ArrayList<Requisicao>();
 	private List<Paciente> pacientes = new ArrayList<Paciente>();
 	private Paciente selectedPaciente;
 	private Posto selectedPosto;
@@ -47,10 +46,10 @@ public class PacienteController implements Serializable {
 	@ManagedProperty(value = "#{unidade.hospital.cnpj}")
 	private String cnpj;
 	
-	@ManagedProperty(value = "#{PacienteService}")
-	private PacienteService pacienteService;
+	@ManagedProperty(value = "#{RequisicaoService}")
+	private RequisicaoService requisicaoService;
 	
-	public PacienteController(){
+	public RequisicaoController(){
 		
 	}
 	
@@ -67,9 +66,9 @@ public class PacienteController implements Serializable {
 		
 	}
 	
-	public void pesquisaPaciente(){
+	public void pesquisarequisicao(){
 		
-		paciente = getPacienteService().getPaciente(pesquisa, tipoPesquisa);
+		requisicoes = getRequisicaoService().getRequisicoes();
 		if(paciente == null){
 			System.out.println("Paciente não encontrado");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -110,10 +109,7 @@ public class PacienteController implements Serializable {
 	public String save(){
 		try{
 			
-			Boolean ok = getPacienteService().savePaciente(paciente, requisicao);
-			if(!ok){
-				return null;
-			}
+			//getPacienteService().savePaciente(paciente, requisicao);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Paciente cadastrado"));
 			return "paciente";
@@ -176,12 +172,12 @@ public class PacienteController implements Serializable {
 		this.exames = exames;
 	}
 
-	public PacienteService getPacienteService() {
-		return pacienteService;
+	public RequisicaoService getRequisicaoService() {
+		return requisicaoService;
 	}
 
-	public void setPacienteService(PacienteService pacienteService) {
-		this.pacienteService = pacienteService;
+	public void setRequisicaoService(RequisicaoService requisicaoService) {
+		this.requisicaoService = requisicaoService;
 	}
 
 	public Paciente getPaciente() {
@@ -238,6 +234,15 @@ public class PacienteController implements Serializable {
 
 	public void setSelectedPosto(Posto selectedPosto) {
 		this.selectedPosto = selectedPosto;
+	}
+
+	public List<Requisicao> getRequisicoes() {
+		requisicoes = getRequisicaoService().getRequisicoes();
+		return requisicoes;
+	}
+
+	public void setRequisicoes(List<Requisicao> requisicoes) {
+		this.requisicoes = requisicoes;
 	}
 	
 }

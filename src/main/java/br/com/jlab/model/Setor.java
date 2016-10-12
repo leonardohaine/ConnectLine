@@ -24,7 +24,7 @@ public class Setor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_SET")
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_SET")
 	@SequenceGenerator(name = "SEQ_SET", sequenceName = "seq_setores")
 	@Basic(optional = false)
     @Column(name = "setor")

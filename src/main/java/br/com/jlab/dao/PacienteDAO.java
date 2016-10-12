@@ -85,23 +85,8 @@ public class PacienteDAO extends GenericDAO<Paciente>{
 
 	public List<Paciente> getPacientes() {
 		List list = getSessionFactory().getCurrentSession().createQuery("from Paciente").list();
+		
 		return list;
-	}
-
-	public Paciente getPacientees(String user, String senha) {
-
-		Paciente paciente = null;
-		boolean retorno = false;
-		try {
-			paciente = (Paciente) getSessionFactory().getCurrentSession().createCriteria(Paciente.class)
-					.add(Restrictions.eq("login", user.toUpperCase())).add(Restrictions.eq("senha", senha))
-					.uniqueResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error in login() --> " + e.getMessage());
-		} finally {
-			return paciente;
-		}
 	}
 
 }

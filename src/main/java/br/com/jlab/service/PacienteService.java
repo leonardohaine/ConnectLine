@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -24,23 +25,32 @@ public class PacienteService {
 	PacienteDAO pacienteDAO;
 
 	@Transactional(readOnly = false)
-	public void savePaciente(Paciente paciente, Requisicao requisicao) {
+	public Boolean savePaciente(Paciente paciente, Requisicao requisicao) {
 		
 		List<Requisicao> req = new ArrayList<Requisicao>();
 		
 		HttpSession session = Util.getSession();
 		FacesContext.getCurrentInstance().getExternalContext().setResponseContentType("multipart/form-data");
 		
+		String cnpjUnidade = (String)session.getAttribute("cnpjUnidade");
+		if(cnpjUnidade == null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+					"Aviso!", "Selecione uma unidade no topo da página."));
+			return false;
+		}
+		
 		paciente.setEntrada(new Date());
+		requisicao.setEntrada(new Date());
 		requisicao.setPosto(paciente.getPosto());
 		requisicao.setProntuario(paciente);
-		requisicao.setCnpjUnidade(Long.valueOf((String)session.getAttribute("cnpjUnidade").toString()));
+		requisicao.setCnpjUnidade(Long.valueOf(cnpjUnidade));
 		
 		
 		req.add(requisicao);
 		paciente.setRequisicoes(req);
 		
 		getPacienteDAO().savePaciente(paciente);
+		return true;
 	}
 
 	@Transactional(readOnly = false)

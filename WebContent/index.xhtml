@@ -7,8 +7,8 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head class="header fullheight">
         <title> :: Connect Line :: Sistema de Gestão Hospitalar</title>
-        <link rel="stylesheet" type="text/css" href="./views/css.css" />  
-        <link rel="stylesheet" type="image/ico" href="./favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="./views/css.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/imagens/favicon.ico"/>
         
         <script type="text/javascript">  
 			function handleLoginRequest(xhr, status, args) {  
@@ -18,7 +18,7 @@
 				else {  
 					PF('dlg').hide();  
 					$('#loginLink').fadeOut();
-					window.location.assign("./views/inicial.jsf");
+					window.location.assign("./views/principal.jsf");
 				}  
 			}  
 		</script> 
@@ -29,16 +29,16 @@
     	<div align="center" class="ui-fluid">
         
         <h:form id="formNf" >
-       	<ui:remove>   	
+       	 <ui:remove>
 			<h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show();" title="Clique para entrar"> 
-            	<p:graphicImage value="./imagens/tubos_ensaio.png" width="450" height="150" />
+            	<p:graphicImage value="./imagens/favicon.ico" width="450" height="150" />
            	</h:outputLink>
-        
+       
         	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 			<p:outputLabel value="JLab" 
 					style="font: bold 100px Goudy Stout; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px white;" />
         </ui:remove>
-        <ui:remove>   	
+        <ui:remove>
            	<h:panelGrid bgcolor="white" columns="2" cellpadding="5" border="0" cellspacing="0" style="border-radius: 15px; box-shadow: 10px 10px 5px blue;">  
 	             
 	            <f:facet name="header">  
@@ -47,22 +47,22 @@
             	</f:facet>	
 	            
 	            <p:outputLabel for="username" value="Usuário:" />  
-	            <p:inputText value="#{auth.user}" id="username" required="true" label="username" />  
-	            <p:watermark for="username" value="Usuário" id="wateruser" />
+	            <p:inputText value="#{auth.user}" id="username1" required="true" label="username" />  
+	            <p:watermark for="username" value="Usuário" id="wateruser1" />
 	              
 	            <p:outputLabel for="password" value="Senha:" />  
-	            <p:password value="#{auth.senha}" id="password" required="true" label="password" />  
-	            <p:watermark for="password" value="Senha" id="waterpass" />
+	            <p:password value="#{auth.senha}" id="password1" required="true" label="password" />  
+	            <p:watermark for="password" value="Senha" id="waterpass1" />
 	            
 	            <f:facet name="footer">
 	                <div style="text-align: center;">        
-	                <p:commandButton id="loginButton1" value="Login" update="growl" oncomplete="handleLoginRequest(xhr, status, args)"
+	                <p:commandButton id="loginButton2" value="Login" update="growl" oncomplete="handleLoginRequest(xhr, status, args)"
 	                                 style="border-radius: 15px;" actionListener="#{auth.login}" />  
 	                </div> 
 	            </f:facet>
 	               
 	        </h:panelGrid>
-        </ui:remove>  	
+       	 </ui:remove>
            	<p:growl id="growl" showDetail="true" life="3000" />
    
         <p:dialog id="dialog" header="Login"  widgetVar="dlg" resizable="false" visible="true" closable="false"
@@ -75,13 +75,13 @@
             	</f:facet>	
 	            
 	            <p:outputLabel for="username" value="Usuário:" />  
-	            <p:inputText value="#{auth.user}" style="border-radius: 15px;" id="username" onkeyup="value=value.toUpperCase()" required="true" label="username" >
+	            <p:inputText value="#{auth.user}" style="border-radius: 15px;" id="username" onkeyup="value=value.toUpperCase()" required="false" label="username" >
 	            	<p:watermark for="username" value="Usuário" id="wateruser" />
 	            </p:inputText>
 	            
 	              
 	            <p:outputLabel for="password" value="Senha:" />  
-	            <p:password value="#{auth.senha}" style="border-radius: 15px;" id="password" required="true" label="password">
+	            <p:password value="#{auth.senha}" style="border-radius: 15px;" id="password" required="false" label="password">
 	            	<p:watermark for="password" value="Senha" id="waterpass" />
 	            </p:password>
 	            

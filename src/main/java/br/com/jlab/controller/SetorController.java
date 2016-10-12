@@ -100,7 +100,7 @@ public class SetorController implements Serializable {
 
 
 	public List<Setor> getSetores() {
-		setores = getSetorService().getSetor();
+		setores = getSetorService().getSetores();
 		return setores;
 	}
 

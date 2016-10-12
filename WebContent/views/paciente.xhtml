@@ -204,9 +204,8 @@
 	        </p:row>    
 		</ui:remove>    
 	        <p:row>
-	            <p:column style="text-align: center;" colspan="8">
-	                <p:toolbar style="background-color: darkblue; color:white; text-align: center;">
-	                	<f:facet name="right">
+	            <p:column style="text-align: right; background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+	               <p:spacer height="0">
 			                <p:commandButton icon="icone-add" id="novoBtn" update="panelPaciente" value="Novo">
 			                    <p:resetInput target="panelPaciente" />
 			                </p:commandButton> 
@@ -216,15 +215,13 @@
 			                </p:commandButton>
 			                
 			                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{paciente.save}" update="panelPaciente" global="true" />
-	                	</f:facet>
-	                </p:toolbar>
-	                  
-	                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-	            </p:column> 
+                	</p:spacer>
+                	
+	            </p:column>
 	        </p:row>
-        
+	        
         </p:panelGrid>
-        
+        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
         <p:blockUI block="panelPaciente" trigger="saveBtn" /> 
    
 	 </h:form>

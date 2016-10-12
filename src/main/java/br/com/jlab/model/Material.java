@@ -39,7 +39,7 @@ public class Material implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_MAT")
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_MAT")
 	@SequenceGenerator(name = "SEQ_MAT", sequenceName = "seq_material")
 	@Basic(optional = false)
     @Column(name = "material")
